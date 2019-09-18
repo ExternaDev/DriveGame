@@ -40,10 +40,8 @@ public class bulletController : MonoBehaviour
 
         }
 
-       // this.transform.position -= TileMover.instance.GetMovementUpdate();
-        //rb.AddForce(TileMover.instance.GetMovementUpdate(), ForceMode.Force);
-     
-
+        this.transform.position -= TileMover.instance.GetMovementUpdate();   
+        this.transform.position +=  this.transform.forward;
 
     }
     private void OnCollisionEnter(Collision col)
