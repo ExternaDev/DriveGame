@@ -211,4 +211,9 @@ public class TileMover : MonoBehaviour
     	// 		return Tiles[0];
     	// 	}
     }
+    public Tile GetCurrentTile()
+    {
+        return Tiles[2];
+
+    }
 }
