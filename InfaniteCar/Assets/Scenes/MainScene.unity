@@ -705,6 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 133171075410956546, guid: 068facbeb3c45504e8b18458bba35ef7, type: 3}
+  bullets: []
   currentSpeed: 0.01
   barrel: {fileID: 754111681}
   thrust: 500
@@ -768,8 +769,8 @@ MonoBehaviour:
   currentSpeed: 0.01
   barrel: {fileID: 754111681}
   thrust: 50
-  NumOfRockets: 20
-  canShootRocket: 0
+  NumOfRockets: 1
+  canShootRocket: 1
   enemyPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1196719126
 GameObject:
@@ -886,7 +887,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 71.05
+  m_fontSize: 39.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

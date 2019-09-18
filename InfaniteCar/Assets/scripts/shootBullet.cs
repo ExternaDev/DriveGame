@@ -6,7 +6,7 @@ public class shootBullet : MonoBehaviour
 {
     public GameObject bullet;
     PlayerInput input;
-    List<bulletController> bullets = new List<bulletController>();
+    public List<bulletController> bullets = new List<bulletController>();
     List<bulletController> bulletsToRemove = new List<bulletController>();   
     public float currentSpeed = .01f;
     public Transform barrel;

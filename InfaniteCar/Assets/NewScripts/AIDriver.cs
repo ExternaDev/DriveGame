@@ -21,6 +21,7 @@ public class AIDriver : MonoBehaviour
     float laneOffset = 2f;
     bool police = false;
     bool inPursuit = false;
+    public bool isdead = false;
     
     PlayerController pc;
     void Awake(){
@@ -81,9 +82,10 @@ public class AIDriver : MonoBehaviour
     	}else{
     		if(currentTile == null)
     		Debug.Log("<color=red> AI with no tile</color>");
+            isdead = true;
     		if(currentWaypoint == null)
     		Debug.Log("<color=red> AI with no waypoint</color>");
-    		Destroy(this.gameObject);
+            isdead = true;
     	}
     }
     void Movement(){
@@ -144,19 +146,23 @@ public class AIDriver : MonoBehaviour
 		    		wayIndex =0;
 		    		Debug.Log("Next Tile");
 		    	 	currentTile = TileMover.instance.FindTileAfter(currentTile);
-		    	 	
 
-		    	 	if(currentTile == null)
-		    	 		ReachedEndOfTrack();
-		    	 	else{
-		    	 		//if(!inPursuit)
-		    	WayDirection = currentWaypoint.forward;
 
-		    	 			currentWaypoint = currentTile.waypoints[wayIndex];
-		    	 		//else
-    						//currentWaypoint = PlayerController.instance.transform;
+                if (currentTile == null)
+                {
+                    Debug.Log("fuck");
+                    ReachedEndOfTrack();
+                }
+                else
+                {
+                    //if(!inPursuit)
+                    WayDirection = currentWaypoint.forward;
 
-		    	 	}
+                    currentWaypoint = currentTile.waypoints[wayIndex];
+                    //else
+                    //currentWaypoint = PlayerController.instance.transform;
+
+                }
 		    	 }
 	    	
 	    }else{
@@ -183,6 +189,7 @@ public class AIDriver : MonoBehaviour
     }
     void ReachedEndOfTrack(){
     	Debug.Log("End of track");
-    	Destroy(this.gameObject);
+    	
+       isdead = true;
     }
 }

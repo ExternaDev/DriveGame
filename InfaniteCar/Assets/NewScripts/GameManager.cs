@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 	public GameObject othervehicle;
 	public List<AIDriver> Enemies = new List<AIDriver>();
-	public Transform enemyNearSpawnPoint;
+    List<AIDriver> EnemiesToRemove = new List<AIDriver>();
+    public Transform enemyNearSpawnPoint;
 	public Transform enemyFarSpawnPoint;
 
 	bool toggle = false;
@@ -26,18 +27,45 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.Space) ){
         	SpawnPC();
         }
-        if(Time.time - LastSpawnTime > 2){
-        	SpawnPC();
-        	LastSpawnTime = Time.time;
+        if (Time.time - LastSpawnTime > 2)
+        {
+            SpawnPC();
+            LastSpawnTime = Time.time;
         }
+        RemoveDriver();
+        DeleteDriver();
+        
     }
     void SpawnPC(){
 
-    	AIDriver en = (AIDriver)Instantiate(othervehicle, Vector3.one*-50f, Quaternion.identity).GetComponent<AIDriver>();
+    	AIDriver en = (AIDriver)Instantiate(othervehicle, Vector3.one*-50f, Quaternion.identity).GetComponent<AIDriver>();   	
     	
-    	en.Init(toggle);
     	Enemies.Add(en);
-
-    	toggle = !toggle;
+        en.Init(toggle);
+        toggle = !toggle;
+    }
+    public void DeleteDriver()
+    {
+        if (EnemiesToRemove.Count > 0)
+        {
+            //destroys all bullets that are in the bullets to remove list 
+            foreach (AIDriver obj in EnemiesToRemove)
+            {
+                Enemies.Remove(obj);
+                Destroy(obj.gameObject);
+            }
+            //clears bullets to remove after destorying all bullets
+            EnemiesToRemove.Clear();
+        }
+    }
+    public void RemoveDriver()
+    {
+        foreach (AIDriver obj in Enemies)
+        {
+            if (obj.isdead == true)
+            {
+                EnemiesToRemove.Add(obj);
+            }
+        }      
     }
 }

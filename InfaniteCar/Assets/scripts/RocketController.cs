@@ -14,7 +14,7 @@ public class RocketController : MonoBehaviour
 
  public Vector3 enemyPos;
 
-    public shootRockets rocketsShoot;
+    //public shootRockets rocketsShoot;
     
     public float thrust;
     public float forwardThrust = 10;
@@ -51,12 +51,14 @@ public class RocketController : MonoBehaviour
     private void GoTowardsEnemy()
     {
         float distanceToClosestEnemy = Mathf.Infinity;
-        Enemy closestEnemy = null;
+        AIDriver closestEnemy = null;
 
         //very taxing in bulk
-        Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
+        List<AIDriver> Enemies = GameManager.instance.Enemies;
+        //go through the list of enemys to find the closest en
+       //Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
 
-        foreach (Enemy currentEnemy in allEnemies)
+        foreach (AIDriver currentEnemy in Enemies)
         {
             float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
             if (distanceToEnemy < distanceToClosestEnemy)
@@ -70,7 +72,7 @@ public class RocketController : MonoBehaviour
             }
         }
                 float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, rocketsShoot.enemyPos, step);
+        transform.position = Vector3.MoveTowards(transform.position, enemyPos, step);
 
 
         /*if (Vector3.Distance(transform.position, rocketsShoot.enemyPos) < 1f)
