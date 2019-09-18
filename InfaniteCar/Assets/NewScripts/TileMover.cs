@@ -161,21 +161,21 @@ public class TileMover : MonoBehaviour
     float driftThreshold = .65f;
     void ApplyDrift(GameObject obj, float ang){
         if(ang >driftThreshold ){
-            Debug.Log("Right drift");
+          //  Debug.Log("Right drift");
             obj.transform.position += DriftDirection() * .1f * DriftAbsValue(ang);
 
         }else if(ang <-driftThreshold){
-             Debug.Log("Left drift");
+            // Debug.Log("Left drift");
             obj.transform.position -= DriftDirection() * .1f *DriftAbsValue(ang);
         }
     
     }
     float DriftAbsValue(float ang){
         float amount = (Mathf.Abs(ang) -driftThreshold) /  (1f- driftThreshold );
-        Debug.Log("angle " + ang);
+//        Debug.Log("angle " + ang);
 
-        Debug.Log((Mathf.Abs(ang) -driftThreshold)  +  "  /  " +(1f- driftThreshold));
-        Debug.Log("Amount " + amount);
+       // Debug.Log((Mathf.Abs(ang) -driftThreshold)  +  "  /  " +(1f- driftThreshold));
+       // Debug.Log("Amount " + amount);
         return amount;
     }
     Vector3 DriftDirection(){

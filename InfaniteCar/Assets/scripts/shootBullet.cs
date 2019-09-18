@@ -94,7 +94,7 @@ public class shootBullet : MonoBehaviour
         // creates bullet based on the position of the barrel obj and adds them to the bullets list
         bulletController obj = Instantiate(bullet, barrel.position, barrel.rotation, null).GetComponent<bulletController>();       
         bullets.Add(obj);
-        obj.GetComponent<Rigidbody>().AddForce(transform.forward * -thrust,ForceMode.Force);
+        obj.GetComponent<Rigidbody>().AddForce(transform.forward * thrust,ForceMode.Force);
         
     }
 }

@@ -52,7 +52,7 @@ public class shootRockets : MonoBehaviour
     {
 
 
-        float distanceToClosestEnemy = Mathf.Infinity;
+       /* float distanceToClosestEnemy = Mathf.Infinity;
         Enemy closestEnemy = null;
 
         //very taxing in bulk
@@ -78,8 +78,7 @@ public class shootRockets : MonoBehaviour
 
             }
 
-
-        }
+        }*/
 
 
     }

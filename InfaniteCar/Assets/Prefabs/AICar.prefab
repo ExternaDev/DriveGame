@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8199140745266273188}
   - component: {fileID: 8199140745266273189}
   - component: {fileID: 8199140745266273186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AICar
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,3 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c07e09c4f3707e49af510a42875f013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComing: 0
+  currentTile: {fileID: 0}
+  currentWaypoint: {fileID: 0}

@@ -8,6 +8,10 @@ public class bulletController : MonoBehaviour
     public bool markedForDeath = false;
     public bool bulletBounce = false;
     public float bounceTimer ;
+    Rigidbody rb;
+    void Start(){
+        rb = GetComponent<Rigidbody>();
+    }
     void Update()
     {
         //timer for each bullet 
@@ -35,10 +39,16 @@ public class bulletController : MonoBehaviour
             }
 
         }
+
+       // this.transform.position -= TileMover.instance.GetMovementUpdate();
+        //rb.AddForce(TileMover.instance.GetMovementUpdate(), ForceMode.Force);
+     
+
+
     }
     private void OnCollisionEnter(Collision col)
     {
-        //Debug.Log("boom");
+        Debug.Log("boom" +col.gameObject.name);
         // if the bullet hits an enemy it will do this
         if (col.gameObject.tag == "Enemy")
         {
