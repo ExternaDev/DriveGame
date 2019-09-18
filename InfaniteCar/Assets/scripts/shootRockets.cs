@@ -28,7 +28,7 @@ public class shootRockets : MonoBehaviour
     void Update()
     {
         //Debug.Log(rocketsToRemove.Count);
-        FindClosest();
+        //FindClosest();
         CreateRockets();
         //create rockets when active
         
@@ -128,7 +128,7 @@ public class shootRockets : MonoBehaviour
         {
             RocketController obj = Instantiate(rocket, barrel.position, barrel.rotation, null).GetComponent<RocketController>();
             rockets.Add(obj);
-            obj.rocketsShoot = this;
+            //obj.rocketsShoot = this;
             //Debug.Log(rockets.Count);
 
             //obj.GetComponent<Rigidbody>().AddForce(transform.forward * -thrust, ForceMode.Force);
