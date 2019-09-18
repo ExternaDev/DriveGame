@@ -12,7 +12,7 @@ public class RocketController : MonoBehaviour
     public bool rocketBounce = false;
     public bool noMoreSpeed = false;
 
-   // public Vector3 enemyPos;
+ public Vector3 enemyPos;
 
     public shootRockets rocketsShoot;
     
@@ -50,14 +50,34 @@ public class RocketController : MonoBehaviour
     }
     private void GoTowardsEnemy()
     {
-        float step = speed * Time.deltaTime;
+        float distanceToClosestEnemy = Mathf.Infinity;
+        Enemy closestEnemy = null;
+
+        //very taxing in bulk
+        Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
+
+        foreach (Enemy currentEnemy in allEnemies)
+        {
+            float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
+            if (distanceToEnemy < distanceToClosestEnemy)
+            {
+                distanceToClosestEnemy = distanceToEnemy;
+
+
+                closestEnemy = currentEnemy;
+                enemyPos = closestEnemy.transform.position;
+                
+            }
+        }
+                float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, rocketsShoot.enemyPos, step);
 
-        if (Vector3.Distance(transform.position, rocketsShoot.enemyPos) < 1f)
+
+        /*if (Vector3.Distance(transform.position, rocketsShoot.enemyPos) < 1f)
         {
            
             markedForExplode = true;
-        }
+        }*/
 
         
     }
