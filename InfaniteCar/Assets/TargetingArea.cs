@@ -3,20 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetingArea : MonoBehaviour
-{
-    // Start is called before the first frame update
+{ 
+    List<AIDriver> InRange = new List<AIDriver>();
+    List<AIDriver> OutOfRange = new List<AIDriver>();
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         
     }
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerStay(AIDriver col )
     {
+        if (col.gameObject.tag == "Enemy")
+        {
+            // add this item to an arry of in range enemies
+            InRange.Add(col);
+
+        }
         
     }
+    public void OnTriggerExit(AIDriver col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            // remove this item from the arry of in range enemies
+            OutOfRange.Add(col);
+        }
+
+    }
+    public void RemoveFromList()
+    {
+        
+        if (OutOfRange.Count > 0) {
+
+            //remove item from the in range list based of the out of range list
+        }
+
+    }
+   
 }
