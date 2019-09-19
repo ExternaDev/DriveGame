@@ -104,14 +104,15 @@ public class AIDriver : MonoBehaviour
 		dir = dir.normalized;
 
 
-        //this.transform.position -= TileMover.instance.GetMovementUpdate()/2f;// (TileMover.instance.PlayerBrakeAmount);
 
-        this.transform.position -= pc.playerForward * TileMover.instance.baseSpeed ;//* (TileMover.instance.PlayerBrakeAmount);
+        this.transform.position -= pc.playerForward * TileMover.instance.baseSpeed * (TileMover.instance.PlayerBrakeAmount - 1f);
+
+    
 
         if(!police){
-        	this.transform.position +=dir * .1f;
+        	this.transform.position +=dir *.01f;// * .1f;
     	}else{
-        	this.transform.position +=dir * .35f;
+        	this.transform.position +=dir *.01f;//* .35f;
 
     	}
 

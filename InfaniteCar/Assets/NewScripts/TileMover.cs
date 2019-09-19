@@ -129,14 +129,13 @@ public class TileMover : MonoBehaviour
        //return PC.playerForward* baseSpeed;
 
     }
-    
     public Tile FindTileAfter(Tile tile){
     	int index = Tiles.IndexOf(tile);
     	if(index +1 >= Tiles.Count)
     		return null;
     	return Tiles[index+1];
     }
-
+    
     public Tile FindTileBefore(Tile tile){
     	int index = Tiles.IndexOf(tile);
     	if(index -1 <0)
