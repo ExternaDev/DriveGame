@@ -58,7 +58,7 @@ public class RocketController : MonoBehaviour
     private void GoTowardsEnemy()
     {
         float distanceToClosestEnemy = Mathf.Infinity;
-        List<AIDriver> Enemies = GameManager.instance.Enemies;
+        List<AIDriver> Enemies = TargetingArea.instance.InRange;
         AIDriver closestEnemy = null;        
         
         //go through the list of enemys to find the closest en
@@ -118,6 +118,7 @@ public class RocketController : MonoBehaviour
         if (col.gameObject.tag == "Enemy")
         {
             markedForExplode = true;
+            TargetingArea.instance.OutOfRange.Add(col.gameObject.GetComponent<AIDriver>());
         }
         //if the bullet hits somthing that is not an enemy it will do this
         if (col.gameObject.tag != "Enemy")
