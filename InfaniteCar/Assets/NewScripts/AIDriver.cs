@@ -31,11 +31,11 @@ public class AIDriver : MonoBehaviour
     	tileMover = TileMover.instance; 
 
     	onComing = _onComing;
-    	if(!onComing){
-    		// int rand = Random.Range(0,10);
-    		// if(rand > 7)
-    		police = true;
-    	}
+    	// if(!onComing){
+    	// 	// int rand = Random.Range(0,10);
+    	// 	// if(rand > 7)
+    	// 	police = true;
+    	// }
     	
 
     	//if oncmine find closest wp from farthest
@@ -54,6 +54,7 @@ public class AIDriver : MonoBehaviour
 
 
 
+    transform.SetParent(currentTile.transform);
 
 
 
@@ -105,14 +106,14 @@ public class AIDriver : MonoBehaviour
 
 
 
-        this.transform.position -= pc.playerForward * TileMover.instance.baseSpeed * (TileMover.instance.PlayerBrakeAmount - 1f);
+        //this.transform.position -= pc.playerForward * TileMover.instance.baseSpeed * (TileMover.instance.PlayerBrakeAmount - 1f);
 
     
 
         if(!police){
-        	this.transform.position +=dir *.01f;// * .1f;
+        	this.transform.position +=dir *.1f;// * .1f;
     	}else{
-        	this.transform.position +=dir *.01f;//* .35f;
+        	this.transform.position +=dir *.1f;//* .35f;
 
     	}
 
@@ -163,6 +164,7 @@ public class AIDriver : MonoBehaviour
                     currentWaypoint = currentTile.waypoints[wayIndex];
                     //else
                     //currentWaypoint = PlayerController.instance.transform;
+                transform.SetParent(currentTile.transform);
 
                 }
 		    	 }
@@ -176,7 +178,6 @@ public class AIDriver : MonoBehaviour
 	    	}else{//Next tiles
 	    	 	currentTile = TileMover.instance.FindTileBefore(currentTile);
 	    		
-
 	    	 	if(currentTile == null){
 	    	 		ReachedEndOfTrack();
 	    	 	}else{
@@ -184,6 +185,8 @@ public class AIDriver : MonoBehaviour
 		    		WayDirection = -currentWaypoint.forward;
 
 	    	 		currentWaypoint = currentTile.waypoints[wayIndex];
+                transform.SetParent(currentTile.transform);
+
 	    	 	}
 	    	 }
 

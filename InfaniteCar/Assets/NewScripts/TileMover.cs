@@ -144,10 +144,10 @@ public class TileMover : MonoBehaviour
     }
 
     public Tile FindFirstTile(bool popo){
-        if(!popo)
+       // if(!popo)
         return Tiles[Tiles.Count-1];
-        else
-        return Tiles[1];
+       // else
+       // return Tiles[1];
 
 
     	// if(onComing){
