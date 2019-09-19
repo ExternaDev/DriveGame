@@ -58,6 +58,7 @@ public class RocketController : MonoBehaviour
     private void GoTowardsEnemy()
     {
         float distanceToClosestEnemy = Mathf.Infinity;
+        Debug.Log(TargetingArea.instance);
         List<AIDriver> Enemies = TargetingArea.instance.InRange;
         AIDriver closestEnemy = null;        
         

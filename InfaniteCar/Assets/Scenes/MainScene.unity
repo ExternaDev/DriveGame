@@ -222,7 +222,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -825,7 +825,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -890,6 +890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 657965760}
   - component: {fileID: 657965761}
+  - component: {fileID: 657965762}
   m_Layer: 0
   m_Name: TargetingArea
   m_TagString: Untagged
@@ -924,6 +925,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &657965762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657965759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d2599bde4ffa14cabe683aaa11c023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InRange: []
+  OutOfRange: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,7 +1505,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
+  m_fontSize: 47.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

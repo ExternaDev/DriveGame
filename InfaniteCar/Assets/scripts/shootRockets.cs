@@ -40,12 +40,15 @@ public class shootRockets : MonoBehaviour
 
     private void CreateRockets()
     {
-        if (input.ActionAlt() && canShootRocket)
+        if (input.ActionAlt() && canShootRocket )
         {
-            
+            if (TargetingArea.instance.InRange.Count > 0)
+            {
 
-            AddRocket();
-           //canShootRocket = false;
+
+                AddRocket();
+                //canShootRocket = false;
+            }
         }
     }
     private void FindClosest()
