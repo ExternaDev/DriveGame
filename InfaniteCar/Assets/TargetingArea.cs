@@ -17,22 +17,22 @@ public class TargetingArea : MonoBehaviour
     {
         
     }
-    public void OnTriggerStay(AIDriver col )
+    public void OnTriggerStay(Collider col )
     {
         if (col.gameObject.tag == "Enemy")
         {
             // add this item to an arry of in range enemies
-            InRange.Add(col);
+            //InRange.Add(col);
 
         }
         
     }
-    public void OnTriggerExit(AIDriver col)
+    public void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "Enemy")
         {
             // remove this item from the arry of in range enemies
-            OutOfRange.Add(col);
+            //OutOfRange.Add(col);
         }
 
     }
