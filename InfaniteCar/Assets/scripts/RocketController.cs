@@ -9,17 +9,24 @@ public class RocketController : MonoBehaviour
     public float enemyTimer;
 
     public bool markedForExplode = false;
-    public bool rocketBounce = false;
-    public bool noMoreSpeed = false;
+    public bool boostTime = false;
+    //public bool rocketBounce = false;
+    //public bool noMoreSpeed = false;
 
- public Vector3 enemyPos;
+    // Quaternion enemyPos;
+    //Quaternion prevPos;
+    //Transform enemyyyy;
+    Quaternion lookOnLook = Quaternion.identity;
 
     //public shootRockets rocketsShoot;
-    
+
     public float thrust;
+    public float boost = 100;
     public float forwardThrust = 10;
     public float upThrust;
-    public float speed = 1f;
+    //public float speed = 1f;
+    public float turnSpeed = .1f;
+
 
     private Rigidbody rb;
 
@@ -33,13 +40,13 @@ public class RocketController : MonoBehaviour
     // use for physics
     void FixedUpdate()
     {
-        
+        GoTowardsEnemy();
         Timers();
        
         if (enemyTimer <= 0)
         {
-            GoTowardsEnemy();
-            noMoreSpeed = true;
+            boostTime = true;
+           // noMoreSpeed = true;
         }
 
         if(enemyTimer > 0) {
@@ -51,10 +58,9 @@ public class RocketController : MonoBehaviour
     private void GoTowardsEnemy()
     {
         float distanceToClosestEnemy = Mathf.Infinity;
-        AIDriver closestEnemy = null;
-
-        //very taxing in bulk
         List<AIDriver> Enemies = GameManager.instance.Enemies;
+        AIDriver closestEnemy = null;        
+        
         //go through the list of enemys to find the closest en
        //Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
 
@@ -64,34 +70,28 @@ public class RocketController : MonoBehaviour
             if (distanceToEnemy < distanceToClosestEnemy)
             {
                 distanceToClosestEnemy = distanceToEnemy;
-
-
-                closestEnemy = currentEnemy;
-                enemyPos = closestEnemy.transform.position;
-                
+                closestEnemy = currentEnemy;                
             }
         }
-                float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, enemyPos, step);
-
-
-        /*if (Vector3.Distance(transform.position, rocketsShoot.enemyPos) < 1f)
+        if (closestEnemy != null)
         {
-           
-            markedForExplode = true;
-        }*/
+            lookOnLook = Quaternion.LookRotation(closestEnemy.transform.position - transform.position);            
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookOnLook, Time.deltaTime * turnSpeed);
+            if (boostTime)
+            {
+                rb.AddForce(transform.forward * boost, ForceMode.Force);
+            }
+        }
+    }
+    private void RocketVariations()
+    {
+        rb.AddForce(transform.forward * forwardThrust, ForceMode.Acceleration);
+        rb.AddForce(transform.right * -thrust, ForceMode.Acceleration);
+        rb.AddForce(transform.up * -upThrust, ForceMode.Acceleration);
 
         
     }
-   
-    private void RocketVariations()
-    {
-        rb.AddForce(transform.forward * forwardThrust, ForceMode.Force);
-        rb.AddForce(transform.right * -thrust, ForceMode.Force);
-        rb.AddForce(transform.up * -upThrust, ForceMode.Force);
 
-        //rb.AddTorque(10, 10, 10, ForceMode.Force);
-    }
     private void Timers()
     {
         if (enemyTimer > 0)
@@ -102,14 +102,13 @@ public class RocketController : MonoBehaviour
         {
             lifeTimer -= Time.deltaTime;
         }
-        else
+        if (lifeTimer <= 0 )
         {
             //if the timer runs out then the bullet is marked to be deleted
             markedForExplode = true;
-        }
-        
+        }        
     }
-   
+    
     private void OnCollisionEnter(Collision col)
     {
         Debug.Log("boom"  + col.gameObject.name);
