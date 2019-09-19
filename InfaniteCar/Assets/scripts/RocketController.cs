@@ -66,11 +66,13 @@ public class RocketController : MonoBehaviour
 
         foreach (AIDriver currentEnemy in Enemies)
         {
-            float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
-            if (distanceToEnemy < distanceToClosestEnemy)
-            {
-                distanceToClosestEnemy = distanceToEnemy;
-                closestEnemy = currentEnemy;                
+            if (currentEnemy != null) {
+                float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
+                if (distanceToEnemy < distanceToClosestEnemy)
+                {
+                    distanceToClosestEnemy = distanceToEnemy;
+                    closestEnemy = currentEnemy;
+                }
             }
         }
         if (closestEnemy != null)
