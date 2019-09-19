@@ -1230,7 +1230,7 @@ MonoBehaviour:
   rocket: {fileID: 3054292085879425571, guid: 0b1d5ece6444e5246a518503ea4e827e, type: 3}
   currentSpeed: 0.01
   barrel: {fileID: 754111681}
-  thrust: 50
+  thrust: 5
   NumOfRockets: 1
   canShootRocket: 1
   enemyPos: {x: 0, y: 0, z: 0}

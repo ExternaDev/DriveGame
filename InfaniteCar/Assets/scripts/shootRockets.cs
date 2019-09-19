@@ -51,36 +51,6 @@ public class shootRockets : MonoBehaviour
     private void FindClosest()
     {
 
-
-       /* float distanceToClosestEnemy = Mathf.Infinity;
-        Enemy closestEnemy = null;
-
-        //very taxing in bulk
-        Enemy[] allEnemies = GameObject.FindObjectsOfType<Enemy>();
-
-        foreach (Enemy currentEnemy in allEnemies)
-        {
-            float distanceToEnemy = (currentEnemy.transform.position - this.transform.position).sqrMagnitude;
-            if (distanceToEnemy < distanceToClosestEnemy)
-            {
-                distanceToClosestEnemy = distanceToEnemy;
-
-              
-                    closestEnemy = currentEnemy;                    
-                if (input.ActionAlt() && canShootRocket)
-                {
-                    enemyToKill = closestEnemy.transform.position;
-
-                }
-
-                enemyPos = enemyToKill;
-
-
-            }
-
-        }*/
-
-
     }
     void UpdateRockets()
     {
@@ -93,11 +63,10 @@ public class shootRockets : MonoBehaviour
                 rocketsToRemove.Add(obj);
             }
             //if bullet gets too far away kill it
-            if (obj.transform.position.z > 20)
-            {
+            //if (obj.transform.position.z > 20)
+            //{
                 //Debug.Log("kill me");
-                rocketsToRemove.Add(obj);
-            }
+           // }
             //if (bullet.collision == true)
             // {
             //    bulletsToRemove.Add(obj); 
