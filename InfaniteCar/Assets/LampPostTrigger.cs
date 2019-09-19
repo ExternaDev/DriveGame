@@ -12,8 +12,10 @@ public class LampPostTrigger : MonoBehaviour
     		//spawn real lamppost and remove this one
     		LampMeshObj.SetActive(false);
     		LampPhysicsObj.SetActive(true);
-    		//LampPhysicsObj.GetComponent<Rigidbody>().AddTorque(PlayerController.instance.playerForward*10000f);
+
     		LampPhysicsObj.GetComponent<Rigidbody>().AddForce(PlayerController.instance.playerForward*10000f);
+
+            col.GetComponentInParent<CarStats>().TakeDamage(10);
 
     	}
     }

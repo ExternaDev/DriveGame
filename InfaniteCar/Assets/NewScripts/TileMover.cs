@@ -6,12 +6,12 @@ using System.Linq;
 public class TileMover : MonoBehaviour
 {
 	public static TileMover instance;
-	public GameObject tile;
+	//public GameObject tile;
 	public List<GameObject> TileTypes = new List<GameObject>();
 
 	public List<Tile> Tiles = new List<Tile>();
-	List<Tile> TilesToRemove = new List<Tile>();
-	 int segments = 6;
+	public List<Tile> TilesToRemove = new List<Tile>();
+	//int segments = 6;
 	public float baseSpeed = .75f;
 	 float playerSpeed = 0;
 	 //float offset = 0;
@@ -33,25 +33,25 @@ public class TileMover : MonoBehaviour
 
     PlayerController PC;
 
-    public int turns = 0;
+   // public int turns = 0;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         PC =PlayerController.instance;
         input = PlayerInput.instance;
         instance = this;
-        SpawnFirstTiles();
+     //   SpawnFirstTiles();
 
     }
-    void SpawnFirstTiles(){
-    	for(int i = 0; i <segments;i ++){
-    		Tile obj = Instantiate(TileTypes[0], new Vector3(0,0,(i*50)-50),Quaternion.identity,this.transform).GetComponent<Tile>();
+    // void SpawnFirstTiles(){
+    // 	for(int i = 0; i <segments;i ++){
+    // 		Tile obj = Instantiate(TileTypes[0], new Vector3(0,0,(i*50)-50),Quaternion.identity,this.transform).GetComponent<Tile>();
     		
-    		Tiles.Add(obj);
+    // 		Tiles.Add(obj);
             
-    	}
-        PlayerController.instance.Init();
-    }
+    // 	}
+    //     PlayerController.instance.Init();
+    // }
     // Update is called once per frame
     void Update()
     {
@@ -88,57 +88,58 @@ public class TileMover : MonoBehaviour
     	}
     }
 
-    public int TilesSinceInter =3;
-    GameObject FindNextTileType(){
-        int rand = Random.Range(0,TileTypes.Count);
+    // public int TilesSinceInter =3;
+    // GameObject FindNextTileType(){
+    //     int rand = Random.Range(0,TileTypes.Count);
        
-        if(TileTypes[rand].GetComponent<Tile>().isIntersection){
-            if(TilesSinceInter <10){
-                return FindNextTileType();
-            }else if( TilesSinceInter > 10){
-                 TilesSinceInter =0;
+    //     if(TileTypes[rand].GetComponent<Tile>().isIntersection){
+    //         if(TilesSinceInter <10){
+    //             return FindNextTileType();
+    //         }else if( TilesSinceInter > 10){
+    //              TilesSinceInter =0;
 
-                return TileTypes[rand];
-            }
-        } 
+    //             return TileTypes[rand];
+    //         }
+    //     } 
 
-        TilesSinceInter ++;
-         if( TileTypes[rand].GetComponent<Tile>().direction == TileDirection.right){
-            if(turns>=1){
-                return FindNextTileType();
-            }else{
-                turns ++;
-            }
-        }else if(TileTypes[rand].GetComponent<Tile>().direction == TileDirection.left){
-            if(turns<=-1){
-                return FindNextTileType();
-            }else{
-                turns --;
-            }
-        }
-        return TileTypes[rand];
+    //     TilesSinceInter ++;
+    //      if( TileTypes[rand].GetComponent<Tile>().direction == TileDirection.right){
+    //         if(turns>=1){
+    //             return FindNextTileType();
+    //         }else{
+    //             turns ++;
+    //         }
+    //     }else if(TileTypes[rand].GetComponent<Tile>().direction == TileDirection.left){
+    //         if(turns<=-1){
+    //             return FindNextTileType();
+    //         }else{
+    //             turns --;
+    //         }
+    //     }
+    //     return TileTypes[rand];
 
-    }
-    public void AddTurnAmount(int dir){
-        if(dir==1){
-            turns --;
+    // }
+    // public void AddTurnAmount(int dir){
+    //     if(dir==1){
+    //         turns --;
 
-         }else if(dir==2){
-            turns ++;
-            }
-    }
-    public  void AddNewTile(){
-        Debug.Log("Spawn tile");
-        GameObject pref = FindNextTileType();
-    	Tile obj = Instantiate(pref, Vector3.one * 100f ,Quaternion.identity,this.transform).GetComponent<Tile>();
+    //      }else if(dir==2){
+    //         turns ++;
+    //         }
+    // }
+    // public  void AddNewTile(){
+    //     Debug.Log("Spawn tile");
+    //     GameObject pref = FindNextTileType();
+    // 	Tile obj = Instantiate(pref, Vector3.one * 100f ,Quaternion.identity,this.transform).GetComponent<Tile>();
        
        
-        Tiles.Add(obj);
-        TilesToRemove.Add(Tiles[0]);
+    //     Tiles.Add(obj);
+    //     TilesToRemove.Add(Tiles[0]);
 
-        obj.RealignToTile(FindTileBefore(obj),0);
+    //     obj.RealignToTile(FindTileBefore(obj),0);
         
-    }
+    // }
+
     Vector3 Absolute(Vector3 v){
         return new Vector3(Mathf.Abs(v.x),  Mathf.Abs(v.y), Mathf.Abs(v.z));
     }

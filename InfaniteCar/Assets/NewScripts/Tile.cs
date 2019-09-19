@@ -25,9 +25,26 @@ public class Tile : MonoBehaviour
     public List<GameObject> FakeEnds = new List<GameObject>();
 
     List<AIDriver> Cars = new List<AIDriver>();
+
+
+    public List<Transform> BuildLocations = new List<Transform>();
+    public GameObject buildingprefab;
     void Update()
     {
         
+    }
+    void Start(){
+        // if(BuildLocations.Count>0){
+        //     foreach(Transform t in BuildLocations){
+        //         if(t.gameObject.activeInHierarchy){
+        //             GameObject building = Instantiate(buildingprefab, t.position, Quaternion.identity,t);
+        //             float height = Random.Range(7f,40f);
+        //             building.transform.localPosition += new Vector3(0,height/2f,0);
+        //             building.transform.localScale  = new Vector3(Random.Range(7f,10f), height,Random.Range(7f,10f) );
+
+        //         }
+        //     }
+        // }
     }
     public int GetWaypointCount(){ return waypoints.Count;}
     public void RealignToTile(Tile tile,int end){
@@ -82,7 +99,7 @@ public class Tile : MonoBehaviour
     public void OnTriggerEnter(Collider col){
         if(col.gameObject.tag == "Player"){
             hit = true;
-            TileMover.instance.AddNewTile();
+            TileSpawner.instance.AddNewTile();
 
             PlayerController.instance.HitTile(this);
 
@@ -95,7 +112,7 @@ public class Tile : MonoBehaviour
             if(dir != 0){
                 RemoveFakes();
                 TileMover.instance.FindTileAfter(this).RealignToTile(this,dir);
-                TileMover.instance.AddTurnAmount(dir);
+                TileSpawner.instance.AddTurnAmount(dir);
 
             }
     }
