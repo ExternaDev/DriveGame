@@ -8,7 +8,7 @@ public class CarMovement : MonoBehaviour
 	float movement = .25f;
 	float width = 15;
 
-    float rotateSpeed = 4f;
+    float rotateSpeed = 2f;
 
 
 
@@ -40,9 +40,9 @@ public class CarMovement : MonoBehaviour
              RotSpeed *= 2f;
 
           if(input.Left()){
-            this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles - new Vector3(0,1,0) ,RotSpeed);
+            this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles - new Vector3(0,rotateSpeed,0) , 1);
         }else if (input.Right() ){
-            this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles + new Vector3(0,1,0) , RotSpeed);
+            this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles + new Vector3(0,rotateSpeed,0) , 1);
         }
 
 

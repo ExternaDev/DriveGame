@@ -34,17 +34,17 @@ public class Tile : MonoBehaviour
         
     }
     void Start(){
-        // if(BuildLocations.Count>0){
-        //     foreach(Transform t in BuildLocations){
-        //         if(t.gameObject.activeInHierarchy){
-        //             GameObject building = Instantiate(buildingprefab, t.position, Quaternion.identity,t);
-        //             float height = Random.Range(7f,40f);
-        //             building.transform.localPosition += new Vector3(0,height/2f,0);
-        //             building.transform.localScale  = new Vector3(Random.Range(7f,10f), height,Random.Range(7f,10f) );
+        if(BuildLocations.Count>0){
+            foreach(Transform t in BuildLocations){
+                if(t.gameObject.activeInHierarchy){
+                    GameObject building = Instantiate(buildingprefab, t.position, Quaternion.identity,t);
+                    float height = Random.Range(7f,40f);
+                    building.transform.localPosition += new Vector3(0,height/2f,0);
+                    building.transform.localScale  = new Vector3(Random.Range(7f,10f), height,Random.Range(7f,10f) );
 
-        //         }
-        //     }
-        // }
+                }
+            }
+        }
     }
     public int GetWaypointCount(){ return waypoints.Count;}
     public void RealignToTile(Tile tile,int end){

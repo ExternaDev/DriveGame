@@ -17,11 +17,11 @@ public class CarTilting : MonoBehaviour
     void Update()
     {
         if(input.Right() && turnAngle < 25){
-            turnAngle +=2f;
+            turnAngle +=4f;
         }else if(input.Left()&& turnAngle > -25){
-            turnAngle -=2f;
+            turnAngle -=4f;
 
-        }else 
+        }else if(!input.Right() && !input.Left() )
             turnAngle *= .95f;
 
         this.transform.localRotation = Quaternion.Euler(new Vector3(0,turnAngle,0));

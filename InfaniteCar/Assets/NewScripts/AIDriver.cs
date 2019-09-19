@@ -101,11 +101,12 @@ public class AIDriver : MonoBehaviour
         	this.transform.LookAt(LeftLane());
 
     	}
-				dir = dir.normalized;
+		dir = dir.normalized;
 
 
+        //this.transform.position -= TileMover.instance.GetMovementUpdate()/2f;// (TileMover.instance.PlayerBrakeAmount);
 
-        this.transform.position -= pc.playerForward * TileMover.instance.baseSpeed * (TileMover.instance.PlayerBrakeAmount);
+        this.transform.position -= pc.playerForward * TileMover.instance.baseSpeed ;//* (TileMover.instance.PlayerBrakeAmount);
 
         if(!police){
         	this.transform.position +=dir * .1f;

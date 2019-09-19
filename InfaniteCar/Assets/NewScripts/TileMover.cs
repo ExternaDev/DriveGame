@@ -61,16 +61,14 @@ public class TileMover : MonoBehaviour
        CheckTilestoRemove();
        GatherInput();
 
-       if(PlayerBrakeAmount <1)
+       if(PlayerBrakeAmount <2)
        PlayerBrakeAmount += PlayerBrakeAmountDecay;
        
     }
 
     void GatherInput(){
-
-
     	baseSpeed += Time.fixedDeltaTime/ 500f;
-    	if(input.Down() && PlayerBrakeAmount >0){
+    	if(input.Down() && PlayerBrakeAmount >1){
     		PlayerBrakeAmount -=PlayerBrakeAmountDecay*5f ;
     	}
 
@@ -88,57 +86,6 @@ public class TileMover : MonoBehaviour
     	}
     }
 
-    // public int TilesSinceInter =3;
-    // GameObject FindNextTileType(){
-    //     int rand = Random.Range(0,TileTypes.Count);
-       
-    //     if(TileTypes[rand].GetComponent<Tile>().isIntersection){
-    //         if(TilesSinceInter <10){
-    //             return FindNextTileType();
-    //         }else if( TilesSinceInter > 10){
-    //              TilesSinceInter =0;
-
-    //             return TileTypes[rand];
-    //         }
-    //     } 
-
-    //     TilesSinceInter ++;
-    //      if( TileTypes[rand].GetComponent<Tile>().direction == TileDirection.right){
-    //         if(turns>=1){
-    //             return FindNextTileType();
-    //         }else{
-    //             turns ++;
-    //         }
-    //     }else if(TileTypes[rand].GetComponent<Tile>().direction == TileDirection.left){
-    //         if(turns<=-1){
-    //             return FindNextTileType();
-    //         }else{
-    //             turns --;
-    //         }
-    //     }
-    //     return TileTypes[rand];
-
-    // }
-    // public void AddTurnAmount(int dir){
-    //     if(dir==1){
-    //         turns --;
-
-    //      }else if(dir==2){
-    //         turns ++;
-    //         }
-    // }
-    // public  void AddNewTile(){
-    //     Debug.Log("Spawn tile");
-    //     GameObject pref = FindNextTileType();
-    // 	Tile obj = Instantiate(pref, Vector3.one * 100f ,Quaternion.identity,this.transform).GetComponent<Tile>();
-       
-       
-    //     Tiles.Add(obj);
-    //     TilesToRemove.Add(Tiles[0]);
-
-    //     obj.RealignToTile(FindTileBefore(obj),0);
-        
-    // }
 
     Vector3 Absolute(Vector3 v){
         return new Vector3(Mathf.Abs(v.x),  Mathf.Abs(v.y), Mathf.Abs(v.z));
@@ -152,7 +99,6 @@ public class TileMover : MonoBehaviour
     Vector3 offset = Vector3.zero;
     void MoveTiles(){
     	foreach(Tile obj in Tiles){
-
             obj.transform.position -= GetMovementUpdate();
             ApplyDrift(obj.gameObject,PC.turnAngle);
             offset += Absolute(GetMovementUpdate());
@@ -173,10 +119,6 @@ public class TileMover : MonoBehaviour
     }
     float DriftAbsValue(float ang){
         float amount = (Mathf.Abs(ang) -driftThreshold) /  (1f- driftThreshold );
-//        Debug.Log("angle " + ang);
-
-       // Debug.Log((Mathf.Abs(ang) -driftThreshold)  +  "  /  " +(1f- driftThreshold));
-       // Debug.Log("Amount " + amount);
         return amount;
     }
     Vector3 DriftDirection(){
@@ -184,13 +126,17 @@ public class TileMover : MonoBehaviour
     }
     public Vector3 GetMovementUpdate(){
         return PC.playerForward*(baseSpeed * PlayerBrakeAmount);
+       //return PC.playerForward* baseSpeed;
+
     }
+    
     public Tile FindTileAfter(Tile tile){
     	int index = Tiles.IndexOf(tile);
     	if(index +1 >= Tiles.Count)
     		return null;
     	return Tiles[index+1];
     }
+
     public Tile FindTileBefore(Tile tile){
     	int index = Tiles.IndexOf(tile);
     	if(index -1 <0)
