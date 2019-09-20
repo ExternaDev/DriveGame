@@ -55,8 +55,10 @@ public class TileMover : MonoBehaviour
        GatherInput();
 
        if(PlayerBrakeAmount <2)
-       PlayerBrakeAmount += PlayerBrakeAmountDecay;
-       
+            PlayerBrakeAmount += PlayerBrakeAmountDecay;
+        if(HitBreak<1){
+            HitBreak+=Time.fixedDeltaTime;
+        }
     }
 
     void GatherInput(){
@@ -117,10 +119,14 @@ public class TileMover : MonoBehaviour
     Vector3 DriftDirection(){
         return (PC.transform.right+ PC.transform.forward + PC.transform.forward).normalized;
     }
+    float HitBreak = 1; 
     public Vector3 GetMovementUpdate(){
-        return PC.playerForward*(baseSpeed * PlayerBrakeAmount);
+        return PC.playerForward*(baseSpeed * PlayerBrakeAmount) * HitBreak;
        //return PC.playerForward* baseSpeed;
 
+    }
+    public void PlayerHitCar(){
+        HitBreak=0;
     }
     public Tile FindTileAfter(Tile tile){
     	int index = Tiles.IndexOf(tile);

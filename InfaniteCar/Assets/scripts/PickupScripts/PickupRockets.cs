@@ -19,7 +19,7 @@ public class PickupRockets : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("you get a bo-bomb");
+        //Debug.Log("you get a bo-bomb");
         //Debug.Log("boom" + col.gameObject.name);
         // if the bullet hits an enemy it will do this
         if (col.gameObject.tag == "Player")

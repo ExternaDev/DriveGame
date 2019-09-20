@@ -197,20 +197,31 @@ public class AIDriver : MonoBehaviour
     	
        isdead = true;
     }
-    private void OnCollisionEnter(Collision col)
+    void OnCollisionEnter(Collision col)
     {
+            Debug.Log("<color=red>something hit ai driver</color>");
+
         if (col.gameObject.tag == "Bullet")
         {
             isdead = true;
             Debug.Log("boom" + col.gameObject.name);
             //mark the enemy as dead
-        }
-        //if the bullet hits somthing that is not an enemy it will do this
-        if (col.gameObject.tag != "Bullet")
+        }else if (col.gameObject.tag != "Bullet") //if the bullet hits somthing that is not an enemy it will do this
         {
             
             Debug.Log(col.gameObject.tag);
         }
 
     }
+    void OnTriggerEnter(Collider col){
+        if (col.gameObject.tag == "Player") 
+        {
+            Debug.Log("<color=red>Player hit car from AIDriver on trigger</color>");
+            isdead = true;
+            
+           PlayerController.instance.HitOtherCar();
+           TileMover.instance.PlayerHitCar();
+        }
+    }
+
 }

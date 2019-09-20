@@ -68,4 +68,20 @@ public class PlayerController : MonoBehaviour
         
 
     }
+    public void HitOtherCar(){
+
+    }
+    void OnCollisionEnter(Collision col)
+    {
+        Debug.Log("<color=red>something hit ai driver</color>");
+
+        if (col.gameObject.tag == "Enemy") 
+        {
+        Debug.Log("<color=red>Player hit car</color>");
+            
+          HitOtherCar();
+           TileMover.instance.PlayerHitCar();
+        }
+
+    }
 }
