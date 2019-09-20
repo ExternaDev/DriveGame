@@ -47,7 +47,7 @@ public class shootRockets : MonoBehaviour
 
 
                 AddRocket();
-                //canShootRocket = false;
+                canShootRocket = false;
             }
         }
     }

@@ -23,8 +23,11 @@ public class PickupOil : MonoBehaviour
         // if the bullet hits an enemy it will do this
         if (col.gameObject.tag == "Player")
         {
-            player.sRockets.canShootRocket = true;
+            player.oil.hasOil = true;
+            player.sRockets.canShootRocket = false;            
+            player.bSpawner.hasBomb = false;
             Debug.Log("you get a bo-bomb");
+            Destroy(this.gameObject);
             //mark the enemy as dead
         }
         //if the bullet hits somthing that is not an enemy it will do this

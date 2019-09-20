@@ -222,7 +222,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1136,8 +1136,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 657965759}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 14.91}
-  m_LocalScale: {x: 10, y: 2, z: 25}
+  m_LocalPosition: {x: 0, y: 0, z: 52.66}
+  m_LocalScale: {x: 50, y: 2, z: 100}
   m_Children: []
   m_Father: {fileID: 1136172345}
   m_RootOrder: 1
@@ -1526,7 +1526,7 @@ MonoBehaviour:
   currentSpeed: 0.01
   barrel: {fileID: 754111681}
   thrust: 5
-  NumOfRockets: 1
+  NumOfRockets: 20
   canShootRocket: 0
   enemyPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1136172349
