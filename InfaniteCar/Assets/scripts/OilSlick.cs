@@ -31,11 +31,11 @@ public class OilSlick : MonoBehaviour
         //if exists
         if (oilController != null && oilController.isdead)
         {
-            BombRemove();
+            OilRemove();
         }
     }
 
-    private void BombRemove()
+    private void OilRemove()
     {
         //remove the bomb from the game
         Destroy(oily);

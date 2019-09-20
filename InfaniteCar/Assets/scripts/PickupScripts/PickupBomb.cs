@@ -25,7 +25,10 @@ public class PickupBomb : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             player.bSpawner.hasBomb = true;
+            player.oil.hasOil = false;
+            player.sRockets.canShootRocket = false;
             Debug.Log("you get a bo-bomb");
+            Destroy(this.gameObject);
             //mark the enemy as dead
         }
         //if the bullet hits somthing that is not an enemy it will do this
