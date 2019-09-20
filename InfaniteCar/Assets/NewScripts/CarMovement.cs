@@ -39,12 +39,11 @@ public class CarMovement : MonoBehaviour
          if(input.Down())
              RotSpeed *= 2f;
 
-          if(input.Left()){
+        if(input.Left()){
             this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles - new Vector3(0,rotateSpeed,0) , 1);
         }else if (input.Right() ){
             this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles + new Vector3(0,rotateSpeed,0) , 1);
         }
-
 
     }
     // void HandleTilting(){

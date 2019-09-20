@@ -43,15 +43,8 @@ public class TileMover : MonoBehaviour
      //   SpawnFirstTiles();
 
     }
-    // void SpawnFirstTiles(){
-    // 	for(int i = 0; i <segments;i ++){
-    // 		Tile obj = Instantiate(TileTypes[0], new Vector3(0,0,(i*50)-50),Quaternion.identity,this.transform).GetComponent<Tile>();
-    		
-    // 		Tiles.Add(obj);
-            
-    // 	}
-    //     PlayerController.instance.Init();
-    // }
+    
+    
     // Update is called once per frame
     void Update()
     {

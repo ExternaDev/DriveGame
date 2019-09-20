@@ -20,6 +20,7 @@ public class TileSpawner : MonoBehaviour
 
 	int segments = 6;
     public int turns = 0;
+    public List<GameObject> pickups = new List<GameObject>();
 
 	void Awake(){
 		instance = this;
@@ -27,10 +28,15 @@ public class TileSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pickups = new List<GameObject>(Resources.LoadAll<GameObject>("Pickups"));
+
     	mover = GetComponent<TileMover>();
         SpawnFirstTiles();
-    }
 
+    }
+    public GameObject GetRandomPickup(){
+    	return pickups[Random.Range(0, pickups.Count)];
+    }
     void SpawnFirstTiles(){
     	for(int i = 0; i <segments;i ++){
     		Tile obj = Instantiate(TileTypes[0].Tile, new Vector3(0,0,(i*50)-50),Quaternion.identity,this.transform).GetComponent<Tile>();
@@ -43,8 +49,8 @@ public class TileSpawner : MonoBehaviour
        // Debug.Log("Spawn tile");
         GameObject pref = FindNextTileType();
     	Tile obj = Instantiate(pref, Vector3.one * 100f ,Quaternion.identity,this.transform).GetComponent<Tile>();
-       
-       
+       if(Random.Range(0,10) > 7)
+       		obj.SpawnPickup();
        mover.Tiles.Add(obj);
        mover.TilesToRemove.Add( mover.Tiles[0]);
 

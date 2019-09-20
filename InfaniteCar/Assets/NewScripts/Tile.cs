@@ -29,6 +29,8 @@ public class Tile : MonoBehaviour
 
     public List<Transform> BuildLocations = new List<Transform>();
     public GameObject buildingprefab;
+    public GameObject PickupSpawnPoints;
+
     void Update()
     {
         
@@ -46,6 +48,18 @@ public class Tile : MonoBehaviour
             }
         }
     }
+
+    public void SpawnPickup(){
+        if(PickupSpawnPoints == null || PickupSpawnPoints.transform.childCount ==0) return;
+
+
+        int rand = Random.Range(0, PickupSpawnPoints.transform.childCount);
+        GameObject pu = (GameObject)Instantiate( TileSpawner.instance.GetRandomPickup(), PickupSpawnPoints.transform.GetChild(rand).position + Vector3.up/2f, Quaternion.identity,this.transform);
+
+    }
+
+
+
     public int GetWaypointCount(){ return waypoints.Count;}
     public void RealignToTile(Tile tile,int end){
         //make list of cars Rel position
