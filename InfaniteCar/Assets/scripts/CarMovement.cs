@@ -8,10 +8,10 @@ public class CarMovement : MonoBehaviour
 	float movement = .25f;
 	float width = 15;
 
-    float rotateSpeed = 2f;
+   public float rotateSpeed = 2;
 
 
-
+float IncreaseScale = 2.5f;
     // //Tilting
     // float rotation = 180;
     // float maxAngle = 20;
@@ -34,15 +34,21 @@ public class CarMovement : MonoBehaviour
        // HandleTilting();
     }
     void HandleRotation(){
-        float RotSpeed = rotateSpeed;
+        //float RotSpeed = rotateSpeed;
 
-         if(input.Down())
-             RotSpeed *= 2f;
+        // if(input.Down())
+             //RotSpeed *= 2f;
 
         if(input.Left()){
+            rotateSpeed += Time.fixedDeltaTime*IncreaseScale;
             this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles - new Vector3(0,rotateSpeed,0) , 1);
         }else if (input.Right() ){
+            rotateSpeed += Time.fixedDeltaTime*IncreaseScale;
+
             this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles + new Vector3(0,rotateSpeed,0) , 1);
+        }else if(rotateSpeed>2f){
+            rotateSpeed-= Time.fixedDeltaTime*IncreaseScale*4f;
+
         }
 
     }

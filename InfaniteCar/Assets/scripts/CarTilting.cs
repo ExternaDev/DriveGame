@@ -22,7 +22,7 @@ public class CarTilting : MonoBehaviour
             turnAngle -=4f;
 
         }else if(!input.Right() && !input.Left() )
-            turnAngle *= .95f;
+            turnAngle *= .9f;
 
         this.transform.localRotation = Quaternion.Euler(new Vector3(0,turnAngle,0));
        
