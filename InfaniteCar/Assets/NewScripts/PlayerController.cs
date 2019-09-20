@@ -4,7 +4,11 @@ using UnityEngine;
 using TMPro;
 public class PlayerController : MonoBehaviour
 {
-	public static PlayerController instance;
+    public BombSpawner bSpawner;
+    public OilSlick oil;
+    public shootRockets sRockets;
+
+    public static PlayerController instance;
     public Vector3 playerForward = new Vector3(0,0,1);
     // Start is called before the first frame update
     
@@ -63,6 +67,14 @@ public class PlayerController : MonoBehaviour
         NextWaytotalDistance =  Mathf.Abs((onComingWaypoint.position - this.transform.position).magnitude);
 
        currTile = tile;
+
+    }
+    public void GetPowerUps()
+    {
+        bSpawner = GetComponent<BombSpawner>();
+        oil = GetComponent<OilSlick>();
+        sRockets = GetComponent<shootRockets>();
+        
 
     }
 }
