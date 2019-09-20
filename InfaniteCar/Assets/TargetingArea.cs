@@ -41,19 +41,25 @@ public class TargetingArea : MonoBehaviour
     }
     public void RemoveFromList()
     {
-        
-        if (OutOfRange.Count > 0) {
+
+        if (OutOfRange.Count > 0)
+        {
 
             foreach (AIDriver obj in OutOfRange)
             {
                 InRange.Remove(obj);
-                OutOfRange.Remove(obj);                
+                
+                Debug.Log("<color=green> fuck </color>");
             }
+            OutOfRange.Clear();
+
+
             //clears bullets to remove after destorying all bullets
-           OutOfRange.Clear();
+
+
 
         }
-
+        
     }
    
 }
