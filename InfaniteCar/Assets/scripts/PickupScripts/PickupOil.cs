@@ -6,7 +6,7 @@ public class PickupOil : MonoBehaviour
 {
     PlayerController player;
     // Start is called before the first frame update
-    void awake()
+    void Awake()
     {
         player = PlayerController.instance;
 
@@ -17,7 +17,7 @@ public class PickupOil : MonoBehaviour
     {
 
     }
-    public void OnCollisionEnter(Collision col)
+    private void OnTriggerEnter(Collider col)
     {
         //Debug.Log("boom" + col.gameObject.name);
         // if the bullet hits an enemy it will do this
