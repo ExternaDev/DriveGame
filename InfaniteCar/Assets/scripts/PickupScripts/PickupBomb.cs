@@ -6,7 +6,7 @@ public class PickupBomb : MonoBehaviour
 {
     PlayerController player;
     // Start is called before the first frame update
-    void awake()
+    void Awake()
     {
         player = PlayerController.instance;
         

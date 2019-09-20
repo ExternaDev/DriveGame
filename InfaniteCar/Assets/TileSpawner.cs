@@ -49,7 +49,7 @@ public class TileSpawner : MonoBehaviour
        // Debug.Log("Spawn tile");
         GameObject pref = FindNextTileType();
     	Tile obj = Instantiate(pref, Vector3.one * 100f ,Quaternion.identity,this.transform).GetComponent<Tile>();
-       if(Random.Range(0,10) > 7)
+       //if(Random.Range(0,10) > 7)
        		obj.SpawnPickup();
        mover.Tiles.Add(obj);
        mover.TilesToRemove.Add( mover.Tiles[0]);

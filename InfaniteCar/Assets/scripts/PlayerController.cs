@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         instance = this;
+        GetPowerUps();
     }
 
     // Update is called once per frame
@@ -43,16 +44,6 @@ public class PlayerController : MonoBehaviour
     {
         playerForward = this.transform.forward;
 
-        // if(inited){
-        //     distanceToNextWay = Mathf.Abs((onComingWaypoint.position - this.transform.position).magnitude);
-        //     TotalDistance = (SmallTileCompleted * 50f);
-        //     TotalDistance += (LargeTileCompleted * 80f);
-        //     TotalDistance += TinyTileCompleted * 25f;
-        //     TotalDistance += (NextWaytotalDistance -distanceToNextWay);
-           
-
-        //     tex.text = TotalDistance.ToString("00");
-        // }
     }
     public bool IsStarted(){
         return inited;
