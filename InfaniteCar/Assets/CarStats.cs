@@ -9,7 +9,7 @@ using TMPro;
 public class CarStats : MonoBehaviour
 {
     
-    public float OverallDistance = 0;
+   // public float OverallDistance = 0;
     public float GasAmount = 100f;
     public float DamageAmount = 0;
     PlayerController PC;
@@ -24,8 +24,17 @@ public class CarStats : MonoBehaviour
 
 
     public Image FuelGauge, DamageGuage;
+    GameManager GM;
+   
+
+    
+
+   // public Event PlayerDied;
     void Awake(){
     	PC = this.GetComponent<PlayerController>();
+        GM = GameManager.instance;
+       // OnPlayerDied += 
+        EventManager.OnGameReset += OnGameReset;
     }
     public void FillGas(){
     	GasAmount=100;
@@ -35,30 +44,43 @@ public class CarStats : MonoBehaviour
     }
     public void TakeDamage(float amount){
     	DamageAmount += amount;
-    	if(amount >=100)	PlayerDiedFromDamage();
+    	if(DamageAmount >=100)	PlayerDiedFromDamage();
     }
     public void PlayerDiedFromDamage(){
     	Debug.Log("<color=red>Player died from damage </color>");
+        //PC.PlayerDied();
+        EventManager.instance.PlayerDied();
+    }
+    void OnGameReset(){
+        TotalDistance=0;
+        SmallTileCompleted=0;
+        LargeTileCompleted=0;
+        TinyTileCompleted=0;
+        GasAmount =100;
+        DamageAmount=0;
+
     }
     void Update(){
+        if(!GM.GameRunning()) return;
+
     	GasAmount -= Time.fixedDeltaTime;
-    	FindTotalDistance();
     	FuelGauge.fillAmount = GasAmount/100f;
     	DamageGuage.fillAmount = DamageAmount/100f;
 
+        FindTotalDistance();
+
     }
     void FindTotalDistance(){
-    	if(PC.IsStarted()){
-       	 distanceToNextWay = Mathf.Abs((PC.onComingWaypoint.position - this.transform.position).magnitude);
+       	distanceToNextWay = Mathf.Abs((PC.onComingWaypoint.position - this.transform.position).magnitude);
 
-            TotalDistance = (SmallTileCompleted * 50f);
-            TotalDistance += (LargeTileCompleted * 80f);
-            TotalDistance += TinyTileCompleted * 25f;
-            TotalDistance += (PC.NextWaytotalDistance - distanceToNextWay);
+        TotalDistance = (SmallTileCompleted * 50f);
+        TotalDistance += (LargeTileCompleted * 80f);
+        TotalDistance += TinyTileCompleted * 25f;
+        TotalDistance += (PC.NextWaytotalDistance - distanceToNextWay);
            
 
-            DistanceText.text = TotalDistance.ToString("00");
-        }
+        DistanceText.text = TotalDistance.ToString("00");
+        
     }
     public void HitTile( Tile tile){
     	if(tile.tileSize == TileSize.Big){

@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     public Tile currTile;
     public float turnAngle = 0;
+
+    
     public void Init(){
         onComingWaypoint =TileMover.instance.Tiles[2].waypoints[0].transform;
         NextWaytotalDistance =  Mathf.Abs((onComingWaypoint.position - this.transform.position).magnitude);
@@ -48,8 +50,8 @@ public class PlayerController : MonoBehaviour
     public bool IsStarted(){
         return inited;
     }
-    public void SetTurnAngle(float t){
-        turnAngle = Mathf.Clamp(t/25f, -1,1);
+    public void SetTurnAngle(float t,float total){
+        turnAngle = Mathf.Clamp(t/total, -1,1);
     }
     public void HitTile( Tile tile){
         GetComponent<CarStats>().HitTile(currTile);//pass in previouse tile to add to distance
@@ -69,19 +71,20 @@ public class PlayerController : MonoBehaviour
 
     }
     public void HitOtherCar(){
-
+        this.GetComponent<CarStats>().TakeDamage(50);
     }
-    void OnCollisionEnter(Collision col)
-    {
-        Debug.Log("<color=red>something hit ai driver</color>");
 
-        if (col.gameObject.tag == "Enemy") 
-        {
-        Debug.Log("<color=red>Player hit car</color>");
+    // void OnCollisionEnter(Collision col)
+    // {
+    //     Debug.Log("<color=red>something hit ai driver</color>");
+
+    //     if (col.gameObject.tag == "Enemy") 
+    //     {
+    //     Debug.Log("<color=red>Player hit car</color>");
             
-          HitOtherCar();
-           TileMover.instance.PlayerHitCar();
-        }
+    //       HitOtherCar();
+    //        TileMover.instance.PlayerHitCar();
+    //     }
 
-    }
+    // }
 }

@@ -18,10 +18,12 @@ float IncreaseScale = 2.5f;
     // float turnAngle = 0;
 
 
-
+    GameManager GM;
     // Start is called before the first frame update
     void Start()
     {
+        GM = GameManager.instance;
+
         input = PlayerInput.instance;
         
     }
@@ -29,6 +31,7 @@ float IncreaseScale = 2.5f;
     // Update is called once per frame
     void Update()
     {
+        if(!GM.GameRunning()) return;
       
         HandleRotation();
        // HandleTilting();

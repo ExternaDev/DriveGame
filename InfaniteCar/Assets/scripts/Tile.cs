@@ -35,6 +35,10 @@ public class Tile : MonoBehaviour
     {
         
     }
+    void Awake(){
+        AICars = GameManager.instance.AICars;
+        
+    }
     void Start(){
         if(BuildLocations.Count>0){
             foreach(Transform t in BuildLocations){
@@ -51,7 +55,8 @@ public class Tile : MonoBehaviour
 
     public void SpawnPickup(){
         if(PickupSpawnPoints == null || PickupSpawnPoints.transform.childCount ==0) return;
-
+        int doSpawn =  Random.Range(0, 100);
+        if(doSpawn > 25) return;
 
         int rand = Random.Range(0, PickupSpawnPoints.transform.childCount);
         GameObject pu = (GameObject)Instantiate( TileSpawner.instance.GetRandomPickup(), PickupSpawnPoints.transform.GetChild(rand).position + Vector3.up/2f, Quaternion.identity,this.transform);
@@ -83,9 +88,9 @@ public class Tile : MonoBehaviour
             TileMover.instance.FindTileAfter(this).RealignToTile(this,0);
          }
     }
-   
+   AICarsManager AICars;
     public void AdjustCars(Vector3 amount){
-       foreach(AIDriver car in GameManager.instance.Enemies){
+       foreach(AIDriver car in AICars.Enemies){
             if(car.currentTile == this){
                car.transform.position+= amount;
             }

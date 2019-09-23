@@ -34,6 +34,9 @@ public class TileSpawner : MonoBehaviour
         SpawnFirstTiles();
 
     }
+
+
+
     public GameObject GetRandomPickup(){
     	return pickups[Random.Range(0, pickups.Count)];
     }
@@ -45,14 +48,14 @@ public class TileSpawner : MonoBehaviour
         PlayerController.instance.Init();
     }
 
-     public  void AddNewTile(){
-       // Debug.Log("Spawn tile");
+     public void AddNewTile(){
+
         GameObject pref = FindNextTileType();
     	Tile obj = Instantiate(pref, Vector3.one * 100f ,Quaternion.identity,this.transform).GetComponent<Tile>();
-       //if(Random.Range(0,10) > 7)
-       		obj.SpawnPickup();
-       mover.Tiles.Add(obj);
-       mover.TilesToRemove.Add( mover.Tiles[0]);
+     
+       	obj.SpawnPickup();
+       	mover.Tiles.Add(obj);
+       	mover.TilesToRemove.Add( mover.Tiles[0]);
 
         obj.RealignToTile(mover.FindTileBefore(obj),0);
         
@@ -67,10 +70,9 @@ public class TileSpawner : MonoBehaviour
      	Debug.Log("Add turn amount");
         if(dir==1){
             turns --;
-
-         }else if(dir==2){
+        }else if(dir==2){
             turns ++;
-            }
+        }
     }
     public int TilesSinceInter =3;
     GameObject FindNextTileType(){

@@ -6,19 +6,26 @@ public class CarTilting : MonoBehaviour
 {
 	PlayerInput input;
 	float rotataion = 180;
-    float maxAngle = 20;
+    float maxAngle = 25;
     float turnAngle = 0;
+    GameManager GM;
     void Start()
     {
+        GM = GameManager.instance;
         input = PlayerInput.instance;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(input.Right() && turnAngle < 25){
+        if(!GM.GameRunning()) return;
+
+
+
+
+        if(input.Right() && turnAngle < maxAngle){
             turnAngle +=4f;
-        }else if(input.Left()&& turnAngle > -25){
+        }else if(input.Left()&& turnAngle > -maxAngle){
             turnAngle -=4f;
 
         }else if(!input.Right() && !input.Left() )
@@ -26,6 +33,6 @@ public class CarTilting : MonoBehaviour
 
         this.transform.localRotation = Quaternion.Euler(new Vector3(0,turnAngle,0));
        
-        PlayerController.instance.SetTurnAngle(turnAngle);
+        PlayerController.instance.SetTurnAngle(turnAngle,maxAngle);
     }
 }

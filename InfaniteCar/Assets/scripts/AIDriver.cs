@@ -24,7 +24,9 @@ public class AIDriver : MonoBehaviour
     public bool isdead = false;
     
     PlayerController pc;
+    GameManager GM;
     void Awake(){
+        GM = GameManager.instance;
     	pc = PlayerController.instance;
     }
     public void Init(bool _onComing){
@@ -37,30 +39,18 @@ public class AIDriver : MonoBehaviour
     	// 	police = true;
     	// }
     	
-
-    	//if oncmine find closest wp from farthest
-    	//if not oncoming start from first wp  
-    	//currentTile = TileMover.instance.FindClosestTo(this.transform.position, onComing).GetComponent<Tile>();
     	currentTile = TileMover.instance.FindFirstTile(police);
 
-    	//currentWaypoint = currentTile.FindClosestWayTo(this.transform.position);
     	currentWaypoint = currentTile.FindFirstWay(onComing);
 
-
-    	//whatever tile the player is on, spawn on one before
 			
 		if(onComing)
 			wayIndex =currentTile.GetWaypointCount();
 
 
 
-    transform.SetParent(currentTile.transform);
+        transform.SetParent(currentTile.transform);
 
-
-
-    	// if(!onComing){
-    	// 	this.transform.position = TileMover.instance.Tiles[0].waypoints[2].position;
-    	// }else{
 		if(onComing)
     		this.transform.position =LeftLane();
     	else
@@ -70,23 +60,19 @@ public class AIDriver : MonoBehaviour
     }
     void Update()
     {
+        if(!GM.GameRunning()) return;
     	if(currentTile != null && currentWaypoint !=null){
-    		// if(police && Vector3.Distance(this.transform.position, PlayerController.instance.transform.position) <15){
-    		// 		inPursuit=true;
-    		// 	}else{
-    		// 		inPursuit=false;
-
-    		// 	}
-        		CheckWayPoint();
-        	
+        	CheckWayPoint();
         	Movement();
     	}else{
     		if(currentTile == null)
-    		Debug.Log("<color=red> AI with no tile</color>");
-            isdead = true;
+    		  Debug.Log("<color=red> AI with no tile</color>");
+            
     		if(currentWaypoint == null)
-    		Debug.Log("<color=red> AI with no waypoint</color>");
-            isdead = true;
+    		  Debug.Log("<color=red> AI with no waypoint</color>");
+
+           GameManager.instance.AICars.RemoveDriver(this);
+           isdead =true;
     	}
     }
     void Movement(){
@@ -139,34 +125,24 @@ public class AIDriver : MonoBehaviour
     	if(!onComing){
 		    	if(wayIndex+1 < currentTile.waypoints.Count){
 		    		wayIndex++;
-		    		//if(!inPursuit)
 		    		WayDirection = currentWaypoint.forward;
 		    		currentWaypoint = currentTile.waypoints[wayIndex];
-		    		//else
-    				//currentWaypoint = PlayerController.instance.transform;
-
 		    	}else{//Next tiles
 		    		wayIndex =0;
-		    		Debug.Log("Next Tile");
 		    	 	currentTile = TileMover.instance.FindTileAfter(currentTile);
 
+                    if (currentTile == null)
+                    {
+                        Debug.Log("fuck");
+                        ReachedEndOfTrack();
+                    }
+                    else
+                    {
+                        WayDirection = currentWaypoint.forward;
+                        currentWaypoint = currentTile.waypoints[wayIndex];
+                        transform.SetParent(currentTile.transform);
 
-                if (currentTile == null)
-                {
-                    Debug.Log("fuck");
-                    ReachedEndOfTrack();
-                }
-                else
-                {
-                    //if(!inPursuit)
-                    WayDirection = currentWaypoint.forward;
-
-                    currentWaypoint = currentTile.waypoints[wayIndex];
-                    //else
-                    //currentWaypoint = PlayerController.instance.transform;
-                transform.SetParent(currentTile.transform);
-
-                }
+                    }
 		    	 }
 	    	
 	    }else{
@@ -185,7 +161,7 @@ public class AIDriver : MonoBehaviour
 		    		WayDirection = -currentWaypoint.forward;
 
 	    	 		currentWaypoint = currentTile.waypoints[wayIndex];
-                transform.SetParent(currentTile.transform);
+                    transform.SetParent(currentTile.transform);
 
 	    	 	}
 	    	 }
@@ -194,7 +170,7 @@ public class AIDriver : MonoBehaviour
     }
     void ReachedEndOfTrack(){
     	Debug.Log("End of track");
-    	
+    	GameManager.instance.AICars.RemoveDriver(this);
        isdead = true;
     }
     void OnCollisionEnter(Collision col)
@@ -204,6 +180,8 @@ public class AIDriver : MonoBehaviour
         if (col.gameObject.tag == "Bullet")
         {
             isdead = true;
+            GameManager.instance.AICars.RemoveDriver(this);
+
             Debug.Log("boom" + col.gameObject.name);
             //mark the enemy as dead
         }else if (col.gameObject.tag != "Bullet") //if the bullet hits somthing that is not an enemy it will do this
@@ -218,9 +196,10 @@ public class AIDriver : MonoBehaviour
         {
             Debug.Log("<color=red>Player hit car from AIDriver on trigger</color>");
             isdead = true;
+            GameManager.instance.AICars.RemoveDriver(this);
             
-           PlayerController.instance.HitOtherCar();
-           TileMover.instance.PlayerHitCar();
+            PlayerController.instance.HitOtherCar();
+            TileMover.instance.PlayerHitCar();
         }
     }
 
