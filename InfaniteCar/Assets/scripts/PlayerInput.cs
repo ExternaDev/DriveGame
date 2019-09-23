@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public class PlayerInput : MonoBehaviour
 {
     public static PlayerInput instance;
@@ -52,9 +52,80 @@ public class PlayerInput : MonoBehaviour
     {
         instance = this;
     }
-    
+    public void SetLeftDown(){
+        left=true;
+        leftPress = true;
+    }
+    public void SetLeftUp(){
+        left=false;
+        leftRelease = true;
+    }
+
+    public void SetRightDown(){
+        right=true;
+        rightPress = true;
+    }
+    public void SetRightUp(){
+        right=false;
+        rightRelease = true;
+    }
+
+    public void SetActionDown(){
+        action=true;
+        actionPress = true;
+    }
+    public void SetActionUp(){
+        action=false;
+        actionRelease = true;
+    }
+
+
     void Update()
-    {
+    {   
+
+        UpdateKeys();
+       // UpdateTouch();
+    }
+    void UpdateTouch(){
+        left =false;
+        right= false;
+        down = false;
+
+
+        
+        //down = left&& right;
+        if(Input.touchCount ==1 ){
+            Touch touch = Input.GetTouch(0);
+            if(EventSystem.current.IsPointerOverGameObject(touch.fingerId))return;
+
+            float pos = touch.position.x;
+            if(pos > Screen.width/2f){
+                right = true;
+            }else {
+                left = true;
+            }
+        }else if(Input.touchCount >1){
+            Touch touchA = Input.GetTouch(0);
+            Touch touchB = Input.GetTouch(1);
+            if(EventSystem.current.IsPointerOverGameObject(touchA.fingerId))return;
+            if(EventSystem.current.IsPointerOverGameObject(touchB.fingerId))return;
+
+            float posA = touchA.position.x;
+            float posB = touchB.position.x;
+            if((posA > Screen.width/2f && posB < Screen.width/2f ) ||   (posA < Screen.width/2f && posB > Screen.width/2f )){
+                down = true;
+            }else if(posA > Screen.width/2f && posB > Screen.width/2f){
+       
+                right = true;
+
+            }else if(posA < Screen.width/2f && posB < Screen.width/2f){
+                left = true;
+
+            }
+        }
+    }
+    void UpdateKeys(){
+
         up = Input.GetKey(KeyCode.UpArrow);
         down = Input.GetKey(KeyCode.DownArrow);
         left = Input.GetKey(KeyCode.LeftArrow);
@@ -76,5 +147,13 @@ public class PlayerInput : MonoBehaviour
         actionPress = Input.GetKeyDown(KeyCode.Space);
         actionAltPress = Input.GetKeyDown(KeyCode.LeftShift);
 
+    }
+    void LateUpdate(){
+        leftPress = false;
+        leftRelease = false;
+        rightPress = false;
+        rightRelease = false;
+        actionPress = false;
+        actionRelease = false;
     }
 }

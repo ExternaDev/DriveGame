@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public BombSpawner bSpawner;
     public OilSlick oil;
-    public shootRockets sRockets;
+    public RocketsManager sRockets;
 
     public static PlayerController instance;
     public Vector3 playerForward = new Vector3(0,0,1);
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         bSpawner = GetComponent<BombSpawner>();
         oil = GetComponent<OilSlick>();
-        sRockets = GetComponent<shootRockets>();
+        sRockets = GetComponent<RocketsManager>();
         
 
     }

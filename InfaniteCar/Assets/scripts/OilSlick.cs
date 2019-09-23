@@ -19,7 +19,7 @@ public class OilSlick : MonoBehaviour
     void Update()
     {
         OilUpdate();
-        IsShoot();
+       // IsShoot();
     }
 
     private void OilUpdate()
@@ -41,20 +41,17 @@ public class OilSlick : MonoBehaviour
         Destroy(oily);
     }
 
-    private void IsShoot()
-    {
-        if (input.ActionAlt() && hasOil)
+    public void Shoot(){
+        if (hasOil)
         {
             BombSpawn();
             hasOil = false;
         }
     }
-
     private void BombSpawn()
     {
         Tile t = TileMover.instance.GetCurrentTile();
 
-        Debug.Log("i done been spawned");
         oily = Instantiate(oil, ass.position, ass.rotation, null);
         oily.transform.SetParent(t.transform);
         oilController = oily.GetComponent<OilController>();

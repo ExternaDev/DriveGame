@@ -18,7 +18,7 @@ public class BombSpawner : MonoBehaviour
     void Update()
     {
         BombUpdate();
-        IsShoot();         
+        //IsShoot();         
     }
 
     private void BombUpdate()
@@ -39,15 +39,21 @@ public class BombSpawner : MonoBehaviour
         Destroy(bomby);
     }
 
-    private void IsShoot()
-    {
-        if (input.ActionAlt() && hasBomb)
+    // private void IsShoot()
+    // {
+    //     if (input.ActionAlt() && hasBomb)
+    //     {
+    //         BombSpawn();
+    //         hasBomb = false;
+    //     }
+    // }
+    public void Shoot(){
+        if(hasBomb)
         {
             BombSpawn();
             hasBomb = false;
         }
     }
-
     private void BombSpawn()
     {
         Tile t = TileMover.instance.GetCurrentTile();

@@ -70,6 +70,7 @@ public class TileMover : MonoBehaviour
 
     void GatherInput(){
     	baseSpeed += Time.fixedDeltaTime/ 1000f;
+        
     	if(input.Down() && PlayerBrakeAmount >1){
     		PlayerBrakeAmount -=PlayerBrakeAmountDecay*5f ;
     	}

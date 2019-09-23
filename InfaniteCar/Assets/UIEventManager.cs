@@ -15,7 +15,7 @@ public class UIEventManager : MonoBehaviour
         EventManager.OnGameStart += OnGameStart;
         EventManager.OnGameReset += OnGameReset;
 
-
+        OnGameReset();//to get panels on
     }
 
    

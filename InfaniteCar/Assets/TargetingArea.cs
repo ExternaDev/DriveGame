@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class TargetingArea : MonoBehaviour
 { 
-    public static TargetingArea instance;
-    public List<AIDriver> InRange = new List<AIDriver>();
-    public List<AIDriver> OutOfRange = new List<AIDriver>();
+    //public static TargetingArea instance;
+    // public List<AIDriver> InRange = new List<AIDriver>();
+    // public List<AIDriver> OutOfRange = new List<AIDriver>();
 
-    void Awake()
-    {
-        instance = this;
+    // void Awake()
+    // {
+    //     instance = this;
         
-    }
+    // }
 
-   
-    void Update()
-    {
-        RemoveFromList();
-        
-    }
+public RocketsManager RM;
+    
     public void OnTriggerEnter(Collider col )
     {
         if (col.gameObject.tag == "Enemy")
         {
             // add this item to an arry of in range enemies
-            InRange.Add(col.GetComponent<AIDriver>());
+            RM.InRange.Add(col.GetComponent<AIDriver>());
 
         }
         
@@ -35,31 +31,10 @@ public class TargetingArea : MonoBehaviour
         if (col.gameObject.tag == "Enemy")
         {
             // remove this item from the arry of in range enemies
-           OutOfRange.Add(col.GetComponent<AIDriver>());
+           RM.OutOfRange.Add(col.GetComponent<AIDriver>());
         }
 
     }
-    public void RemoveFromList()
-    {
-
-        if (OutOfRange.Count > 0)
-        {
-
-            foreach (AIDriver obj in OutOfRange)
-            {
-                InRange.Remove(obj);
-                
-                Debug.Log("<color=green> fuck </color>");
-            }
-            OutOfRange.Clear();
-
-
-            //clears bullets to remove after destorying all bullets
-
-
-
-        }
-        
-    }
+    
    
 }

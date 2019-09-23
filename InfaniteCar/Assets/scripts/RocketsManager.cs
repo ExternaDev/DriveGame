@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class shootRockets : MonoBehaviour
+public class RocketsManager : MonoBehaviour
 {
-    public GameObject rocket;
+    public GameObject rocketPrefab;
     PlayerInput input;
     List<RocketController> rockets = new List<RocketController>();
     List<RocketController> rocketsToRemove = new List<RocketController>();
@@ -17,6 +17,10 @@ public class shootRockets : MonoBehaviour
    // public Enemy enemyToAttack ;
     private Vector3 enemyToKill;
     public Vector3 enemyPos;
+
+
+     public List<AIDriver> InRange = new List<AIDriver>();
+    public List<AIDriver> OutOfRange = new List<AIDriver>();
     
     void Start()
     {
@@ -29,27 +33,41 @@ public class shootRockets : MonoBehaviour
     {
         //Debug.Log(rocketsToRemove.Count);
         //FindClosest();
-        CreateRockets();
+        //CreateRockets();
         //create rockets when active
         
         //update rockets , check to see if rockets need to be destroyed
         //destroy rockets when they are marked for death
         UpdateRockets();
         DeleteRockets();
+
+
+        UpdateRangeRemoval();
     }
 
-    private void CreateRockets()
-    {
-        if (input.ActionAlt() && canShootRocket )
+    // private void CreateRockets()
+    // {
+    //     if (input.ActionAlt() && canShootRocket )
+    //     {
+    //         if (TargetingArea.instance.InRange.Count > 0)
+    //         {
+
+
+    //             AddRocket();
+    //             canShootRocket = false;
+    //         }
+    //     }
+    // }
+    public void Shoot(){
+        if(canShootRocket && ValidTargetsInRange() )
         {
-            if (TargetingArea.instance.InRange.Count > 0)
-            {
-
-
-                AddRocket();
-                canShootRocket = false;
-            }
+            AddRocket();
+            canShootRocket = false;
+            
         }
+    }
+    bool ValidTargetsInRange(){
+        return InRange.Count > 0;
     }
     private void FindClosest()
     {
@@ -64,16 +82,7 @@ public class shootRockets : MonoBehaviour
             if (obj.markedForExplode == true)
             {
                 rocketsToRemove.Add(obj);
-            }
-            //if bullet gets too far away kill it
-            //if (obj.transform.position.z > 20)
-            //{
-                //Debug.Log("kill me");
-           // }
-            //if (bullet.collision == true)
-            // {
-            //    bulletsToRemove.Add(obj); 
-            // }        
+            } 
 
             //check to see if bullet hits somthing
             //if it has mark for death and do damage 
@@ -98,13 +107,35 @@ public class shootRockets : MonoBehaviour
     {
         for (int i = 0; i < NumOfRockets; i++)
         {
-            RocketController obj = Instantiate(rocket, barrel.position, barrel.rotation, null).GetComponent<RocketController>();
-            rockets.Add(obj);
-            //obj.rocketsShoot = this;
-            //Debug.Log(rockets.Count);
-
-            //obj.GetComponent<Rigidbody>().AddForce(transform.forward * -thrust, ForceMode.Force);
+            RocketController rocket = Instantiate(rocketPrefab, barrel.position, barrel.rotation, null).GetComponent<RocketController>();
+            rocket.Init(this);
+            rockets.Add(rocket);
         }
+        
+    }
+
+
+
+
+    public void UpdateRangeRemoval()
+    {
+
+        if (OutOfRange.Count > 0)
+        {
+
+            foreach (AIDriver obj in OutOfRange)
+            {
+                InRange.Remove(obj);
+            }
+            OutOfRange.Clear();
+
+
+            //clears bullets to remove after destorying all bullets
+
+
+
+        }
+        
     }
 }
 

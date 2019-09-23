@@ -6,7 +6,7 @@ public class CarTilting : MonoBehaviour
 {
 	PlayerInput input;
 	float rotataion = 180;
-    float maxAngle = 25;
+    float maxAngle = 35;
     float turnAngle = 0;
     GameManager GM;
     void Start()
