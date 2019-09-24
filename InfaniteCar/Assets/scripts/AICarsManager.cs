@@ -5,6 +5,8 @@ using UnityEngine;
 public class AICarsManager : MonoBehaviour
 {
 	public GameObject othervehicle;
+    public GameObject PoliceVehicle;
+
 	public List<AIDriver> Enemies = new List<AIDriver>();
     List<AIDriver> EnemiesToRemove = new List<AIDriver>();
     public Transform enemyNearSpawnPoint;
@@ -12,6 +14,8 @@ public class AICarsManager : MonoBehaviour
 
 	bool OnComing = false;
 	float LastSpawnTime =0;
+    float LastPoliceTime =0;
+    bool policeSpawned = false;
 	GameManager GM;
     // Start is called before the first frame update
     void Start()
@@ -44,6 +48,13 @@ public class AICarsManager : MonoBehaviour
 	            SpawnPC();
 	            LastSpawnTime = Time.time;
 	        }
+            //if (Time.time - LastPoliceTime > 5)
+            if(!policeSpawned)
+            {
+                SpawnPolice();
+                policeSpawned=true;
+                LastPoliceTime = Time.time;
+            }
     	}
         UpdateEnemiesToBeRemoved();
         
@@ -55,6 +66,12 @@ public class AICarsManager : MonoBehaviour
     	Enemies.Add(en);
         en.Init(OnComing);
         OnComing = !OnComing;
+    }
+     void SpawnPolice(){
+        Debug.Log("Police spawned");
+        AIDriver en = (AIDriver)Instantiate(PoliceVehicle, Vector3.one*-50f, Quaternion.identity).GetComponent<AIDriver>();      
+  
+        en.InitPolice();
     }
     public void UpdateEnemiesToBeRemoved()
     {

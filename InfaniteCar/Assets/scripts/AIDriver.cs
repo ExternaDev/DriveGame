@@ -33,22 +33,14 @@ public class AIDriver : MonoBehaviour
     	tileMover = TileMover.instance; 
 
     	onComing = _onComing;
-    	// if(!onComing){
-    	// 	// int rand = Random.Range(0,10);
-    	// 	// if(rand > 7)
-    	// 	police = true;
-    	// }
     	
-    	currentTile = TileMover.instance.FindFirstTile(police);
+    	currentTile = TileMover.instance.FindLastTile();
 
     	currentWaypoint = currentTile.FindFirstWay(onComing);
 
 			
 		if(onComing)
 			wayIndex =currentTile.GetWaypointCount();
-
-
-
         transform.SetParent(currentTile.transform);
 
 		if(onComing)
@@ -58,6 +50,21 @@ public class AIDriver : MonoBehaviour
 
     	
     }
+
+    public void InitPolice(){
+        tileMover = TileMover.instance; 
+        
+        currentTile = TileMover.instance.Tiles[1];
+
+        currentWaypoint = currentTile.FindFirstWay(false);
+
+        transform.SetParent(currentTile.transform);
+
+        this.transform.position =RightLane();
+
+        police=true;
+    }
+
     void Update()
     {
         if(!GM.GameRunning()) return;
@@ -76,32 +83,46 @@ public class AIDriver : MonoBehaviour
     	}
     }
     void Movement(){
-    	Vector3 dir= Vector3.zero;
-    	if(!onComing){
-    	 	dir =RightLane() - this.transform.position;
-        	this.transform.LookAt(RightLane());
+        if(police) PoliceMovement();
+        else StandardMovement();
+    	
+    }
+    void PoliceMovement(){
+        Vector3 dir= Vector3.zero;
+        float distance  = Vector3.Distance(this.transform.position, pc.transform.position);
 
-    	}
-    	else{
-    	 	dir =LeftLane() - this.transform.position;
+        if(distance>10f){
 
-        	this.transform.LookAt(LeftLane());
+            dir =RightLane() - this.transform.position;
+            this.transform.LookAt(RightLane());
 
-    	}
-		dir = dir.normalized;
+            dir = dir.normalized;
+
+            this.transform.position +=dir *tileMover.GetUnstoppableSpeed() *1.2f;
+        }else{
+            this.transform.LookAt(pc.transform.position);
+            dir =pc.transform.position - this.transform.position;
+            dir = dir.normalized;
+
+            this.transform.position +=dir * tileMover.GetUnstoppableSpeed() *1.0f;
+        }
 
 
 
-        //this.transform.position -= pc.playerForward * TileMover.instance.baseSpeed * (TileMover.instance.PlayerBrakeAmount - 1f);
+    }
+    void StandardMovement(){
+        Vector3 dir= Vector3.zero;
 
-    
+        if(!onComing){
+            dir =RightLane() - this.transform.position;
+            this.transform.LookAt(RightLane());
+        }else{
+            dir =LeftLane() - this.transform.position;
+            this.transform.LookAt(LeftLane());
+        }
+        dir = dir.normalized;
 
-        if(!police){
-        	this.transform.position +=dir *.1f;// * .1f;
-    	}else{
-        	this.transform.position +=dir *.1f;//* .35f;
-
-    	}
+        this.transform.position +=dir *.1f;
 
 
     }
@@ -180,6 +201,7 @@ public class AIDriver : MonoBehaviour
         if (col.gameObject.tag == "Bullet")
         {
             isdead = true;
+            if(!police)
             GameManager.instance.AICars.RemoveDriver(this);
 
             Debug.Log("boom" + col.gameObject.name);
@@ -196,6 +218,7 @@ public class AIDriver : MonoBehaviour
         {
             Debug.Log("<color=red>Player hit car from AIDriver on trigger</color>");
             isdead = true;
+            if(!police)
             GameManager.instance.AICars.RemoveDriver(this);
             
             PlayerController.instance.HitOtherCar();

@@ -12,10 +12,13 @@ public class CoinsObjectManager : MonoBehaviour
         	coins.Add(c);
         	c.SetParent(this);
         }
+        coins[coins.Count-1].gameObject.SetActive(false);
     }
     public void Remove(Coin c){
     	coins.Remove(c);
     	Destroy(c.gameObject);
+    	if(coins.Count ==1)
+    		coins[0].gameObject.SetActive(true);
     }
     // Update is called once per frame
     void Update()

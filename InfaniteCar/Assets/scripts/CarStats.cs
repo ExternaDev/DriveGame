@@ -21,12 +21,14 @@ public class CarStats : MonoBehaviour
     int LargeTileCompleted=0;
     int TinyTileCompleted=0;
     public TextMeshProUGUI DistanceText;
+    public TextMeshProUGUI CoinsText;
+
 
 
     public Image FuelGauge, DamageGuage;
     GameManager GM;
    
-    public float PointsCollected = 0;
+    public int PointsCollected = 0;
     
 
    // public Event PlayerDied;
@@ -35,7 +37,25 @@ public class CarStats : MonoBehaviour
         GM = GameManager.instance;
        // OnPlayerDied += 
         EventManager.OnGameReset += OnGameReset;
+        EventManager.OnResumeAftervideo += OnResumeAftervideo;
+
+        
     }
+    void Update(){
+        if(!GM.GameRunning()) return;
+
+        GasAmount -= Time.fixedDeltaTime;
+        FuelGauge.fillAmount = GasAmount/100f;
+        DamageGuage.fillAmount = DamageAmount/100f;
+        CoinsText.text = PointsCollected.ToString("00");
+        FindTotalDistance();
+
+    }
+
+
+
+
+    
     public void FillGas(){
     	GasAmount=100;
     }
@@ -49,7 +69,9 @@ public class CarStats : MonoBehaviour
     public void PlayerDiedFromDamage(){
     	Debug.Log("<color=red>Player died from damage </color>");
         //PC.PlayerDied();
+        GM.SetCoinsCollected(PointsCollected);
         EventManager.instance.PlayerDied();
+
     }
     public void AddCoinPints(int i){
         PointsCollected+=i;
@@ -63,16 +85,11 @@ public class CarStats : MonoBehaviour
         DamageAmount=0;
         PointsCollected=0;
     }
-    void Update(){
-        if(!GM.GameRunning()) return;
-
-    	GasAmount -= Time.fixedDeltaTime;
-    	FuelGauge.fillAmount = GasAmount/100f;
-    	DamageGuage.fillAmount = DamageAmount/100f;
-
-        FindTotalDistance();
-
+    void OnResumeAftervideo(){
+        GasAmount =100;
+        DamageAmount=0;
     }
+    
     void FindTotalDistance(){
        	distanceToNextWay = Mathf.Abs((PC.onComingWaypoint.position - this.transform.position).magnitude);
 

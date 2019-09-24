@@ -14,6 +14,8 @@ public class UIEventManager : MonoBehaviour
         EventManager.OnPlayerDied += OnPlayerDied;
         EventManager.OnGameStart += OnGameStart;
         EventManager.OnGameReset += OnGameReset;
+        EventManager.OnResumeAftervideo += OnResumeAftervideo;
+
 
         OnGameReset();//to get panels on
     }
@@ -29,5 +31,9 @@ public class UIEventManager : MonoBehaviour
     	startPanel.SetActive(true);
     	deathPanel.SetActive(false);
 
+    }
+    void OnResumeAftervideo(){
+        deathPanel.SetActive(false);
+        
     }
 }

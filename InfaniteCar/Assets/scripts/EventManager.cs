@@ -6,17 +6,23 @@ public class EventManager : MonoBehaviour
 {
 	public static EventManager instance;
 
-	public delegate void OnGameStartAction();
-    public static event OnGameStartAction OnGameStart;
+	public delegate void GameEventAction();
+    public static event GameEventAction OnGameStart;
 
 
 
-    public delegate void OnPlayerDiedAction();
-    public static event OnPlayerDiedAction OnPlayerDied;
+    //public delegate void OnPlayerDiedAction();
+    public static event GameEventAction OnPlayerDied;
 
 
-    public delegate void OnGameResetAction();
-    public static event OnGameResetAction OnGameReset;
+    //public delegate void OnGameResetAction();
+    public static event GameEventAction OnGameReset;
+
+
+    public static event GameEventAction OnResumeAftervideo;
+
+
+
     void Awake(){
     	instance = this;
     }
@@ -36,4 +42,9 @@ public class EventManager : MonoBehaviour
             OnGameReset();
     }
 
+
+    public void ResumeGameAftervideo(){
+        if(OnResumeAftervideo != null)
+            OnResumeAftervideo();
+    }
 }

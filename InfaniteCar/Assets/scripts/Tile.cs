@@ -31,10 +31,7 @@ public class Tile : MonoBehaviour
     public GameObject buildingprefab;
     public GameObject PickupSpawnPoints;
 
-    void Update()
-    {
-        
-    }
+    
     void Awake(){
         AICars = GameManager.instance.AICars;
         
@@ -59,11 +56,13 @@ public class Tile : MonoBehaviour
         if(doSpawn > 25) return;
 
         int rand = Random.Range(0, PickupSpawnPoints.transform.childCount);
-        GameObject pu = (GameObject)Instantiate( TileSpawner.instance.GetRandomPickup(), PickupSpawnPoints.transform.GetChild(rand).position + Vector3.up/2f, Quaternion.identity,this.transform);
+        GameObject pu = (GameObject)Instantiate( TileSpawner.instance.GetRandomPickup(), PickupSpawnPoints.transform.GetChild(rand).position + Vector3.up/2f,PickupSpawnPoints.transform.GetChild(rand).rotation,this.transform);
 
     }
 
+    public void SpawnCoins(){
 
+    }
 
     public int GetWaypointCount(){ return waypoints.Count;}
     public void RealignToTile(Tile tile,int end){

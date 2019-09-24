@@ -43,12 +43,19 @@ public class TileMover : MonoBehaviour
         input = PlayerInput.instance;
         instance = this;
         EventManager.OnGameReset += OnGameReset;
+        EventManager.OnResumeAftervideo += OnResumeAftervideo;
+
         InitialBaseSpeed = baseSpeed;
     }
     
     void OnGameReset(){
         baseSpeed = InitialBaseSpeed;
     }
+    void OnResumeAftervideo(){
+       // baseSpeed = InitialBaseSpeed;
+    }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -126,10 +133,17 @@ public class TileMover : MonoBehaviour
     }
     float HitBreak = 1; 
     public Vector3 GetMovementUpdate(){
-        return PC.playerForward*(baseSpeed * PlayerBrakeAmount) * HitBreak;
-       //return PC.playerForward* baseSpeed;
-
+        return PC.playerForward*GetSpeed();
     }
+
+    public float GetSpeed(){
+        return (baseSpeed * PlayerBrakeAmount) * HitBreak;
+    }
+    public float GetUnstoppableSpeed(){
+        return (baseSpeed * PlayerBrakeAmount);
+    }
+
+
     public void PlayerHitCar(){
         HitBreak=0;
     }
@@ -147,19 +161,8 @@ public class TileMover : MonoBehaviour
     	return Tiles[index-1];
     }
 
-    public Tile FindFirstTile(bool popo){
-       // if(!popo)
+    public Tile FindLastTile(){
         return Tiles[Tiles.Count-1];
-       // else
-       // return Tiles[1];
-
-
-    	// if(onComing){
-    	// 		return Tiles[Tiles.Count-1];
-
-    	// 	}else{
-    	// 		return Tiles[0];
-    	// 	}
     }
     public Tile GetCurrentTile()
     {
