@@ -50,7 +50,21 @@ public class AIDriver : MonoBehaviour
 
     	
     }
+    void OnDestroy(){
+        DebugDeath("On Destroy");
+    }
+    void OnDisable(){
+        DebugDeath("On Disable");
 
+    }
+    void OnDisabled(){
+        DebugDeath("On Disabled");
+
+    }
+    void DebugDeath(string info){
+        if(police)
+        Debug.Log(info);
+    }
     public void InitPolice(){
         tileMover = TileMover.instance; 
         
@@ -98,7 +112,7 @@ public class AIDriver : MonoBehaviour
 
             dir = dir.normalized;
 
-            this.transform.position +=dir *tileMover.GetUnstoppableSpeed() *1.2f;
+            this.transform.position +=dir *tileMover.GetUnstoppableSpeed() *1f;
         }else{
             this.transform.LookAt(pc.transform.position);
             dir =pc.transform.position - this.transform.position;

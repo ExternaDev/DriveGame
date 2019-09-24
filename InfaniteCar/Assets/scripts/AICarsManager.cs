@@ -16,6 +16,7 @@ public class AICarsManager : MonoBehaviour
 	float LastSpawnTime =0;
     float LastPoliceTime =0;
     bool policeSpawned = false;
+    AIDriver police;
 	GameManager GM;
     // Start is called before the first frame update
     void Start()
@@ -23,17 +24,35 @@ public class AICarsManager : MonoBehaviour
         GM = GameManager.instance;
         EventManager.OnGameReset += OnGameReset;
 
+        EventManager.OnResumeAftervideo += OnResumeAftervideo;
+
+
     }
 
     void OnGameReset(){
-    	foreach (AIDriver obj in Enemies)
+    	ClearAll();
+    }
+
+    void OnResumeAftervideo(){
+        ClearPolice();
+    }
+
+    void ClearAll(){
+        ClearPolice();
+        ClearCars();
+    }
+    void ClearPolice(){
+        Destroy(police.gameObject);
+        policeSpawned=false;
+    }
+    void ClearCars(){
+        foreach (AIDriver obj in Enemies)
         {
-        	if(obj != null)
+            if(obj != null)
             Destroy(obj.gameObject);
         }
         Enemies.Clear();
         EnemiesToRemove.Clear();
-
     }
     void Update()
     {
@@ -69,9 +88,9 @@ public class AICarsManager : MonoBehaviour
     }
      void SpawnPolice(){
         Debug.Log("Police spawned");
-        AIDriver en = (AIDriver)Instantiate(PoliceVehicle, Vector3.one*-50f, Quaternion.identity).GetComponent<AIDriver>();      
+        police = (AIDriver)Instantiate(PoliceVehicle, Vector3.one*-50f, Quaternion.identity).GetComponent<AIDriver>();      
   
-        en.InitPolice();
+        police.InitPolice();
     }
     public void UpdateEnemiesToBeRemoved()
     {

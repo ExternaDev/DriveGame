@@ -140,7 +140,7 @@ public class TileMover : MonoBehaviour
         return (baseSpeed * PlayerBrakeAmount) * HitBreak;
     }
     public float GetUnstoppableSpeed(){
-        return (baseSpeed * PlayerBrakeAmount);
+        return (baseSpeed*2f);
     }
 
 

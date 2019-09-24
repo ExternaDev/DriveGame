@@ -34,7 +34,9 @@ public class Tile : MonoBehaviour
     
     void Awake(){
         AICars = GameManager.instance.AICars;
-        
+        EventManager.OnGameReset += ClearOnReset;
+        //EventManager.OnResumeAftervideo += ClearOnReset;
+
     }
     void Start(){
         if(BuildLocations.Count>0){
@@ -63,7 +65,9 @@ public class Tile : MonoBehaviour
     public void SpawnCoins(){
 
     }
+    void ClearOnReset(){
 
+    }
     public int GetWaypointCount(){ return waypoints.Count;}
     public void RealignToTile(Tile tile,int end){
         //make list of cars Rel position
