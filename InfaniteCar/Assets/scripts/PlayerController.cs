@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     
 
+    public delegate void PlayerEvent();
+    public static event PlayerEvent OnTileChange;
 
     //public float TotalDistance = 0;
     //public float distanceToNextWay = 0;
@@ -30,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public void Init(){
         onComingWaypoint =TileMover.instance.Tiles[2].waypoints[0].transform;
         NextWaytotalDistance =  Mathf.Abs((onComingWaypoint.position - this.transform.position).magnitude);
-       currTile = TileMover.instance.Tiles[1];
+        currTile = TileMover.instance.Tiles[1];
         
         inited = true;
 
@@ -60,7 +62,8 @@ public class PlayerController : MonoBehaviour
         NextWaytotalDistance =  Mathf.Abs((onComingWaypoint.position - this.transform.position).magnitude);
 
        currTile = tile;
-
+       if(OnTileChange!=null)
+            OnTileChange();
     }
     public void GetPowerUps()
     {

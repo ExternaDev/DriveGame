@@ -38,7 +38,9 @@ public class TileSpawner : MonoBehaviour
 
 
     public GameObject GetRandomPickup(){
-    	return pickups[Random.Range(0, pickups.Count)];
+    	//return pickups[Random.Range(0, pickups.Count)];
+        return pickups[0];
+
     }
     void SpawnFirstTiles(){
     	for(int i = 0; i <segments;i ++){

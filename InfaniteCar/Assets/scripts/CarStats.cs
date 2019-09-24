@@ -26,7 +26,7 @@ public class CarStats : MonoBehaviour
     public Image FuelGauge, DamageGuage;
     GameManager GM;
    
-
+    public float PointsCollected = 0;
     
 
    // public Event PlayerDied;
@@ -51,6 +51,9 @@ public class CarStats : MonoBehaviour
         //PC.PlayerDied();
         EventManager.instance.PlayerDied();
     }
+    public void AddCoinPints(int i){
+        PointsCollected+=i;
+    }
     void OnGameReset(){
         TotalDistance=0;
         SmallTileCompleted=0;
@@ -58,7 +61,7 @@ public class CarStats : MonoBehaviour
         TinyTileCompleted=0;
         GasAmount =100;
         DamageAmount=0;
-
+        PointsCollected=0;
     }
     void Update(){
         if(!GM.GameRunning()) return;

@@ -7,7 +7,7 @@ public class EventManager : MonoBehaviour
 	public static EventManager instance;
 
 	public delegate void OnGameStartAction();
-    public static event OnPlayerDiedAction OnGameStart;
+    public static event OnGameStartAction OnGameStart;
 
 
 
@@ -16,7 +16,7 @@ public class EventManager : MonoBehaviour
 
 
     public delegate void OnGameResetAction();
-    public static event OnPlayerDiedAction OnGameReset;
+    public static event OnGameResetAction OnGameReset;
     void Awake(){
     	instance = this;
     }

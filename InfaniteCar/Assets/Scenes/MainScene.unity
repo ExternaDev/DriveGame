@@ -1343,6 +1343,7 @@ Transform:
   m_Children:
   - {fileID: 754111681}
   - {fileID: 1827258883}
+  - {fileID: 1240219333}
   m_Father: {fileID: 1136172345}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1772,6 +1773,36 @@ MonoBehaviour:
   Enemies: []
   enemyNearSpawnPoint: {fileID: 1667035344}
   enemyFarSpawnPoint: {fileID: 1196719127}
+--- !u!1 &721798773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721798774}
+  m_Layer: 13
+  m_Name: Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &721798774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721798773}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.393, y: -0.45599997, z: -0.027}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1240219333}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &754111680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2788,6 +2819,7 @@ GameObject:
   - component: {fileID: 1136172350}
   - component: {fileID: 1136172344}
   - component: {fileID: 1136172348}
+  - component: {fileID: 1136172351}
   m_Layer: 13
   m_Name: Cube
   m_TagString: Player
@@ -2808,6 +2840,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 2
+  BackLeftTire: {fileID: 2013160519}
+  BackRightTire: {fileID: 721798774}
 --- !u!114 &1136172343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2929,6 +2963,7 @@ MonoBehaviour:
   DistanceText: {fileID: 1245918781}
   FuelGauge: {fileID: 369015013}
   DamageGuage: {fileID: 1635240936}
+  PointsCollected: 0
 --- !u!114 &1136172350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2944,6 +2979,21 @@ MonoBehaviour:
   oil: {fileID: 203808304566106179, guid: 67f85998aef5500488e19da079c788ca, type: 3}
   ass: {fileID: 1827258883}
   hasOil: 0
+--- !u!114 &1136172351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136172341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6cc13358e5f6c448b2b2c1ab16d3fe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cMovement: {fileID: 1136172342}
+  SkidmarkPrefab: {fileID: 1577084476027050181, guid: d187b8bce19f87448964ea63899eae1b,
+    type: 3}
 --- !u!1 &1177742282
 GameObject:
   m_ObjectHideFlags: 0
@@ -3049,6 +3099,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2015231013}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1240219332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1240219333}
+  m_Layer: 13
+  m_Name: Tires
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1240219333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240219332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2013160519}
+  - {fileID: 721798774}
+  m_Father: {fileID: 637189810}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1245918779
 GameObject:
@@ -4630,6 +4712,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010966874}
   m_CullTransparentMesh: 0
+--- !u!1 &2013160518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2013160519}
+  m_Layer: 13
+  m_Name: Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2013160519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013160518}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.381, y: -0.456, z: -0.026999995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1240219333}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2015231012
 GameObject:
   m_ObjectHideFlags: 0

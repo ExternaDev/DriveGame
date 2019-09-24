@@ -116,7 +116,7 @@ public class Tile : MonoBehaviour
     }
     bool hit = false;
     public void OnTriggerEnter(Collider col){
-        if(col.gameObject.tag == "Player"){
+        if(col.gameObject.tag == "Player" && !hit){
             hit = true;
             TileSpawner.instance.AddNewTile();
 
