@@ -23,6 +23,7 @@ public class UIEventManager : MonoBehaviour
    
     void OnPlayerDied(){
     	deathPanel.SetActive(true);
+        deathPanel.GetComponent<DeathPanelManager>().SetScore(GameManager.instance.GetCoinsCollected());
     }
     void OnGameStart(){
     	startPanel.SetActive(false);
