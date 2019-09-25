@@ -18,9 +18,11 @@ public class TileMover : MonoBehaviour
 	//float offset = 0;
 	float maxSpeed = .3f;
 	float width=15;
+    float sideForce = 0;
+    public float bumpAmount = .25f;
 
-	//public float currentSpeed = 0;
-	PlayerInput input;
+    //public float currentSpeed = 0;
+    PlayerInput input;
 
 
 	float Acceleration = .005f;
@@ -73,6 +75,11 @@ public class TileMover : MonoBehaviour
 
         if(HitBreak<1){
             HitBreak+=Time.fixedDeltaTime;
+
+        }
+        if (Mathf.Abs(sideForce) > 0) {
+            sideForce *= .9f;
+
         }
         
     }
@@ -132,12 +139,20 @@ public class TileMover : MonoBehaviour
     }
     float HitBreak = 1; 
     public Vector3 GetMovementUpdate(){
-        return PC.playerForward*GetSpeed();
+        return PC.playerForward* GetSpeed() + GetSideForce();
+            
+       
     }
+    
 
     public float GetSpeed(){
         return (baseSpeed * PlayerBrakeAmount) * HitBreak;
     }
+    public Vector3 GetSideForce()
+    {
+        return PC.playerRight * sideForce;
+    }
+
     public float GetUnstoppableSpeed(){
         return (baseSpeed*2f);
     }
@@ -167,5 +182,12 @@ public class TileMover : MonoBehaviour
     {
         return Tiles[2];
 
+    }
+    public void BumpRight() {
+        sideForce = bumpAmount;
+    }
+    public void BumpLeft()
+    {
+        sideForce = -bumpAmount;
     }
 }

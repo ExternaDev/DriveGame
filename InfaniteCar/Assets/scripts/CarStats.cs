@@ -52,6 +52,7 @@ public class CarStats : MonoBehaviour
         DamageGuage.fillAmount = DamageAmount/100f;
         CoinsText.text = PointsCollected.ToString("00");
         FindTotalDistance();
+        Debug.Log(DamageAmount);
 
     }
 

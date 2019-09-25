@@ -10,8 +10,9 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController instance;
     public Vector3 playerForward = new Vector3(0,0,1);
+    public Vector3 playerRight = new Vector3(0, 0, 1);
     // Start is called before the first frame update
-    
+
 
     public delegate void PlayerEvent();
     public static event PlayerEvent OnTileChange;
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         playerForward = this.transform.forward;
+        playerRight = this.transform.right;
 
     }
     public bool IsStarted(){
@@ -77,7 +79,7 @@ public class PlayerController : MonoBehaviour
         TakeDamage(50);
     }
     public void TakeDamage(int amount){
-        this.GetComponent<CarStats>().TakeDamage(50);
+        this.GetComponent<CarStats>().TakeDamage(amount);
 
     }
     // void OnCollisionEnter(Collision col)

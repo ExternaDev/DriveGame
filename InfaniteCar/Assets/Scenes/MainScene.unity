@@ -741,9 +741,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 159049148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b92ad40a9d8dd244c8d3142af615340c, type: 3}
+  m_Script: {fileID: 11500000, guid: 73890f74aad696541adea1b95ea98481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Front: 0
+  Left: 0
+  Right: 1
 --- !u!1 &185961877
 GameObject:
   m_ObjectHideFlags: 0
@@ -4510,9 +4513,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1380113560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ffc2a52003b7c34a88fbd30dee8112b, type: 3}
+  m_Script: {fileID: 11500000, guid: 73890f74aad696541adea1b95ea98481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Front: 0
+  Left: 1
+  Right: 0
 --- !u!1 &1410623910
 GameObject:
   m_ObjectHideFlags: 0
@@ -6489,6 +6495,7 @@ GameObject:
   - component: {fileID: 2038472371}
   - component: {fileID: 2038472373}
   - component: {fileID: 2038472372}
+  - component: {fileID: 2038472374}
   m_Layer: 13
   m_Name: FrontBumber
   m_TagString: Untagged
@@ -6531,6 +6538,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038472370}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2038472374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038472370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73890f74aad696541adea1b95ea98481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Front: 1
+  Left: 0
+  Right: 0
 --- !u!1 &2076635843
 GameObject:
   m_ObjectHideFlags: 0
