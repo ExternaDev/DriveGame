@@ -14,20 +14,20 @@ public class TileMover : MonoBehaviour
 	//int segments = 6;
 	public float baseSpeed = .75f;
     float InitialBaseSpeed = .3f;
-	 float playerSpeed = 0;
-	 //float offset = 0;
-	 float maxSpeed = .3f;
-	 float width=15;
+	float playerSpeed = 0;
+	//float offset = 0;
+	float maxSpeed = .3f;
+	float width=15;
 
 	//public float currentSpeed = 0;
 	PlayerInput input;
 
 
-	 float Acceleration = .005f;
-	 float BrakePower = .03f;
-	 float turnAmount = .15f;
+	float Acceleration = .005f;
+	float BrakePower = .03f;
+	float turnAmount = .15f;
 	public float PlayerBrakeAmount = 1;
-	 float PlayerBrakeAmountDecay = .01f;
+	float PlayerBrakeAmountDecay = .01f;
 
 
 
@@ -38,16 +38,18 @@ public class TileMover : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        GM = GameManager.instance;
-        PC = PlayerController.instance;
-        input = PlayerInput.instance;
         instance = this;
+
         EventManager.OnGameReset += OnGameReset;
         EventManager.OnResumeAftervideo += OnResumeAftervideo;
 
         InitialBaseSpeed = baseSpeed;
     }
-    
+    void Start(){
+        GM = GameManager.instance;
+        PC = PlayerController.instance;
+        input = PlayerInput.instance;
+    }
     void OnGameReset(){
         baseSpeed = InitialBaseSpeed;
     }
@@ -85,7 +87,7 @@ public class TileMover : MonoBehaviour
     void CheckTilestoRemove(){
     	if(TilesToRemove.Count >0){
     		foreach(Tile obj in TilesToRemove){
-
+               
 		    	Tiles.Remove(obj);
 		    	Destroy(obj.gameObject);
     		}

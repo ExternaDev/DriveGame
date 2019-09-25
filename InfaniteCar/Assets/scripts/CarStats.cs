@@ -34,12 +34,15 @@ public class CarStats : MonoBehaviour
    // public Event PlayerDied;
     void Awake(){
     	PC = this.GetComponent<PlayerController>();
-        GM = GameManager.instance;
+      
        // OnPlayerDied += 
         EventManager.OnGameReset += OnGameReset;
         EventManager.OnResumeAftervideo += OnResumeAftervideo;
 
         
+    }
+    void Start(){
+    	  GM = GameManager.instance;
     }
     void Update(){
         if(!GM.GameRunning()) return;

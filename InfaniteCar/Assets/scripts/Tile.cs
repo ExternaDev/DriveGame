@@ -31,6 +31,7 @@ public class Tile : MonoBehaviour
     public GameObject buildingprefab;
     public GameObject PickupSpawnPoints;
 
+   AICarsManager AICars;
     
     void Awake(){
         AICars = GameManager.instance.AICars;
@@ -81,7 +82,7 @@ public class Tile : MonoBehaviour
         MoveAmount = transform.position - MoveAmount;//find offest amount
 
 
-        AdjustCars(MoveAmount);
+       // AdjustCars(MoveAmount);
 
 
         //if not alst tile then RECURSION
@@ -91,7 +92,6 @@ public class Tile : MonoBehaviour
             TileMover.instance.FindTileAfter(this).RealignToTile(this,0);
          }
     }
-   AICarsManager AICars;
     public void AdjustCars(Vector3 amount){
        foreach(AIDriver car in AICars.Enemies){
             if(car.currentTile == this){
@@ -143,4 +143,5 @@ public class Tile : MonoBehaviour
             obj.SetActive(false);
         }
     }
+   
 }

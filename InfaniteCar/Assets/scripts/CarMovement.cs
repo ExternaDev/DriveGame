@@ -21,7 +21,7 @@ float IncreaseScale = 2.5f;
     public static event SkidEvent OnStartSkid;
     public static event SkidEvent OnStopSkid;
 
-    public Transform BackLeftTire,BackRightTire;
+    public Transform BackLeftTire, BackRightTire;
     GameManager GM;
     // Start is called before the first frame update
     void Start()
@@ -41,10 +41,6 @@ float IncreaseScale = 2.5f;
        // HandleTilting();
     }
     void HandleRotation(){
-        //float RotSpeed = rotateSpeed;
-
-        // if(input.Down())
-             //RotSpeed *= 2f;
 
         if(input.Left()){
             rotateSpeed += Time.fixedDeltaTime*IncreaseScale;

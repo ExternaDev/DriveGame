@@ -14,12 +14,9 @@ public class DeathPanelManager : MonoBehaviour
         EventManager.OnPlayerDied += OnPlayerDied;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     void OnPlayerDied(){
+        Debug.Log("Player died");
     	CoinsText.text = GM.GetCoinsCollected().ToString("00");
     }
 }

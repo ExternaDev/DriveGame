@@ -25,7 +25,7 @@ public class AIDriver : MonoBehaviour
     
     PlayerController pc;
     GameManager GM;
-    void Awake(){
+    void Start(){
         GM = GameManager.instance;
     	pc = PlayerController.instance;
     }
@@ -52,18 +52,22 @@ public class AIDriver : MonoBehaviour
     }
     void OnDestroy(){
         DebugDeath("On Destroy");
+        GameManager.instance.AICars.RemoveDriver(this);
+
     }
     void OnDisable(){
         DebugDeath("On Disable");
+        GameManager.instance.AICars.RemoveDriver(this);
 
     }
     void OnDisabled(){
         DebugDeath("On Disabled");
+        GameManager.instance.AICars.RemoveDriver(this);
 
     }
     void DebugDeath(string info){
-        if(police)
-        Debug.Log(info);
+     //   if(police)
+//        Debug.Log(info);
     }
     public void InitPolice(){
         tileMover = TileMover.instance; 
@@ -168,8 +172,7 @@ public class AIDriver : MonoBehaviour
 
                     if (currentTile == null)
                     {
-                        Debug.Log("fuck");
-                        ReachedEndOfTrack();
+                        RemoveDriver("End of way");
                     }
                     else
                     {
@@ -190,7 +193,7 @@ public class AIDriver : MonoBehaviour
 	    	 	currentTile = TileMover.instance.FindTileBefore(currentTile);
 	    		
 	    	 	if(currentTile == null){
-	    	 		ReachedEndOfTrack();
+	    	 		RemoveDriver("End of way");
 	    	 	}else{
 	    			wayIndex =currentTile.GetWaypointCount()-1;
 		    		WayDirection = -currentWaypoint.forward;
@@ -203,9 +206,9 @@ public class AIDriver : MonoBehaviour
 
 	    }
     }
-    void ReachedEndOfTrack(){
-    	Debug.Log("End of track");
-    	GameManager.instance.AICars.RemoveDriver(this);
+    public void RemoveDriver(string info){
+    	//Debug.Log("End of track");
+    	GameManager.instance.AICars.RemoveDriver(this,info);
        isdead = true;
     }
     void OnCollisionEnter(Collision col)
@@ -216,13 +219,12 @@ public class AIDriver : MonoBehaviour
         {
             isdead = true;
             if(!police)
-            GameManager.instance.AICars.RemoveDriver(this);
+            GameManager.instance.AICars.RemoveDriver(this,"collision");
 
             Debug.Log("boom" + col.gameObject.name);
             //mark the enemy as dead
         }else if (col.gameObject.tag != "Bullet") //if the bullet hits somthing that is not an enemy it will do this
         {
-            
             Debug.Log(col.gameObject.tag);
         }
 
@@ -233,7 +235,7 @@ public class AIDriver : MonoBehaviour
             Debug.Log("<color=red>Player hit car from AIDriver on trigger</color>");
             isdead = true;
             if(!police)
-            GameManager.instance.AICars.RemoveDriver(this);
+            GameManager.instance.AICars.RemoveDriver(this,"Collision");
             
             PlayerController.instance.HitOtherCar();
             TileMover.instance.PlayerHitCar();

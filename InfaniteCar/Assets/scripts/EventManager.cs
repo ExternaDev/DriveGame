@@ -27,6 +27,7 @@ public class EventManager : MonoBehaviour
     	instance = this;
     }
     public void PlayerDied(){
+        Debug.Log("Player died");
         if(OnPlayerDied != null)
             OnPlayerDied();
     }
