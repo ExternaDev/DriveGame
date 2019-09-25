@@ -15,7 +15,7 @@ public class AICarsManager : MonoBehaviour
 	bool OnComing = false;
 	float LastSpawnTime =0;
     float LastPoliceTime =0;
-    bool policeSpawned = false;
+    bool policeSpawned = true;
     AIDriver police;
 	GameManager GM;
     // Start is called before the first frame update

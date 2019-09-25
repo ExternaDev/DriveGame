@@ -117,11 +117,8 @@ public class TileMover : MonoBehaviour
     float driftThreshold = .65f;
     void ApplyDrift(GameObject obj, float ang){
         if(ang >driftThreshold ){
-          //  Debug.Log("Right drift");
             obj.transform.position += DriftDirection() * .1f * DriftAbsValue(ang);
-
         }else if(ang <-driftThreshold){
-            // Debug.Log("Left drift");
             obj.transform.position -= DriftDirection() * .1f *DriftAbsValue(ang);
         }
     

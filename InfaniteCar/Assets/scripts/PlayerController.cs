@@ -74,9 +74,12 @@ public class PlayerController : MonoBehaviour
 
     }
     public void HitOtherCar(){
-        this.GetComponent<CarStats>().TakeDamage(50);
+        TakeDamage(50);
     }
+    public void TakeDamage(int amount){
+        this.GetComponent<CarStats>().TakeDamage(50);
 
+    }
     // void OnCollisionEnter(Collision col)
     // {
     //     Debug.Log("<color=red>something hit ai driver</color>");

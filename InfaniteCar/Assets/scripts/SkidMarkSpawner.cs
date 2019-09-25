@@ -37,8 +37,12 @@ public class SkidMarkSpawner : MonoBehaviour
 
         skids[0].positionCount = pointCount;
         skids[0].SetPosition(pointCount-1,cMovement.BackLeftTire.position);
+       // skids[0].SetPosition(pointCount-1, PC.currTile.transform.InverseTransformPoint(cMovement.BackLeftTire.position));
+
         skids[1].positionCount = pointCount;
         skids[1].SetPosition(pointCount-1,cMovement.BackRightTire.position);
+       // skids[1].SetPosition(pointCount-1, PC.currTile.transform.InverseTransformPoint(cMovement.BackRightTire.position));
+
     }
     void OnTileChange(){
         if(!skidding) return;
@@ -70,12 +74,17 @@ public class SkidMarkSpawner : MonoBehaviour
        // Debug.Log("Start skid");
         skidding = true;
         pointCount=0;
-        LineRenderer lineLeft = Instantiate(SkidmarkPrefab, cMovement.BackLeftTire.position + (Vector3.up*.1f), Quaternion.identity, PC.currTile.transform ).GetComponent<LineRenderer>();
-        LineRenderer lineRight = Instantiate(SkidmarkPrefab, cMovement.BackRightTire.position+ (Vector3.up*.1f), Quaternion.identity, PC.currTile.transform ).GetComponent<LineRenderer>();
+        LineRenderer lineLeft = Instantiate(SkidmarkPrefab, cMovement.BackLeftTire.position + (Vector3.up * .1f), Quaternion.identity, PC.currTile.transform ).GetComponent<LineRenderer>();
+        LineRenderer lineRight= Instantiate(SkidmarkPrefab, cMovement.BackRightTire.position+ (Vector3.up * .1f), Quaternion.identity, PC.currTile.transform ).GetComponent<LineRenderer>();
+        
+
 
         skids.Add(lineLeft);
         skids.Add(lineRight);
-
+        skids[0].SetPosition(0,cMovement.BackLeftTire.position);
+        skids[1].SetPosition(0,cMovement.BackRightTire.position);
+        //skids[0].SetPosition(0, PC.currTile.transform.InverseTransformPoint(cMovement.BackLeftTire.position));
+        //skids[1].SetPosition(0, PC.currTile.transform.InverseTransformPoint(cMovement.BackRightTire.position));
     }
 
     void EndSkid(){
@@ -83,6 +92,9 @@ public class SkidMarkSpawner : MonoBehaviour
         if(skids.Count>0){
             skids[0].useWorldSpace = false;
             skids[1].useWorldSpace = false;
+
+
+
        }
        // Debug.Log("stop skid");
         skids.Clear();

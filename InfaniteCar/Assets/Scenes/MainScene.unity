@@ -3801,7 +3801,7 @@ GameObject:
   - component: {fileID: 1136172348}
   - component: {fileID: 1136172351}
   m_Layer: 13
-  m_Name: Cube
+  m_Name: CarObject
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

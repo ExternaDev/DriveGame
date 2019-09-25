@@ -9,15 +9,9 @@ public class EventManager : MonoBehaviour
 	public delegate void GameEventAction();
     public static event GameEventAction OnGameStart;
 
-
-
-    //public delegate void OnPlayerDiedAction();
     public static event GameEventAction OnPlayerDied;
 
-
-    //public delegate void OnGameResetAction();
     public static event GameEventAction OnGameReset;
-
 
     public static event GameEventAction OnResumeAftervideo;
 
