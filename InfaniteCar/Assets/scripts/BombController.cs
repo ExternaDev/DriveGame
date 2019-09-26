@@ -5,16 +5,17 @@ using UnityEngine;
 public class BombController : MonoBehaviour
 {
     public bool isdead = false;
-    public float speed;   
+    public float speed;
     public float deathTimer = 3;
     private GameObject explode;
     public GameObject explotion;
-    private Vector3 bombpos;  
+    private Vector3 bombpos;
+    public float bombRadius = 20;
 
     void Update()
     {
         MoveBomb();
-        Timers();        
+        Timers();
     }
     void Timers()
     {
@@ -25,16 +26,16 @@ public class BombController : MonoBehaviour
 
         if (deathTimer <= 0)
         {
-            //isdead = true;
+            Detonate();
         }
     }
 
     void MoveBomb()
     {
-       
+
     }
 
-    private void OnTriggerStay(Collider trig)
+    private void OnTriggerEnter(Collider trig)
     {
         if (trig.gameObject.tag == "Enemy")
         {
@@ -45,7 +46,7 @@ public class BombController : MonoBehaviour
 
         if (trig.gameObject.tag != "Enemy")
         {
-            
+
             //isdead = true;
             Debug.Log(trig.gameObject.tag);
         }
@@ -56,10 +57,18 @@ public class BombController : MonoBehaviour
 
     private void Detonate()
     {
+        RaycastHit hit; 
+
         isdead = true;
-        explode = Instantiate(explotion, this.transform.position,Quaternion.identity);
-        Destroy(explode, 2);
-        // switch the bomb for an explosion or add particels to make it look like an explostion
-        //mark the bomb for death
+        explode = Instantiate(explotion, this.transform.position, Quaternion.identity);
+        Destroy(explode, .5f);
+        Destroy(this.gameObject);
+        if (Physics.SphereCast(this.transform.position,bombRadius,this.transform.position,out hit, 10))
+        {
+            // kill what was hit
+            Debug.Log("enemy hit a bomb");
+        }
     }
+    
 }
+

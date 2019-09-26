@@ -73,7 +73,7 @@ public class CarStats : MonoBehaviour
         if (!hasShield)
         { 
         DamageAmount += amount;
-        //if (DamageAmount >= 100) PlayerDiedFromDamage();
+        if (DamageAmount >= 100) PlayerDiedFromDamage();
         }
     }
     public void PlayerDiedFromDamage(){

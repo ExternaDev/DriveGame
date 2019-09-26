@@ -18,7 +18,8 @@ public class BombSpawner : MonoBehaviour
     void Update()
     {
         BombUpdate();
-        //IsShoot();         
+        //IsShoot(); 
+        Shoot();
     }
 
     private void BombUpdate()
@@ -48,10 +49,12 @@ public class BombSpawner : MonoBehaviour
     //     }
     // }
     public void Shoot(){
-        if(hasBomb)
+
+        if(hasBomb && input.ActionAlt())
         {
+            Debug.Log("bomb");
             BombSpawn();
-            hasBomb = false;
+            //hasBomb = false;
         }
     }
     private void BombSpawn()
