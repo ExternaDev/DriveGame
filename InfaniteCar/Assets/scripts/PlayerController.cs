@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 public class PlayerController : MonoBehaviour
 {
+    CarStats CS;
     public BombSpawner bSpawner;
     public OilSlick oil;
     public RocketsManager sRockets;
@@ -43,6 +44,11 @@ public class PlayerController : MonoBehaviour
         instance = this;
         GetPowerUps();
     }
+    private void Start()
+    {
+        CS = CarStats.instance;
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -76,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
     }
     public void HitOtherCar(){
+      
         TakeDamage(50);
     }
     public void TakeDamage(int amount){

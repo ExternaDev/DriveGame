@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FrontBumper : MonoBehaviour
 {
+    CarStats CS;
     TileMover tilemover;
     PlayerController PC;
     public bool Front;
@@ -14,6 +15,7 @@ public class FrontBumper : MonoBehaviour
 
     void Start()
     {
+        CS = CarStats.instance;
         tilemover = TileMover.instance;
         PC = PlayerController.instance;
 
@@ -33,7 +35,9 @@ public class FrontBumper : MonoBehaviour
             if (col.gameObject.tag == "Building")
             {
               Debug.Log("front");
-              PC.TakeDamage(1000);
+
+                
+                    PC.TakeDamage(1000);
             }
         }else if (Left){
             if (col.gameObject.tag == "Building")
@@ -41,7 +45,8 @@ public class FrontBumper : MonoBehaviour
                 // bump the car to the right
                 tilemover.BumpRight();
                 Debug.Log("left");
-                PC.TakeDamage(10);
+               
+                    PC.TakeDamage(10);
             }  
         }
         else if (Right){
@@ -49,8 +54,10 @@ public class FrontBumper : MonoBehaviour
             {
                 tilemover.BumpLeft();
                 //bump the car to the left
+
                 Debug.Log("right");
-                PC.TakeDamage(10);
+               
+                    PC.TakeDamage(10);
             }
         }
         else{

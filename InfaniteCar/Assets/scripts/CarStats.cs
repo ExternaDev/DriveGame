@@ -8,7 +8,8 @@ using TMPro;
 
 public class CarStats : MonoBehaviour
 {
-    
+    CarStats CS;
+    public static CarStats instance;
    // public float OverallDistance = 0;
     public float GasAmount = 100f;
     public float DamageAmount = 0;
@@ -23,6 +24,8 @@ public class CarStats : MonoBehaviour
     public TextMeshProUGUI DistanceText;
     public TextMeshProUGUI CoinsText;
 
+    public bool hasShield = false;
+
 
 
     public Image FuelGauge, DamageGuage;
@@ -33,6 +36,7 @@ public class CarStats : MonoBehaviour
 
    // public Event PlayerDied;
     void Awake(){
+        instance = this;
     	PC = this.GetComponent<PlayerController>();
       
        // OnPlayerDied += 
@@ -43,6 +47,7 @@ public class CarStats : MonoBehaviour
     }
     void Start(){
     	  GM = GameManager.instance;
+        CS = CarStats.instance;
     }
     void Update(){
         if(!GM.GameRunning()) return;
@@ -63,9 +68,13 @@ public class CarStats : MonoBehaviour
     public void RepaireDamages(){
     	DamageAmount = 0;
     }
-    public void TakeDamage(float amount){
-    	DamageAmount += amount;
-    	if(DamageAmount >=100)	PlayerDiedFromDamage();
+    public void TakeDamage(float amount)
+    {
+        if (CS.hasShield == false)
+        { 
+        DamageAmount += amount;
+        if (DamageAmount >= 100) PlayerDiedFromDamage();
+        }
     }
     public void PlayerDiedFromDamage(){
     	Debug.Log("<color=red>Player died from damage </color>");

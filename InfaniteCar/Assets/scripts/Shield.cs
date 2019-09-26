@@ -5,11 +5,13 @@ using UnityEngine;
 public class Shield : MonoBehaviour
 {
     public Renderer rend;
+    CarStats CS;
     PlayerInput input;
     public float timer;
     public bool hasShield;
     void Start()
     {
+        CS = CarStats.instance;
         input = PlayerInput.instance;
         rend = GetComponent<Renderer>();
         rend.enabled = false;        
@@ -18,6 +20,14 @@ public class Shield : MonoBehaviour
     void Update()
     {
         ShieldUpdate();
+        if (rend)
+        {
+            CS.hasShield = true;
+        }
+        else
+        {
+            CS.hasShield = false;
+        }
         
         
     }
