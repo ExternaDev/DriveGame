@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CarMovement : MonoBehaviour
 {
+    public static CarMovement instance;
 	PlayerInput input;
 	float movement = .25f;
 	float width = 15;
@@ -23,7 +24,11 @@ float IncreaseScale = 2.5f;
 
     public Transform BackLeftTire, BackRightTire;
     GameManager GM;
+    public CarDataScriptableObject CarData;
     // Start is called before the first frame update
+    void Awake(){
+        instance = this;
+    }
     void Start()
     {
         GM = GameManager.instance;
@@ -43,17 +48,17 @@ float IncreaseScale = 2.5f;
     void HandleRotation(){
 
         if(input.Left()){
-            rotateSpeed += Time.fixedDeltaTime*IncreaseScale;
+            rotateSpeed += Time.fixedDeltaTime*CarData.Grip;
             this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles - new Vector3(0,rotateSpeed,0) , 1);
             Skid();
         }else if (input.Right() ){
-            rotateSpeed += Time.fixedDeltaTime*IncreaseScale;
+            rotateSpeed += Time.fixedDeltaTime*CarData.Grip;
 
             this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles + new Vector3(0,rotateSpeed,0) , 1);
             Skid();
 
         }else if(rotateSpeed>2f){
-            rotateSpeed-= Time.fixedDeltaTime*IncreaseScale*4f;
+            rotateSpeed-= Time.fixedDeltaTime*CarData.Grip*4f;
             //Skid();
         }else{
             StopSkid();

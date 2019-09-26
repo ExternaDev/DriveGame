@@ -21,7 +21,7 @@ public class TileSpawner : MonoBehaviour
 	int segments = 6;
     public int turns = 0;
     public List<GameObject> pickups = new List<GameObject>();
-
+public TileSpawnerScriptableObject spawnManagerValues;
 	void Awake(){
 		instance = this;
 	}

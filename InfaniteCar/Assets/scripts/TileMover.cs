@@ -23,13 +23,15 @@ public class TileMover : MonoBehaviour
 	PlayerInput input;
 
 
-	float Acceleration = .005f;
-	float BrakePower = .03f;
-	float turnAmount = .15f;
+	//float Acceleration = .005f;
+	//float BrakePower = .03f;
+	//float turnAmount = .15f;
 	public float PlayerBrakeAmount = 1;
-	float PlayerBrakeAmountDecay = .01f;
+	//float PlayerBrakeAmountDecay = .01f;
 
 
+    float CarDataSpeed =0;
+    float CarDataAccel =0;
 
 
     PlayerController PC;
@@ -49,6 +51,8 @@ public class TileMover : MonoBehaviour
         GM = GameManager.instance;
         PC = PlayerController.instance;
         input = PlayerInput.instance;
+        CarDataSpeed = CarMovement.instance.CarData.Speed; 
+        CarDataAccel = CarMovement.instance.CarData.Acceleration; 
     }
     void OnGameReset(){
         baseSpeed = InitialBaseSpeed;
@@ -68,8 +72,8 @@ public class TileMover : MonoBehaviour
         CheckTilestoRemove();
         GatherInput();
 
-        if(PlayerBrakeAmount <2)
-            PlayerBrakeAmount += PlayerBrakeAmountDecay;
+        if(PlayerBrakeAmount <2 && !input.Down())
+            PlayerBrakeAmount += CarDataAccel;
 
         if(HitBreak<1){
             HitBreak+=Time.fixedDeltaTime;
@@ -80,8 +84,9 @@ public class TileMover : MonoBehaviour
     void GatherInput(){
     	baseSpeed += Time.fixedDeltaTime/ 1000f;
         
-    	if(input.Down() && PlayerBrakeAmount >1){
-    		PlayerBrakeAmount -=PlayerBrakeAmountDecay*5f ;
+    	if(input.Down() && PlayerBrakeAmount >.5f){
+            Debug.Log("down");
+    		PlayerBrakeAmount -=CarDataAccel*5f ;
     	}
     }
     void CheckTilestoRemove(){
@@ -136,7 +141,7 @@ public class TileMover : MonoBehaviour
     }
 
     public float GetSpeed(){
-        return (baseSpeed * PlayerBrakeAmount) * HitBreak;
+        return (baseSpeed * PlayerBrakeAmount) * HitBreak + CarDataSpeed;
     }
     public float GetUnstoppableSpeed(){
         return (baseSpeed*2f);
