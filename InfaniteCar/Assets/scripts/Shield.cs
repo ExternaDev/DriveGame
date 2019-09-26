@@ -20,7 +20,7 @@ public class Shield : MonoBehaviour
     void Update()
     {
         ShieldUpdate();
-        if (rend)
+        if (rend.enabled)
         {
             CS.hasShield = true;
         }

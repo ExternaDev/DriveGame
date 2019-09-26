@@ -8,7 +8,7 @@ using TMPro;
 
 public class CarStats : MonoBehaviour
 {
-    CarStats CS;
+
     public static CarStats instance;
    // public float OverallDistance = 0;
     public float GasAmount = 100f;
@@ -47,12 +47,12 @@ public class CarStats : MonoBehaviour
     }
     void Start(){
     	  GM = GameManager.instance;
-        CS = CarStats.instance;
+       
     }
     void Update(){
         if(!GM.GameRunning()) return;
 
-        GasAmount -= Time.fixedDeltaTime * 10;
+        GasAmount -= Time.fixedDeltaTime;
         FuelGauge.fillAmount = GasAmount/100f;
         DamageGuage.fillAmount = DamageAmount/100f;
         CoinsText.text = PointsCollected.ToString("00");
@@ -70,10 +70,10 @@ public class CarStats : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
-        if (CS.hasShield == false)
+        if (!hasShield)
         { 
         DamageAmount += amount;
-        if (DamageAmount >= 100) PlayerDiedFromDamage();
+        //if (DamageAmount >= 100) PlayerDiedFromDamage();
         }
     }
     public void PlayerDiedFromDamage(){

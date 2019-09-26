@@ -706,7 +706,7 @@ Transform:
   m_GameObject: {fileID: 159049148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 0.75}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1014229353}
   m_RootOrder: 1
@@ -3942,6 +3942,7 @@ MonoBehaviour:
   oil: {fileID: 0}
   sRockets: {fileID: 0}
   playerForward: {x: 0, y: 0, z: 1}
+  playerRight: {x: 0, y: 0, z: 1}
   onComingWaypoint: {fileID: 0}
   NextWaytotalDistance: 0
   currTile: {fileID: 0}
@@ -4046,6 +4047,7 @@ MonoBehaviour:
   TotalDistance: 0
   DistanceText: {fileID: 1245918781}
   CoinsText: {fileID: 1003350981}
+  hasShield: 0
   FuelGauge: {fileID: 369015013}
   DamageGuage: {fileID: 1635240936}
   PointsCollected: 0
@@ -4478,7 +4480,7 @@ Transform:
   m_GameObject: {fileID: 1380113560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 0.75}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1014229353}
   m_RootOrder: 0
@@ -4958,6 +4960,7 @@ MonoBehaviour:
   Tiles: []
   TilesToRemove: []
   baseSpeed: 0.3
+  bumpAmount: 0.25
   PlayerBrakeAmount: 1
 --- !u!4 &1592896612
 Transform:
@@ -5051,7 +5054,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633528702}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -0.309}
   m_LocalScale: {x: 0.5, y: 1, z: 0.75}
   m_Children: []
   m_Father: {fileID: 1014229353}
@@ -5848,8 +5851,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 1814872642}
-  timer: 0
-  hasShield: 0
+  timer: 10
+  hasShield: 1
 --- !u!23 &1814872642 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7563820260259760621, guid: 020965223ca3a8d46b7dfc68c568eee8,
@@ -6511,7 +6514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038472370}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: -0, y: 0, z: 0.303}
   m_LocalScale: {x: 0.5, y: 1, z: 0.75}
   m_Children: []
   m_Father: {fileID: 1014229353}
