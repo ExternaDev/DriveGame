@@ -200,11 +200,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f05d49a694b75d4790355162db50ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHitObj: {fileID: 0}
   isdead: 0
   speed: 0
   deathTimer: 3
   explotion: {fileID: 1569878991714682041, guid: bb363db11ec99cb4e8338dfe5f4dbc4b,
     type: 3}
+  maxDistance: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  bombRadius: 20
 --- !u!54 &8454816440610840254
 Rigidbody:
   m_ObjectHideFlags: 0

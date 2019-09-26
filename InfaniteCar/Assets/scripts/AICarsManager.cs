@@ -113,6 +113,7 @@ public class AICarsManager : MonoBehaviour
         if(s != null)
             Debug.Log(s);
         if(Enemies.Contains(driver) && !EnemiesToRemove.Contains(driver))
-        EnemiesToRemove.Add(driver);    
+        EnemiesToRemove.Add(driver);
+        Debug.Log(driver);
     }
 }
