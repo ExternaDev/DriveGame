@@ -26,7 +26,7 @@ public class FrontBumper : MonoBehaviour
             //push the player to the left
             Debug.Log("fuck i hit a building F");
             tilemover.PlayerHitCar();
-            player
+//            player
 
         }
     }
