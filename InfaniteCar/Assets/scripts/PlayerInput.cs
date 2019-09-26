@@ -69,7 +69,14 @@ public class PlayerInput : MonoBehaviour
         right=false;
         rightRelease = true;
     }
-
+    public void SetDownPress(){
+        down=true;
+        downPress = true;
+    }
+    public void SetDownRelease(){
+        down=false;
+        downRelease = true;
+    }
     public void SetActionDown(){
         action=true;
         actionPress = true;
@@ -80,12 +87,12 @@ public class PlayerInput : MonoBehaviour
     }
 
 
-    void Update()
-    {   
+    // void Update()
+    // {   
 
-        UpdateKeys();
-       // UpdateTouch();
-    }
+    //     UpdateKeys();
+    //    // UpdateTouch();
+    // }
     void UpdateTouch(){
         left =false;
         right= false;
@@ -155,5 +162,8 @@ public class PlayerInput : MonoBehaviour
         rightRelease = false;
         actionPress = false;
         actionRelease = false;
+        downPress = false;
+        downRelease = false;
+
     }
 }
