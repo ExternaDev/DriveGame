@@ -32,7 +32,7 @@ public class FrontBumper : MonoBehaviour
             Debug.Log("fuck i hit a building F");
             if (col.gameObject.tag == "Building")
             {
-                Debug.Log("front");
+              Debug.Log("front");
               PC.TakeDamage(1000);
             }
         }else if (Left){

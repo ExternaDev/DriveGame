@@ -11,12 +11,19 @@ public class Coin : MonoBehaviour
     	COM=c;
     }
     void OnTriggerEnter(Collider col){
-    	if(col.gameObject.tag == "Player" && !hit){
-    		if(SpecialCoin)
-    		col.GetComponentInParent<CarStats>().AddCoinPints(10);
+        if (col.gameObject.tag == "Player" && !hit)
+        {
+            if (SpecialCoin)
+            {
+                col.GetComponentInParent<CarStats>().AddCoinPints(10);
+                Debug.Log("BIG MONEY");
+            }
 
-    		else
-    		col.GetComponentInParent<CarStats>().AddCoinPints(1);
+            else
+            {
+                col.GetComponentInParent<CarStats>().AddCoinPints(1);
+                Debug.Log("MONEY");
+            }
     		COM.Remove(this);
         }
     }

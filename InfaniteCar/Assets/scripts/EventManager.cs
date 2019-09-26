@@ -24,22 +24,30 @@ public class EventManager : MonoBehaviour
         Debug.Log("Player died");
         if(OnPlayerDied != null)
             OnPlayerDied();
+        /*
+          */
     }
 
     public void StartGame(){
         if(OnGameStart != null)
             OnGameStart();
+        /*
+          */
     }
 
 
     public void GameReset(){
         if(OnGameReset != null)
             OnGameReset();
+        /*
+          */
     }
 
 
     public void ResumeGameAftervideo(){
         if(OnResumeAftervideo != null)
             OnResumeAftervideo();
+        /*
+          */
     }
 }

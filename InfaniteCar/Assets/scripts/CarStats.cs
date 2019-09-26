@@ -47,18 +47,15 @@ public class CarStats : MonoBehaviour
     void Update(){
         if(!GM.GameRunning()) return;
 
-        GasAmount -= Time.fixedDeltaTime;
+        GasAmount -= Time.fixedDeltaTime * 10;
         FuelGauge.fillAmount = GasAmount/100f;
         DamageGuage.fillAmount = DamageAmount/100f;
         CoinsText.text = PointsCollected.ToString("00");
         FindTotalDistance();
         Debug.Log(DamageAmount);
+        ZeroGas();
 
     }
-
-
-
-
     
     public void FillGas(){
     	GasAmount=100;
@@ -72,6 +69,14 @@ public class CarStats : MonoBehaviour
     }
     public void PlayerDiedFromDamage(){
     	Debug.Log("<color=red>Player died from damage </color>");
+        //PC.PlayerDied();
+        GM.SetCoinsCollected(PointsCollected);
+        EventManager.instance.PlayerDied();
+
+    }
+    public void PlayerDiedFromGas()
+    {
+        Debug.Log("<color=red>Player died from damage </color>");
         //PC.PlayerDied();
         GM.SetCoinsCollected(PointsCollected);
         EventManager.instance.PlayerDied();
@@ -105,6 +110,15 @@ public class CarStats : MonoBehaviour
 
         DistanceText.text = TotalDistance.ToString("00");
         
+    }
+    public void ZeroGas()
+    {
+        if (GasAmount <= 0)
+        {
+            PlayerDiedFromGas();
+        }
+
+
     }
     public void HitTile( Tile tile){
     	if(tile.tileSize == TileSize.Big){
