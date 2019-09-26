@@ -38,8 +38,8 @@ public TileSpawnerScriptableObject spawnManagerValues;
 
 
     public GameObject GetRandomPickup(){
-    	//return pickups[Random.Range(0, pickups.Count)];
-        return pickups[0];
+    	return pickups[Random.Range(0, pickups.Count)];
+        //return pickups[0];
 
     }
     void SpawnFirstTiles(){
@@ -56,7 +56,7 @@ public TileSpawnerScriptableObject spawnManagerValues;
     	Tile obj = Instantiate(pref, Vector3.one * 100f ,Quaternion.identity,this.transform).GetComponent<Tile>();
      
        	obj.SpawnPickup();
-        obj.SpawnCoins();
+        //obj.SpawnCoins();
 
        	mover.Tiles.Add(obj);
        	mover.TilesToRemove.Add( mover.Tiles[0]);
