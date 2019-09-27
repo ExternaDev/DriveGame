@@ -115,6 +115,12 @@ MonoBehaviour:
   FakeEnds:
   - {fileID: 4658300251661028328}
   - {fileID: 4892054339803654110}
+  BuildLocations: []
+  buildingprefab: {fileID: 0}
+  buildingprefabs:
+  - {fileID: 3629918377528175542, guid: b45319f24d509d84f983b680c3d53df1, type: 3}
+  - {fileID: 3629918377528175542, guid: ff26e64a5391f3441ac85979b5335213, type: 3}
+  PickupSpawnPoints: {fileID: 0}
 --- !u!65 &7694914630063282205
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1336,6 +1342,10 @@ MonoBehaviour:
   tileSize: 1
   EndNodes: []
   FakeEnds: []
+  BuildLocations: []
+  buildingprefab: {fileID: 0}
+  buildingprefabs: []
+  PickupSpawnPoints: {fileID: 0}
 --- !u!65 &3348489030739620880
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1452,6 +1462,10 @@ MonoBehaviour:
   tileSize: 1
   EndNodes: []
   FakeEnds: []
+  BuildLocations: []
+  buildingprefab: {fileID: 0}
+  buildingprefabs: []
+  PickupSpawnPoints: {fileID: 0}
 --- !u!65 &7441904642727020689
 BoxCollider:
   m_ObjectHideFlags: 0

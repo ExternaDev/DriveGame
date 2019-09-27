@@ -25,7 +25,7 @@ public class BombController : MonoBehaviour
 
     private float currentHitDis;
 
-    void Update()
+    void FixedUpdate()
     {
         MoveBomb();
         Timers();

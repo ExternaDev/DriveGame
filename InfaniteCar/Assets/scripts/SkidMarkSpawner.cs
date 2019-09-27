@@ -50,7 +50,7 @@ public class SkidMarkSpawner : MonoBehaviour
         EndSkid();
         StartSkid();
     }
-    void Update(){
+    void FixedUpdate(){
         if(skidding){
             if(Time.time - LastAddTime > AddRate){
                 AddPoint();

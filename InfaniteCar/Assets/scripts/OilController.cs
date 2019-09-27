@@ -10,7 +10,7 @@ public class OilController : MonoBehaviour
     private Vector3 bombpos;
 
 
-    void Update()
+    void FixedUpdate()
     {
         MoveOil();
         Timers();

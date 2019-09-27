@@ -6,7 +6,7 @@ public class bulletTimer : MonoBehaviour
 {
     public float howLongToLive;
     public bool markedForDeath = false;    
-    void Update()
+    void FixedUpdate()
     {
         //timer for each bullet 
         if (howLongToLive > 0)

@@ -54,7 +54,7 @@ public class AICarsManager : MonoBehaviour
         Enemies.Clear();
         EnemiesToRemove.Clear();
     }
-    void Update()
+    void FixedUpdate()
     {
     	if(GM.GameRunning()){
 

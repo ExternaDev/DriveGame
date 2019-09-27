@@ -83,7 +83,7 @@ public class AIDriver : MonoBehaviour
         police=true;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(!GM.GameRunning()) return;
     	if(currentTile != null && currentWaypoint !=null){

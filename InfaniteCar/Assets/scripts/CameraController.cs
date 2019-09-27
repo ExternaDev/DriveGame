@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
 	public Transform LookTarget;
     float TurnSpeed = 1f;
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
     	float distance = Vector3.Distance(transform.position, IdealPosition.position);
     	if(distance <2.5f && TurnSpeed >1.5f){

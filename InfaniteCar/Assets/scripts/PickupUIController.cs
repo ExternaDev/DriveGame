@@ -14,7 +14,7 @@ public class PickupUIController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Bomb.SetActive(PC.bSpawner.hasBomb);
         Rcokets.SetActive(PC.sRockets.canShootRocket);

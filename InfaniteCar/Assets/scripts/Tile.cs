@@ -29,6 +29,8 @@ public class Tile : MonoBehaviour
 
     public List<Transform> BuildLocations = new List<Transform>();
     public GameObject buildingprefab;
+    public List<GameObject> buildingprefabs = new List<GameObject>();
+
     public GameObject PickupSpawnPoints;
 
    AICarsManager AICars;
@@ -42,11 +44,14 @@ public class Tile : MonoBehaviour
     void Start(){
         if(BuildLocations.Count>0){
             foreach(Transform t in BuildLocations){
-                if(t.gameObject.activeInHierarchy){
-                    GameObject building = Instantiate(buildingprefab, t.position, Quaternion.identity,t);
-                    float height = Random.Range(7f,40f);
-                    building.transform.localPosition += new Vector3(0,height/2f,0);
-                    building.transform.localScale  = new Vector3(Random.Range(7f,10f), height,Random.Range(7f,10f) );
+                if(t !=null && t.gameObject.activeInHierarchy){
+                    GameObject prefab = buildingprefabs[Random.Range(0,buildingprefabs.Count)];
+                    GameObject building = Instantiate(prefab, t.position, t.rotation,t);
+                   // float height = Random.Range(7f,10);
+                    building.transform.localPosition = new Vector3(0,5,0);
+                    //building.transform.localPosition += new Vector3(0,height/2f,0);
+
+                    //building.transform.localScale  = new Vector3(Random.Range(7f,10f), height,Random.Range(7f,10f) );
 
                 }
             }

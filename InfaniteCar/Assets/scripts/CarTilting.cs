@@ -16,7 +16,7 @@ public class CarTilting : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(!GM.GameRunning()) return;
 

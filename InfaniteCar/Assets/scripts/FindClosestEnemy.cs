@@ -5,7 +5,7 @@ using UnityEngine;
 public class FindClosestEnemy : MonoBehaviour
 {
    
-    void Update()
+    void FixedUpdate()
     {
         FindClosest();
     }

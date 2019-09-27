@@ -32,7 +32,7 @@ public class movingBlock : MonoBehaviour
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
 
         blockSpeed = _spawner.speed;

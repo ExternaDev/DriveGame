@@ -16,7 +16,7 @@ public class OilSlick : MonoBehaviour
         input = PlayerInput.instance;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         OilUpdate();
        // IsShoot();

@@ -21,7 +21,7 @@ public class CoinsObjectManager : MonoBehaviour
     		coins[0].gameObject.SetActive(true);
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
     	float offset =0;
         foreach(Coin c in coins){

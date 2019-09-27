@@ -65,7 +65,7 @@ public class TileMover : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate ()
     {
 
         if(!GM.GameRunning())   return;
@@ -145,8 +145,6 @@ public class TileMover : MonoBehaviour
     float HitBreak = 1; 
     public Vector3 GetMovementUpdate(){
         return PC.playerForward* GetSpeed() + GetSideForce();
-            
-       
     }
     
 

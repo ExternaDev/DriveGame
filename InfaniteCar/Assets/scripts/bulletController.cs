@@ -12,7 +12,7 @@ public class bulletController : MonoBehaviour
     void Start(){
         rb = GetComponent<Rigidbody>();
     }
-    void Update()
+    void FixedUpdate()
     {
         //timer for each bullet 
         if (howLongToLive > 0)

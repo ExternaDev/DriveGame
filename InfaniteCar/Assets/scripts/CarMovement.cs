@@ -38,7 +38,7 @@ float IncreaseScale = 2.5f;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(!GM.GameRunning()) return;
       

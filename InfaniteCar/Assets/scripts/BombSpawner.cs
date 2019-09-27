@@ -15,7 +15,7 @@ public class BombSpawner : MonoBehaviour
     {
         input = PlayerInput.instance;
     }
-    void Update()
+    void FixedUpdate()
     {
         BombUpdate();
         //IsShoot(); 

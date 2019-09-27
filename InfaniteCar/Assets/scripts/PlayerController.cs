@@ -51,11 +51,19 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         playerForward = this.transform.forward;
         playerRight = this.transform.right;
-
+        if(Input.GetKeyUp(KeyCode.UpArrow)){
+            Debug.Log("Pause");
+                Time.timeScale = 0;
+            
+            // if(Time.timeScale == 0)
+            //     Time.timeScale =1;
+            //     else
+            //     Time.timeScale = 0;
+        }
     }
     public bool IsStarted(){
         return inited;

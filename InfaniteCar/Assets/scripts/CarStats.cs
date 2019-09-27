@@ -49,7 +49,7 @@ public class CarStats : MonoBehaviour
     	  GM = GameManager.instance;
        
     }
-    void Update(){
+    void FixedUpdate(){
         if(!GM.GameRunning()) return;
 
         GasAmount -= Time.fixedDeltaTime;

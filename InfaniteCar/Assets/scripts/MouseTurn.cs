@@ -21,7 +21,7 @@ public class MouseTurn : MonoBehaviour
         //Vector3 startingPosition = transform.position;
     }
     
-    void Update()
+    void FixedUpdate()
     {
         //gets the x position of the mouse
         carRot = Input.GetAxis("Mouse X") ;

@@ -20,7 +20,7 @@ public class ParticalFollow : MonoBehaviour
        // main.customSimulationSpace = relativeTo;
     }
 
-    void Update()
+    void FixedUpdate()
     {
        
          tile = TileMover.instance.GetCurrentTile();
