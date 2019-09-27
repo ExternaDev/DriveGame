@@ -28,8 +28,10 @@ public class CarTilting : MonoBehaviour
         }else if(input.Left()&& turnAngle > -maxAngle){
             turnAngle -=4f;
 
-        }else if(!input.Right() && !input.Left() )
+        }else if(!input.Right() && !input.Left() ){
+            //if not turning apply turn angle to car/camera
             turnAngle *= .9f;
+        }
 
         this.transform.localRotation = Quaternion.Euler(new Vector3(0,turnAngle,0));
        
