@@ -18,7 +18,7 @@ public class shootBullet : MonoBehaviour
     {
         input = PlayerInput.instance;
     }    
-    void Update()
+    void FixedUpdate()
     {
      // create bullets based on player rotation
      CreateBullet();

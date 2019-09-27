@@ -5,6 +5,7 @@ using UnityEngine;
 public class PausePanal : MonoBehaviour
 {
     bool active = false;
+    public GameObject GO; 
     
     // Start is called before the first frame update
     void Start()

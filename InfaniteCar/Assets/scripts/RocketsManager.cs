@@ -29,7 +29,7 @@ public class RocketsManager : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //Debug.Log(rocketsToRemove.Count);
         //FindClosest();

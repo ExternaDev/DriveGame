@@ -17,7 +17,7 @@ public class Shield : MonoBehaviour
         rend.enabled = false;        
     }
     
-    void Update()
+    void FixedUpdate()
     {
         ShieldUpdate();
         if (rend.enabled)

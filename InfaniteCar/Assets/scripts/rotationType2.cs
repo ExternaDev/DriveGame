@@ -16,7 +16,7 @@ public class rotationType2 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.A) && !restoreRot)
         {
