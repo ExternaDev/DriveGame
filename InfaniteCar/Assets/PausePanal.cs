@@ -5,6 +5,7 @@ using UnityEngine;
 public class PausePanal : MonoBehaviour
 {
     bool active = false;
+    public GameObject GO; 
     
     // Start is called before the first frame update
     void Start()
@@ -20,8 +21,8 @@ public class PausePanal : MonoBehaviour
     public void TogglePanal()
     {
         active = !active;
-        this.transform.GetChild(0).gameObject.SetActive(active);
-       
+       // this.transform.GetChild(0).gameObject.SetActive(active);
+        GO.SetActive(active);
 
 
     }
