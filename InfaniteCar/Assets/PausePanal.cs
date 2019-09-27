@@ -21,7 +21,11 @@ public class PausePanal : MonoBehaviour
     {
         active = !active;
         this.transform.GetChild(0).gameObject.SetActive(active);
-       
+        if(active)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
+
 
 
     }

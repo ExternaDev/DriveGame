@@ -86,13 +86,13 @@ public class PlayerInput : MonoBehaviour
         actionRelease = true;
     }
 
-
-    // void Update()
-    // {   
-
-    //     UpdateKeys();
-    //    // UpdateTouch();
-    // }
+    public bool DebugKeys = false;
+    void FixedUpdate()
+    {   
+        if(DebugKeys)
+        UpdateKeys();
+       // UpdateTouch();
+    }
     void UpdateTouch(){
         left =false;
         right= false;
