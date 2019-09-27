@@ -23,7 +23,7 @@ public class spawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         p -= Time.deltaTime;
         while (p <= 0)

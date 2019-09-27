@@ -5,7 +5,7 @@ using UnityEngine;
 public class Rotation : MonoBehaviour
 {
     public Vector3 RotationAmount;
-    void Update(){
+    void FixedUpdate(){
     	this.transform.eulerAngles += RotationAmount *Time.fixedDeltaTime;
     }
 }

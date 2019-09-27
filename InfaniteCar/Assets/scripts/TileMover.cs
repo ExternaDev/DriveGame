@@ -65,7 +65,7 @@ public class TileMover : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if(!GM.GameRunning())   return;
