@@ -115,6 +115,14 @@ MonoBehaviour:
   - {fileID: 3629918377528175542, guid: b45319f24d509d84f983b680c3d53df1, type: 3}
   - {fileID: 3629918377528175542, guid: ff26e64a5391f3441ac85979b5335213, type: 3}
   PickupSpawnPoints: {fileID: 7971648950768099322}
+  siding: 0
+  sidings:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  RightBuildings: {fileID: 0}
+  LeftBuildings: {fileID: 0}
 --- !u!65 &7694914630063282205
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -21,7 +21,14 @@ public class TileSpawner : MonoBehaviour
 	int segments = 6;
     public int turns = 0;
     public List<GameObject> pickups = new List<GameObject>();
-public TileSpawnerScriptableObject spawnManagerValues;
+    public TileSpawnerScriptableObject spawnManagerValues;
+
+    public List<GameObject> OneBlockBuildings = new List<GameObject>();
+    public List<GameObject> TwoBlockBuildings = new List<GameObject>();
+    public List<GameObject> ThreeBlockBuildings = new List<GameObject>();
+
+
+
 	void Awake(){
 		instance = this;
 	}
@@ -35,6 +42,15 @@ public TileSpawnerScriptableObject spawnManagerValues;
 
     }
 
+    public GameObject GetOneBlockBuilding(){
+       return OneBlockBuildings[Random.Range(0,OneBlockBuildings.Count)];
+    }
+    public GameObject GetTwoBlockBuilding(){
+       return TwoBlockBuildings[Random.Range(0,TwoBlockBuildings.Count)];
+    }
+    public GameObject GetThreeBlockBuilding(){
+       return ThreeBlockBuildings[Random.Range(0,ThreeBlockBuildings.Count)];
+    }
 
 
     public GameObject GetRandomPickup(){
@@ -46,8 +62,11 @@ public TileSpawnerScriptableObject spawnManagerValues;
     	for(int i = 0; i <segments;i ++){
     		Tile obj = Instantiate(TileTypes[0].Tile, new Vector3(0,0,(i*50)-50),Quaternion.identity,this.transform).GetComponent<Tile>();
     		mover.Tiles.Add(obj);
+            obj.SetSiding(TileSiding.Ground);
+
     	}
         PlayerController.instance.Init();
+
     }
 
      public void AddNewTile(){
@@ -79,6 +98,8 @@ public TileSpawnerScriptableObject spawnManagerValues;
         }
     }
     public int TilesSinceInter =3;
+    public int TilesSinceTurn =0;
+
     GameObject FindNextTileType(){
         int rand = Random.Range(0,TileTypes.Count);
        if(!TileTypes[rand].Use )
@@ -88,26 +109,34 @@ public TileSpawnerScriptableObject spawnManagerValues;
             if(TilesSinceInter <10){
                 return FindNextTileType();
             }else if( TilesSinceInter > 10){
-                 TilesSinceInter =0;
-
+                TilesSinceInter =0;
+                TilesSinceTurn++;
                 return TileTypes[rand].Tile;
             }
         } 
 
-        TilesSinceInter ++;
-         if( TileTypes[rand].Tile.GetComponent<Tile>().direction == TileDirection.right){
+
+
+        if( TileTypes[rand].Tile.GetComponent<Tile>().direction == TileDirection.right && TilesSinceTurn > 2){
             if(turns>=1){
                 return FindNextTileType();
             }else{
+                TilesSinceInter ++;
+                TilesSinceTurn =0;
                 turns ++;
             }
-        }else if(TileTypes[rand].Tile.GetComponent<Tile>().direction == TileDirection.left){
+        }else if(TileTypes[rand].Tile.GetComponent<Tile>().direction == TileDirection.left && TilesSinceTurn > 2){
             if(turns<=-1){
                 return FindNextTileType();
             }else{
+                TilesSinceInter ++;
+                TilesSinceTurn =0;
                 turns --;
             }
         }
+
+        TilesSinceTurn++;
+
         return TileTypes[rand].Tile;
 
     }

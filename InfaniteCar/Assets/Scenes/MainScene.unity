@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.46165276, g: 0, b: 1, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.03
@@ -1950,7 +1950,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4360063edbf15c247a6981609d6743a3, type: 2}
+      objectReference: {fileID: 2100000, guid: c436e337617a52b4099c3b0e6d51f1dd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c37b6e9c5a201f74f99321c807b672ee, type: 3}
 --- !u!1 &522087788
@@ -3120,8 +3120,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 1
-  m_Color: {r: 0.6484144, g: 0.3160377, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.94350845, g: 0.3537736, b: 1, a: 1}
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5826,7 +5826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc8fa9e145462148bc519eca388078c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugKeys: 0
+  DebugKeys: 1
 --- !u!114 &1136172347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5879,6 +5879,7 @@ MonoBehaviour:
   FuelGauge: {fileID: 369015013}
   DamageGuage: {fileID: 1635240936}
   PointsCollected: 0
+  DebugInvinsable: 1
 --- !u!114 &1136172350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7212,7 +7213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileTypes:
   - name: Standard
-    Tile: {fileID: 293990148674709477, guid: f77f43d3ac2ce554aa83e730efbf68e5, type: 3}
+    Tile: {fileID: 3411765297831231198, guid: e4945c80b089d6f46b78c390adc71ac6, type: 3}
     Use: 1
   - name: Big S Left
     Tile: {fileID: 293990148674709477, guid: 2c0256488a2e74b4eb8b8aa0d534b077, type: 3}
@@ -7222,10 +7223,10 @@ MonoBehaviour:
     Use: 1
   - name: Big Turn Left
     Tile: {fileID: 293990148674709477, guid: 938547c21419ddf4db2cb1245f468ce7, type: 3}
-    Use: 1
+    Use: 0
   - name: Big Turn right
     Tile: {fileID: 293990148674709477, guid: 9e68bc33742e509489e0cbb37b2a7c37, type: 3}
-    Use: 1
+    Use: 0
   - name: Gas Station
     Tile: {fileID: 8654095535783691040, guid: 1b50994b24774f947a4a7bb2dc4a1a57, type: 3}
     Use: 1
@@ -7234,7 +7235,7 @@ MonoBehaviour:
     Use: 1
   - name: Small Tile
     Tile: {fileID: 293990148674709477, guid: fc653437a4214e9439c14ad379f4f978, type: 3}
-    Use: 1
+    Use: 0
   - name: Intersection
     Tile: {fileID: 293990148674709477, guid: 530a8c38fcc268943b0e9a63a97b1f99, type: 3}
     Use: 1
@@ -7244,13 +7245,22 @@ MonoBehaviour:
   - name: Small Right
     Tile: {fileID: 8477026044648677901, guid: 125a91e1ce8b6164dadca1f6a7b53398, type: 3}
     Use: 1
-  - name: Angle
-    Tile: {fileID: 37203696444351181, guid: d37fa8c9a1682894d9b8fa2a6ec19dec, type: 3}
-    Use: 0
   turns: 0
   pickups: []
   spawnManagerValues: {fileID: 0}
+  OneBlockBuildings:
+  - {fileID: 1105968295820938511, guid: c4a2fae3a96381a48a221975aaa0ce2c, type: 3}
+  TwoBlockBuildings:
+  - {fileID: 5491375394676941666, guid: e6db1df9628d954418cc6283a5c8c73b, type: 3}
+  - {fileID: 5491375394676941666, guid: 7910289d2ac8ecb449444a9acaa3c526, type: 3}
+  - {fileID: 1105968295820938511, guid: 90633a5e34e374c4f80be24e015c0a56, type: 3}
+  - {fileID: 5491375394676941666, guid: 54a8a3f86972e18479a2533443968440, type: 3}
+  - {fileID: 5491375394676941666, guid: c00bb56c659709b4c8bbd7a5c36baf32, type: 3}
+  ThreeBlockBuildings:
+  - {fileID: 2956546658855130826, guid: 7ba9e3c700279d540a2f69969f670934, type: 3}
+  - {fileID: 5491375394676941666, guid: 5f7a17747977a3d4e93e6d5bbdbfeeba, type: 3}
   TilesSinceInter: 3
+  TilesSinceTurn: 0
 --- !u!1 &1633528702
 GameObject:
   m_ObjectHideFlags: 0

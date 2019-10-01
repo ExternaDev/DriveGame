@@ -32,7 +32,7 @@ public class CarStats : MonoBehaviour
     GameManager GM;
    
     public int PointsCollected = 0;
-    
+    public bool DebugInvinsable =false;
 
    // public Event PlayerDied;
     void Awake(){
@@ -57,7 +57,7 @@ public class CarStats : MonoBehaviour
         DamageGuage.fillAmount = DamageAmount/100f;
         CoinsText.text = PointsCollected.ToString("00");
         FindTotalDistance();
-        Debug.Log(DamageAmount);
+       // Debug.Log(DamageAmount);
         ZeroGas();
 
     }
@@ -70,10 +70,11 @@ public class CarStats : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
-        if (!hasShield)
-        { 
-        DamageAmount += amount;
-        if (DamageAmount >= 100) PlayerDiedFromDamage();
+        if(DebugInvinsable) return;
+        Debug.Log("Player took " + amount  + " damage");
+        if (!hasShield ){ 
+            DamageAmount += amount;
+            if (DamageAmount >= 100) PlayerDiedFromDamage();
         }
     }
     public void PlayerDiedFromDamage(){

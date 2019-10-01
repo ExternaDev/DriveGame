@@ -133,24 +133,24 @@ public class PlayerInput : MonoBehaviour
     }
     void UpdateKeys(){
 
-        up = Input.GetKey(KeyCode.UpArrow);
-        down = Input.GetKey(KeyCode.DownArrow);
-        left = Input.GetKey(KeyCode.LeftArrow);
-        right = Input.GetKey(KeyCode.RightArrow);
+        up = Input.GetKey(KeyCode.W);
+        down = Input.GetKey(KeyCode.S);
+        left = Input.GetKey(KeyCode.A);
+        right = Input.GetKey(KeyCode.D);
         action = Input.GetKey(KeyCode.Space);
         actionAlt = Input.GetKey(KeyCode.LeftShift);
 
-        upRelease = Input.GetKeyUp(KeyCode.UpArrow);
-        downRelease = Input.GetKeyUp(KeyCode.DownArrow);
-        leftRelease = Input.GetKeyUp(KeyCode.LeftArrow);
-        rightRelease = Input.GetKeyUp(KeyCode.RightArrow);
+        upRelease = Input.GetKeyUp(KeyCode.W);
+        downRelease = Input.GetKeyUp(KeyCode.S);
+        leftRelease = Input.GetKeyUp(KeyCode.A);
+        rightRelease = Input.GetKeyUp(KeyCode.D);
         actionRelease = Input.GetKeyUp(KeyCode.Space);
         actionAltRelease = Input.GetKeyUp(KeyCode.LeftShift);
 
-        upPress = Input.GetKeyDown(KeyCode.UpArrow);
-        downPress = Input.GetKeyDown(KeyCode.DownArrow);
-        leftPress = Input.GetKeyDown(KeyCode.LeftArrow);
-        rightPress = Input.GetKeyDown(KeyCode.RightArrow);
+        upPress = Input.GetKeyDown(KeyCode.W);
+        downPress = Input.GetKeyDown(KeyCode.S);
+        leftPress = Input.GetKeyDown(KeyCode.A);
+        rightPress = Input.GetKeyDown(KeyCode.D);
         actionPress = Input.GetKeyDown(KeyCode.Space);
         actionAltPress = Input.GetKeyDown(KeyCode.LeftShift);
 
