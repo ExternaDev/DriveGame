@@ -7,7 +7,7 @@ public class TileMover : MonoBehaviour
 {
 	public static TileMover instance;
 	//public GameObject tile;
-	public List<GameObject> TileTypes = new List<GameObject>();
+	//public List<GameObject> TileTypes = new List<GameObject>();
 
 	public List<Tile> Tiles = new List<Tile>();
 	public List<Tile> TilesToRemove = new List<Tile>();

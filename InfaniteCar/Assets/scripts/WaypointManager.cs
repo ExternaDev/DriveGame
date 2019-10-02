@@ -9,10 +9,10 @@ public class WaypointManager : MonoBehaviour
 
 
   
-  	public Transform GetStart(){return startPoint;}
-  	public Transform GetLast(){return endPoint;}
-  	public Transform GetFirstMiddle(){return middlepoint[0];}
-  	public Transform GetMiddleViaIndex(int i){
+  	 Transform GetStart(){return startPoint;}
+  	 Transform GetLast(){return endPoint;}
+  	 Transform GetFirstMiddle(){return middlepoint[0];}
+  	 Transform GetMiddleViaIndex(int i){
   		if(i< middlepoint.Count)
   		return middlepoint[i];
   		else return endPoint;

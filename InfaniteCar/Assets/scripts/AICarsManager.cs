@@ -59,7 +59,7 @@ public class AICarsManager : MonoBehaviour
     void FixedUpdate()
     {
     	if(GM.GameRunning()){
-
+            
 
 	        if(Input.GetKeyUp(KeyCode.Space) ){
 	        	SpawnPC();

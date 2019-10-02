@@ -14,6 +14,6 @@ public class CarDataScriptableObject : ScriptableObject
     [Range(0.01f, .1f)]
     public float Acceleration;
 
-
+    public GameObject MeshObject;
 
 }
