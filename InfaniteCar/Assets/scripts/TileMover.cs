@@ -38,7 +38,7 @@ public class TileMover : MonoBehaviour
 
     PlayerController PC;
     GameManager GM;
-
+    PlayerData playerData;
     // Start is called before the first frame update
     void Awake()
     {
@@ -53,8 +53,9 @@ public class TileMover : MonoBehaviour
         GM = GameManager.instance;
         PC = PlayerController.instance;
         input = PlayerInput.instance;
-        CarDataSpeed = CarMovement.instance.CarData.Speed; 
-        CarDataAccel = CarMovement.instance.CarData.Acceleration; 
+        playerData = PlayerData.instance;
+        CarDataSpeed = playerData.currentSelection.Speed; 
+        CarDataAccel = playerData.currentSelection.Acceleration; 
     }
     void OnGameReset(){
         baseSpeed = InitialBaseSpeed;
@@ -149,7 +150,7 @@ public class TileMover : MonoBehaviour
     
 
     public float GetSpeed(){
-        return (baseSpeed * PlayerBrakeAmount) * HitBreak + CarMovement.instance.CarData.Speed;
+        return (baseSpeed * PlayerBrakeAmount) * HitBreak + CarDataSpeed;
     }
     public Vector3 GetSideForce()
     {

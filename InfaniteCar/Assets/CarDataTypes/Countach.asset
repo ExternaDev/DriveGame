@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d76b64dda79234c8a5acd7878af9cf, type: 3}
   m_Name: Countach
   m_EditorClassIdentifier: 
-  CarType: Basic
+  CarType: Countach
   Speed: 0.7
   Grip: 3.24
   Acceleration: 0.081
-  MeshObject: {fileID: 9169477548798034448, guid: 4faa8ccf7d02e9647b755c1a0e875898,
+  MeshObject: {fileID: 9169477548798034448, guid: 573a5d085de5a63489de37c55967293f,
     type: 3}

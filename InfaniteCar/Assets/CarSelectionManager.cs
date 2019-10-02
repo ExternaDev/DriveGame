@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 public class CarSelectionManager : MonoBehaviour
 {
 	public List<CarDataScriptableObject> CarTypes = new List<CarDataScriptableObject>();
 	int SelectionIndex = 0;
 	CarDataScriptableObject currentSelection;
 	public Transform CenterSpawn;
-	PlayerData playerData;
+	public PlayerData playerData;
 	public Image speedImage,gripImage,accelImage;
 	GameObject VisableMesh;
+
+    public TextMeshProUGUI Title;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +49,7 @@ public class CarSelectionManager : MonoBehaviour
     	speedImage.fillAmount = currentSelection.Speed /1f;
     	gripImage.fillAmount = currentSelection.Grip /5f;
     	accelImage.fillAmount = currentSelection.Acceleration /.1f;
-
+        Title.text = currentSelection.CarType;
     }
 
     public void Play(){

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04d76b64dda79234c8a5acd7878af9cf, type: 3}
-  m_Name: mr3
+  m_Name: Police
   m_EditorClassIdentifier: 
-  CarType: mr3
-  Speed: 0.29
-  Grip: 5
-  Acceleration: 0.01
-  MeshObject: {fileID: 5918668758015435547, guid: 96097a9ef3550a24ab9ca025af6d1f00,
+  CarType: Police
+  Speed: 0.7
+  Grip: 3.24
+  Acceleration: 0.081
+  MeshObject: {fileID: 2017271653730460869, guid: c2f66220cb39eae4bb067df2ce3e629f,
     type: 3}

@@ -30,12 +30,14 @@ public class PlayerController : MonoBehaviour
     public Tile currTile;
     public float turnAngle = 0;
 
-    
+    PlayerData playerData;
+    GameObject CarMesh;
+    public Transform CarMeshContainer;
     public void Init(){
         onComingWaypoint =TileMover.instance.Tiles[2].waypoints[0].transform;
         NextWaytotalDistance =  Mathf.Abs((onComingWaypoint.position - this.transform.position).magnitude);
         currTile = TileMover.instance.Tiles[1];
-        
+        CarMesh = Instantiate(playerData.currentSelection.MeshObject, Vector3.zero, Quaternion.identity,CarMeshContainer);
         inited = true;
 
     }
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         CS = CarStats.instance;
-
+        playerData = PlayerData.instance;
     }
 
     // Update is called once per frame

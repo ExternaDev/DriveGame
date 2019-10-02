@@ -6,7 +6,7 @@ public class BrakeLightController : MonoBehaviour
 {
     MeshRenderer rend;
 	PlayerInput input;
-
+    
     void Start(){
         input = PlayerInput.instance;
 
@@ -16,6 +16,7 @@ public class BrakeLightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(input==null)return;
         if(input.Down() && !active){
         	active=true;
         	rend.material.SetColor("_AdditionalColor", Color.white);

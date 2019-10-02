@@ -25,6 +25,7 @@ public class CarMovement : MonoBehaviour
     public Transform BackLeftTire, BackRightTire;
     GameManager GM;
     public CarDataScriptableObject CarData;
+    public PlayerData playerData;
     // Start is called before the first frame update
     void Awake(){
         instance = this;
@@ -34,7 +35,8 @@ public class CarMovement : MonoBehaviour
         GM = GameManager.instance;
 
         input = PlayerInput.instance;
-        
+        playerData = PlayerData.instance;
+        CarData = playerData.currentSelection;
     }
 
     // Update is called once per frame

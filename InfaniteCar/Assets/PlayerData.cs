@@ -8,18 +8,21 @@ public class PlayerData : MonoBehaviour
 	public CarDataScriptableObject currentSelection;
 
 	void Awake(){
-		if(instance != null){
-			DestroyImmediate(instance.gameObject);
+		// if(instance != null){
+		// 	DestroyImmediate(instance.gameObject);
 
-			instance = this;
-			DontDestroyOnLoad(this.gameObject);
-		}
-		// if(instance == null){
 		// 	instance = this;
 		// 	DontDestroyOnLoad(this.gameObject);
 		// }else{
-		// 	DestroyImmediate(this.gameObject);
+		// 	instance = this;
+			
 		// }
+		if(instance == null){
+			instance = this;
+			DontDestroyOnLoad(this.gameObject);
+		}else{
+			DestroyImmediate(this.gameObject);
+		}
 	}
    
 

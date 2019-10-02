@@ -110,7 +110,6 @@ public class AIDriver : MonoBehaviour
         float distance  = Vector3.Distance(this.transform.position, pc.transform.position);
 
         if(distance>10f){
-
             dir =RightLane() - this.transform.position;
             this.transform.LookAt(RightLane());
 
@@ -124,9 +123,6 @@ public class AIDriver : MonoBehaviour
 
             this.transform.position +=dir * tileMover.GetUnstoppableSpeed() *1.0f;
         }
-
-
-
     }
     void StandardMovement(){
         Vector3 dir= Vector3.zero;
@@ -142,8 +138,9 @@ public class AIDriver : MonoBehaviour
 
         this.transform.position +=dir *.1f;
 
-
     }
+
+    
     Vector3 RightLane(){
     	return currentWaypoint.position + (currentWaypoint.right*laneOffset);
     }
@@ -152,8 +149,7 @@ public class AIDriver : MonoBehaviour
     }
     void CheckWayPoint(){
     	float dist = Vector3.Distance(this.transform.position, currentWaypoint.position);
-    	
-    	
+
     	if( Vector3.Distance(this.transform.position, currentWaypoint.position) < waypointMinDistance){
     		MoveToNextWay();
     	}
