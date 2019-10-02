@@ -2033,6 +2033,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: mr3
       objectReference: {fileID: 0}
+    - target: {fileID: 6677848245353662492, guid: c66fde5afb428cf4baf0e031efacc9fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -7433413850658674440, guid: c66fde5afb428cf4baf0e031efacc9fd,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

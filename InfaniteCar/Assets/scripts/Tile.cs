@@ -197,7 +197,7 @@ public class Tile : MonoBehaviour
             siding=TileSiding.Ground;
         else{
 
-            if( sidings[(int)sidingType] == null )//if we cant set this tile as this type find new one
+            if(sidings[(int)sidingType] == null )//if we cant set this tile as this type find new one
                 SetSiding(NewSideing(sidingType));
             else{   
                 siding = sidingType;
@@ -209,14 +209,6 @@ public class Tile : MonoBehaviour
                             if(obj != null && obj != sidings[0])
                                 Destroy(obj);
 
-                        // sidings[0].SetActive(true);
-                        // Destroy(sidings[1]);
-                        // Destroy(sidings[2]);
-                        // if(sidings[3] != null){
-                        //     Debug.Log("Sideing length " + sidings.Length);
-                        //     Destroy(sidings[3]);
-                        // }
-
                     break;
                     case TileSiding.LeftBeach:
                          sidings[1].SetActive(true);
@@ -224,17 +216,6 @@ public class Tile : MonoBehaviour
                         foreach(GameObject obj in sidings)
                             if(obj != null && obj != sidings[1])
                                 Destroy(obj);
-
-
-                        // Destroy(sidings[0]);
-                         //sidings[1].SetActive(true);
-
-                        // Destroy(sidings[2]);
-                        // if( sidings[3] != null){
-                        //     Debug.Log("Sideing length " + sidings.Length);
-
-                        //     Destroy(sidings[3]);
-                        // }
                         Destroy(LeftBuildings);
                     break;
                     case TileSiding.RightBeach:
@@ -243,12 +224,6 @@ public class Tile : MonoBehaviour
                         foreach(GameObject obj in sidings)
                             if(obj != null && obj != sidings[3])
                                 Destroy(obj);
-
-                        // Destroy(sidings[0]);
-                        // Destroy(sidings[1]);
-                        // sidings[2].SetActive(true);
-                        // if(sidings[3] != null)
-                        //     Destroy(sidings[3]);
 
                         Destroy(RightBuildings);
 
@@ -259,11 +234,6 @@ public class Tile : MonoBehaviour
                         foreach(GameObject obj in sidings)
                             if(obj != null && obj != sidings[2])
                                 Destroy(obj);
-                        // Destroy(sidings[0]);
-                        // Destroy(sidings[1]);
-                        // Destroy(sidings[2]);
-                        
-                        // sidings[3].SetActive(true);
                         Destroy(LeftBuildings);
                         Destroy(RightBuildings);
 
