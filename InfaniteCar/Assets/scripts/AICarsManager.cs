@@ -42,6 +42,7 @@ public class AICarsManager : MonoBehaviour
         ClearCars();
     }
     void ClearPolice(){
+        if(police != null && police.gameObject!= null)
         Destroy(police.gameObject);
         policeSpawned=false;
     }
@@ -62,7 +63,7 @@ public class AICarsManager : MonoBehaviour
 	        if(Input.GetKeyUp(KeyCode.Space) ){
 	        	SpawnPC();
 	        }
-	        if (Time.time - LastSpawnTime > 2)
+	        if (Time.time - LastSpawnTime > 4)
 	        {
 	            SpawnPC();
 	            LastSpawnTime = Time.time;
@@ -70,7 +71,7 @@ public class AICarsManager : MonoBehaviour
             //if (Time.time - LastPoliceTime > 5)
             if(!policeSpawned)
             {
-                SpawnPolice();
+                //SpawnPolice();
                 policeSpawned=true;
                 LastPoliceTime = Time.time;
             }

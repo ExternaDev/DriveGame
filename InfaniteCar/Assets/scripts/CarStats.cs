@@ -55,7 +55,6 @@ public class CarStats : MonoBehaviour
         GasAmount -= Time.fixedDeltaTime;
         FuelGauge.fillAmount = GasAmount/100f;
         DamageGuage.fillAmount = DamageAmount/100f;
-        CoinsText.text = PointsCollected.ToString("00");
         FindTotalDistance();
        // Debug.Log(DamageAmount);
         ZeroGas();
@@ -94,6 +93,8 @@ public class CarStats : MonoBehaviour
     }
     public void AddCoinPints(int i){
         PointsCollected+=i;
+        CoinsText.text = PointsCollected.ToString("00");
+        
     }
     void OnGameReset(){
         TotalDistance=0;

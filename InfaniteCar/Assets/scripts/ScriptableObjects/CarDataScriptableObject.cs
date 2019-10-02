@@ -8,7 +8,7 @@ public class CarDataScriptableObject : ScriptableObject
     [Range(0.0f, 1.0f)]
     public float Speed;
 
-    [Range(1.0f, 4.0f)]
+    [Range(.5f, 5.0f)]
     public float Grip;
 
     [Range(0.01f, .1f)]

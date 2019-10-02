@@ -74,9 +74,7 @@ public class TileMover : MonoBehaviour
         CheckTilestoRemove();
         GatherInput();
 
-        if(PlayerBrakeAmount <2 && !input.Down())
-            PlayerBrakeAmount += CarDataAccel;
-
+        
         if(HitBreak<1){
             HitBreak+=Time.fixedDeltaTime;
 
@@ -91,10 +89,12 @@ public class TileMover : MonoBehaviour
     void GatherInput(){
     	baseSpeed += Time.fixedDeltaTime/ 1000f;
         
-    	if(input.Down() && PlayerBrakeAmount >.5f){
-            Debug.Log("down");
+    	if(input.Down() && PlayerBrakeAmount >.1f){
+           // Debug.Log("down");
     		PlayerBrakeAmount -=CarDataAccel*5f ;
-    	}
+    	}else if(PlayerBrakeAmount <2 && !input.Down())
+            PlayerBrakeAmount += CarDataAccel;
+
     }
     void CheckTilestoRemove(){
     	if(TilesToRemove.Count >0){
@@ -149,7 +149,7 @@ public class TileMover : MonoBehaviour
     
 
     public float GetSpeed(){
-        return (baseSpeed * PlayerBrakeAmount) * HitBreak + CarDataSpeed;
+        return (baseSpeed * PlayerBrakeAmount) * HitBreak + CarMovement.instance.CarData.Speed;
     }
     public Vector3 GetSideForce()
     {

@@ -9,10 +9,12 @@ public class CarTilting : MonoBehaviour
     float maxAngle = 35;
     float turnAngle = 0;
     GameManager GM;
+    CarDataScriptableObject data;
     void Start()
     {
         GM = GameManager.instance;
         input = PlayerInput.instance;
+        data = CarMovement.instance.CarData;
     }
 
     // Update is called once per frame
@@ -24,10 +26,9 @@ public class CarTilting : MonoBehaviour
 
 
         if(input.Right() && turnAngle < maxAngle){
-            turnAngle +=4f;
+            turnAngle +=data.Grip * Time.fixedDeltaTime * 20f;
         }else if(input.Left()&& turnAngle > -maxAngle){
-            turnAngle -=4f;
-
+            turnAngle -= data.Grip * Time.fixedDeltaTime * 20f;
         }else if(!input.Right() && !input.Left() ){
             //if not turning apply turn angle to car/camera
             turnAngle *= .9f;

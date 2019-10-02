@@ -117,16 +117,16 @@ public class TileSpawner : MonoBehaviour
 
 
 
-        if( TileTypes[rand].Tile.GetComponent<Tile>().direction == TileDirection.right && TilesSinceTurn > 2){
-            if(turns>=1){
+        if( TileTypes[rand].Tile.GetComponent<Tile>().direction == TileDirection.right  ){
+            if(turns>=1 || TilesSinceTurn < 2){
                 return FindNextTileType();
             }else{
                 TilesSinceInter ++;
                 TilesSinceTurn =0;
                 turns ++;
             }
-        }else if(TileTypes[rand].Tile.GetComponent<Tile>().direction == TileDirection.left && TilesSinceTurn > 2){
-            if(turns<=-1){
+        }else if(TileTypes[rand].Tile.GetComponent<Tile>().direction == TileDirection.left ){
+            if(turns<=-1 || TilesSinceTurn < 2){
                 return FindNextTileType();
             }else{
                 TilesSinceInter ++;
@@ -135,7 +135,7 @@ public class TileSpawner : MonoBehaviour
             }
         }
 
-        TilesSinceTurn++;
+       
 
         return TileTypes[rand].Tile;
 
