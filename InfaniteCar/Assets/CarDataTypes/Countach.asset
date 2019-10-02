@@ -18,3 +18,4 @@ MonoBehaviour:
   Acceleration: 0.081
   MeshObject: {fileID: 9169477548798034448, guid: 573a5d085de5a63489de37c55967293f,
     type: 3}
+  CarPrice: 200

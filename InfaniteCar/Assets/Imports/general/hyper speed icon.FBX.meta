@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9445220651d076f4fa4883bf94ad69ff
+guid: d50946f1eb7a4fe49b0e670982b9a8d9
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
@@ -10,8 +10,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: 'Material #1'
-    second: {fileID: 2100000, guid: 4f54ddbbd589ba545ba30a9f622828be, type: 2}
+      name: No Name
+    second: {fileID: 2100000, guid: 783ba645090b23a469b274cefe6b4485, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,7 +51,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

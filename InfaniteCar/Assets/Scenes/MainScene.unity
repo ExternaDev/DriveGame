@@ -4232,7 +4232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84667913a1069b84e82092cfa858936e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: {fileID: 11400000, guid: 50bd28c579443b248ab057810dfc11a1, type: 2}
+  currentSelection: {fileID: 11400000, guid: 53593cf93b8843247871c721e712d5a3, type: 2}
 --- !u!4 &939355788
 Transform:
   m_ObjectHideFlags: 0

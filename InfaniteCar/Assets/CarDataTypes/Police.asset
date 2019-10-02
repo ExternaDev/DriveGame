@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CarType: Police
   Speed: 0.7
-  Grip: 3.24
+  Grip: 4
   Acceleration: 0.081
   MeshObject: {fileID: 2017271653730460869, guid: c2f66220cb39eae4bb067df2ce3e629f,
     type: 3}
+  CarPrice: 750
