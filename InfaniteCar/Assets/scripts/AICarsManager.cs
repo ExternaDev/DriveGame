@@ -9,6 +9,7 @@ public class AICarsManager : MonoBehaviour
 
 	public List<AIDriver> Enemies = new List<AIDriver>();
     List<AIDriver> EnemiesToRemove = new List<AIDriver>();
+    public List<GameObject> CarPre = new List<GameObject>();
     public Transform enemyNearSpawnPoint;
 	public Transform enemyFarSpawnPoint;
 
@@ -80,6 +81,8 @@ public class AICarsManager : MonoBehaviour
         
     }
     void SpawnPC(){
+        int i = Random.Range(0,CarPre.Count);
+        othervehicle = CarPre[i];
 
     	AIDriver en = (AIDriver)Instantiate(othervehicle, Vector3.one*-50f, Quaternion.identity).GetComponent<AIDriver>();   	
     	
