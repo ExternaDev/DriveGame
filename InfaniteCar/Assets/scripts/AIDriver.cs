@@ -126,13 +126,32 @@ public class AIDriver : MonoBehaviour
     }
     void StandardMovement(){
         Vector3 dir= Vector3.zero;
+        if (!onComing)
+        {
+            dir = RightLane() - this.transform.position;
+            //this.transform.LookAt(RightLane());
 
-        if(!onComing){
-            dir =RightLane() - this.transform.position;
-            this.transform.LookAt(RightLane());
-        }else{
-            dir =LeftLane() - this.transform.position;
-            this.transform.LookAt(LeftLane());
+            _direction = (RightLane() - transform.position).normalized;
+
+            _lookRotation = Quaternion.LookRotation(_direction);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotSpeed);
+
+
+        }
+        else
+        {
+            dir = LeftLane() - this.transform.position;
+            //this.transform.LookAt(LeftLane());
+
+            _direction = (LeftLane() - transform.position).normalized;
+
+            _lookRotation = Quaternion.LookRotation(_direction);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotSpeed);
+
+
+
         }
         dir = dir.normalized;
 
