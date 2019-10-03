@@ -13,6 +13,7 @@ public class AIDriver : MonoBehaviour
 
     public Tile currentTile;
     public Transform currentWaypoint;
+    public Transform nextWaypoint;
     float turnSpeed = .5f;
     float waypointMinDistance = 4f;
     int wayIndex = 0;
@@ -22,7 +23,17 @@ public class AIDriver : MonoBehaviour
     bool police = false;
     bool inPursuit = false;
     public bool isdead = false;
-    
+    public float x;
+    public float y;
+    public float wayPointdis;
+    public float percentOfdis;
+
+    private float rotSpeed = 2;
+
+    private Quaternion _lookRotation;
+    private Vector3 _direction;
+
+
     PlayerController pc;
     GameManager GM;
     void Start(){
@@ -38,16 +49,23 @@ public class AIDriver : MonoBehaviour
 
     	currentWaypoint = currentTile.FindFirstWay(onComing);
 
-			
-		if(onComing)
+        
+
+
+        if (onComing)
 			wayIndex =currentTile.GetWaypointCount();
         transform.SetParent(currentTile.transform);
 
-		if(onComing)
-    		this.transform.position =LeftLane();
-    	else
-    		this.transform.position =RightLane();
-
+        if (onComing)
+        {
+            this.transform.position = LeftLane();
+            nextWaypoint = currentTile.waypoints[wayIndex - 1];
+        }
+        else
+        {
+            this.transform.position = RightLane();
+            nextWaypoint = currentTile.waypoints[wayIndex + 1];
+        }
     	
     }
     void OnDestroy(){
@@ -126,17 +144,36 @@ public class AIDriver : MonoBehaviour
     }
     void StandardMovement(){
         Vector3 dir= Vector3.zero;
-
-        if(!onComing){
-            dir =RightLane() - this.transform.position;
-            this.transform.LookAt(RightLane());
-        }else{
-            dir =LeftLane() - this.transform.position;
-            this.transform.LookAt(LeftLane());
+        Vector3 dir2 = Vector3.zero;
+        if (!onComing)
+        {
+            dir = RightLane() - this.transform.position;
+            dir2 = RightLane2() - this.transform.position;
+            //this.transform.LookAt(RightLane());
+            //_direction = (RightLane()  - transform.position).normalized;
+           // _lookRotation = Quaternion.LookRotation(_direction);
+           // transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotSpeed);
+        }
+        else
+        {
+            dir = LeftLane() - this.transform.position;
+            dir2 = LeftLane2() - this.transform.position;
+            //this.transform.LookAt(LeftLane());
+            //_direction = (LeftLane() - transform.position).normalized;
+           // _lookRotation = Quaternion.LookRotation(_direction);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotSpeed);
         }
         dir = dir.normalized;
+        dir2 = dir2.normalized;
 
-        this.transform.position +=dir *.1f;
+        //(currentWaypoint.position * .5f) + (currentWaypoint.position * .5f); 
+        percentOfdis = wayPointdis * .2f; 
+       Vector3 somthing = ((dir * .1f) * x) + ((dir2 * .1f) * y);
+        Debug.DrawRay(this.transform.position, somthing, Color.black, .5f);
+        this.transform.position += somthing;
+        
+       // GetNextWaypoint();
+        //this.transform.position += currentWaypoint.position * .5f;
 
     }
 
@@ -144,65 +181,153 @@ public class AIDriver : MonoBehaviour
     Vector3 RightLane(){
     	return currentWaypoint.position + (currentWaypoint.right*laneOffset);
     }
+    Vector3 RightLane2()
+    {
+        return nextWaypoint.position + (nextWaypoint.right * laneOffset);
+    }
     Vector3 LeftLane(){
     	return currentWaypoint.position - (currentWaypoint.right*laneOffset);
     }
+    Vector3 LeftLane2()
+    {
+        return nextWaypoint.position - (nextWaypoint.right * laneOffset);
+    }
     void CheckWayPoint(){
     	float dist = Vector3.Distance(this.transform.position, currentWaypoint.position);
+        if (dist <= percentOfdis)
+        {
+            if (NextWayDirection == Vector3.zero)
+            {
+                Debug.Log("no where to go");
+                y = 0;
+                x = 1;
+            }
+            else
+            { 
+            x = dist / (wayPointdis * .2f);
+            Debug.Log(x);
+            y = 1 - x;
+            }
+
+        }
 
     	if( Vector3.Distance(this.transform.position, currentWaypoint.position) < waypointMinDistance){
-    		MoveToNextWay();
-    	}
+            
+            MoveToNextWay();
+
+            NextWayDirection = getNextWaypoint();
+            
+
+            wayPointdis = Vector3.Distance(this.transform.position, currentWaypoint.position);
+        }
     }
 	Vector3 WayDirection = new Vector3(0,0,1);
-    
+    Vector3 NextWayDirection = new Vector3(0, 0, 1);
+
+    Vector3 getNextWaypoint() {
+        if (!onComing)
+        {
+            if (wayIndex + 1 < currentTile.waypoints.Count)
+            {
+                Debug.Log("yep");
+                return currentTile.waypoints[wayIndex + 1].forward;
+            }
+            else
+            {//Next tiles
+                Tile nextTile = TileMover.instance.FindTileAfter(currentTile);
+                if (nextTile == null)
+                {
+                    RemoveDriver("End of way");
+                    return Vector3.zero;
+                }
+                else
+                {
+                    return nextTile.waypoints[0].forward;
+                }
+            }
+        }
+        else
+        {
+            if (wayIndex - 1 >= 0)
+            {
+                return currentTile.waypoints[wayIndex - 1].forward;               
+            }
+            else
+            {//Next tiles
+                Tile nextTile = TileMover.instance.FindTileAfter(currentTile);
+                if (nextTile == null)
+                {
+                    RemoveDriver("End of way");
+                    return Vector3.zero;
+                }
+                else
+                {
+                    return nextTile.waypoints[nextTile.GetWaypointCount() - 1].forward;
+
+                }
+            }
+
+        }
+    }
+
+
     void MoveToNextWay(){
     	Debug.Log("Find next waypoint");
-    	if(!onComing){
-		    	if(wayIndex + 1 < currentTile.waypoints.Count){
-		    		wayIndex++;
-		    		WayDirection = currentWaypoint.forward;
-		    		currentWaypoint = currentTile.waypoints[wayIndex];
-                   
-		    	}else{//Next tiles
-		    		wayIndex =0;
-		    	 	currentTile = TileMover.instance.FindTileAfter(currentTile);
+        if (!onComing)
+        {
+            if (wayIndex + 1 < currentTile.waypoints.Count)
+            {
+                wayIndex++;                
+                WayDirection = currentWaypoint.forward;
+                currentWaypoint = currentTile.waypoints[wayIndex];
+            }
+            else
+            {//Next tiles
+                wayIndex = 0;
+                currentTile = TileMover.instance.FindTileAfter(currentTile);
 
-                    if (currentTile == null)
-                    {
-                        RemoveDriver("End of way");
-                    }
-                    else
-                    {
-                        WayDirection = currentWaypoint.forward;
-                        currentWaypoint = currentTile.waypoints[wayIndex];
-                        transform.SetParent(currentTile.transform);
+                if (currentTile == null)
+                {
+                    RemoveDriver("End of way");
+                }
+                else
+                {
+                    WayDirection = currentWaypoint.forward;
+                    currentWaypoint = currentTile.waypoints[wayIndex];
+                    nextWaypoint = currentTile.waypoints[wayIndex + 1];
+                    transform.SetParent(currentTile.transform);
+                }
+            }
 
-                    }
-		    	 }
-	    	
-	    }else{
-	    	if(wayIndex-1 >=0){
-	    		wayIndex--;
-		    	WayDirection =-currentWaypoint.forward;
+        }
+        else
+        {
+            if (wayIndex - 1 >= 0)
+            {
+                wayIndex--;                
+                WayDirection = -currentWaypoint.forward;
+                currentWaypoint = currentTile.waypoints[wayIndex];
 
-	    		currentWaypoint = currentTile.waypoints[wayIndex];
-	    	}else{//Next tiles
-	    	 	currentTile = TileMover.instance.FindTileBefore(currentTile);
-	    		
-	    	 	if(currentTile == null){
-	    	 		RemoveDriver("End of way");
-	    	 	}else{
-	    			wayIndex =currentTile.GetWaypointCount()-1;
-		    		WayDirection = -currentWaypoint.forward;
+            }
+            else
+            {//Next tiles
+                currentTile = TileMover.instance.FindTileBefore(currentTile);
 
-	    	 		currentWaypoint = currentTile.waypoints[wayIndex];
+                if (currentTile == null)
+                {
+                    RemoveDriver("End of way");
+                }
+                else
+                {
+                    wayIndex = currentTile.GetWaypointCount() - 1;
+                    WayDirection = -currentWaypoint.forward;
+                    currentWaypoint = currentTile.waypoints[wayIndex];                   
                     transform.SetParent(currentTile.transform);
 
-	    	 	}
-	    	 }
+                }
+            }
 
-	    }
+        }
     }
     public void RemoveDriver(string info){
     	//Debug.Log("End of track");
