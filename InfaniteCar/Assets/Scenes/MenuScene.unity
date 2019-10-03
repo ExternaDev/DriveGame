@@ -772,6 +772,7 @@ MonoBehaviour:
   playerUnlocks:
     Cars: 00
     Coins: 0
+    Distance: []
   playerUpgrades:
     CarUpgrades: []
   OverriteSaveOnLoad: 0

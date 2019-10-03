@@ -5,35 +5,28 @@ using UnityEngine;
 public class RocketsManager : MonoBehaviour
 {
     public GameObject rocketPrefab;
-    PlayerInput input;
+    //PlayerInput input;
     List<RocketController> rockets = new List<RocketController>();
     List<RocketController> rocketsToRemove = new List<RocketController>();
     public float currentSpeed = .01f;
     public Transform barrel;
     public float thrust = 50;
     public float NumOfRockets = 20;
-    public bool canShootRocket;
+   // public bool canShootRocket;
     //public bool startboll = false;
    // public Enemy enemyToAttack ;
-    private Vector3 enemyToKill;
-    public Vector3 enemyPos;
+    //private Vector3 enemyToKill;
+    //public Vector3 enemyPos;
 
 
      public List<AIDriver> InRange = new List<AIDriver>();
     public List<AIDriver> OutOfRange = new List<AIDriver>();
     
-    void Start()
-    {
-        input = PlayerInput.instance;
-        
-
-    }
+    
 
     void FixedUpdate()
     {
-        //Debug.Log(rocketsToRemove.Count);
-        //FindClosest();
-        //CreateRockets();
+
         //create rockets when active
         
         //update rockets , check to see if rockets need to be destroyed
@@ -45,34 +38,26 @@ public class RocketsManager : MonoBehaviour
         UpdateRangeRemoval();
     }
 
-    // private void CreateRockets()
-    // {
-    //     if (input.ActionAlt() && canShootRocket )
-    //     {
-    //         if (TargetingArea.instance.InRange.Count > 0)
-    //         {
 
-
-    //             AddRocket();
-    //             canShootRocket = false;
-    //         }
-    //     }
-    // }
     public void Shoot(){
-        if(canShootRocket && ValidTargetsInRange() )
+        if(ValidTargetsInRange() )
         {
             AddRocket();
-            canShootRocket = false;
-            
         }
+    }
+    public bool AttemptShoot(){
+        if(ValidTargetsInRange() )
+        {
+            AddRocket();
+            return true;
+        }
+        return false;
     }
     bool ValidTargetsInRange(){
         return InRange.Count > 0;
     }
-    private void FindClosest()
-    {
+    
 
-    }
     void UpdateRockets()
     {
         foreach (RocketController obj in rockets)
@@ -105,6 +90,7 @@ public class RocketsManager : MonoBehaviour
 
     private void AddRocket()
     {
+        Debug.Log("Shooting rockets confirmed");
         for (int i = 0; i < NumOfRockets; i++)
         {
             RocketController rocket = Instantiate(rocketPrefab, barrel.position, barrel.rotation, null).GetComponent<RocketController>();

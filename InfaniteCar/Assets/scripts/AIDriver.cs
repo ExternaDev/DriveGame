@@ -155,13 +155,15 @@ public class AIDriver : MonoBehaviour
     	}
     }
 	Vector3 WayDirection = new Vector3(0,0,1);
+    
     void MoveToNextWay(){
     	Debug.Log("Find next waypoint");
     	if(!onComing){
-		    	if(wayIndex+1 < currentTile.waypoints.Count){
+		    	if(wayIndex + 1 < currentTile.waypoints.Count){
 		    		wayIndex++;
 		    		WayDirection = currentWaypoint.forward;
 		    		currentWaypoint = currentTile.waypoints[wayIndex];
+                   
 		    	}else{//Next tiles
 		    		wayIndex =0;
 		    	 	currentTile = TileMover.instance.FindTileAfter(currentTile);
@@ -182,7 +184,7 @@ public class AIDriver : MonoBehaviour
 	    }else{
 	    	if(wayIndex-1 >=0){
 	    		wayIndex--;
-		    	WayDirection = -currentWaypoint.forward;
+		    	WayDirection =-currentWaypoint.forward;
 
 	    		currentWaypoint = currentTile.waypoints[wayIndex];
 	    	}else{//Next tiles

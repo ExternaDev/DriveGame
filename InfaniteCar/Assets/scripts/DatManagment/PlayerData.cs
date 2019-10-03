@@ -42,6 +42,11 @@ public class PlayerData : MonoBehaviour
 
 			playerUnlocks = new PlayerUnlocks();
 			playerUnlocks.Coins = 10000;
+
+			playerUnlocks.Distance.Add(0);
+			playerUnlocks.Distance.Add(0);
+			playerUnlocks.Distance.Add(0);
+
 			playerUnlocks.Cars.Add(true);
 
 			for(int i = 0 ; i<6;i++)
@@ -53,7 +58,7 @@ public class PlayerData : MonoBehaviour
    	void FindUpgrades(){
    		string data = "";
    		
-		if (System.IO.File.Exists(UpgradePath) )
+		if (System.IO.File.Exists(UpgradePath)  && !OverriteSaveOnLoad)
 		{
 			//Debug.Log("File exists");
    			data = ReadData(UpgradePath);
@@ -74,12 +79,20 @@ public class PlayerData : MonoBehaviour
 
 		}
    	}
+   	public bool CheckDistance(float distance, int track){
+		if(distance > playerUnlocks.Distance[track]){
+			playerUnlocks.Distance[track] =distance;
+			return true;
+		}
+		return false;
+   	}
    	public void SavePlayerUnlocks(Action callBack = null){
 		SaveData(UnlocksPath, JsonUtility.ToJson(playerUnlocks));
 		if(callBack !=null)
 			callBack();
    	}
    	public void AddToCoins(int amount,Action callBack = null){
+
    		playerUnlocks.Coins += amount;
    		SaveData(UnlocksPath, JsonUtility.ToJson(playerUnlocks));
 		if(callBack !=null)
@@ -114,6 +127,9 @@ public class PlayerData : MonoBehaviour
 public class PlayerUnlocks{
 	public List<bool> Cars = new List<bool>(){};
 	public int Coins;
+	public List<float> Distance = new List<float>(){};
+
+
 }
 [Serializable]
 public class PlayerUpgrades{
