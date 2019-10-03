@@ -211,14 +211,14 @@ public class AIDriver : MonoBehaviour
         {
             if (NextWayDirection == Vector3.zero || nextWaypoint == null)
             {
-                Debug.Log("no where to go");
+             //   Debug.Log("no where to go");
                 y = 0;
                 x = 1;
             }
             else
             { 
                 x = dist / (wayPointdis * .2f);
-                Debug.Log(x);
+//                Debug.Log(x);
                 y = 1 - x;
             }
 
@@ -242,7 +242,7 @@ public class AIDriver : MonoBehaviour
         {
             if (wayIndex + 1 < currentTile.waypoints.Count)
             {
-                Debug.Log("yep");
+//                Debug.Log("yep");
                 return currentTile.waypoints[wayIndex + 1].forward;
             }
             else
@@ -287,7 +287,7 @@ public class AIDriver : MonoBehaviour
         {
             if (wayIndex + 1 < currentTile.waypoints.Count)
             {
-                Debug.Log("yep");
+                //Debug.Log("yep");
                 return currentTile.waypoints[wayIndex + 1];
             }
             else

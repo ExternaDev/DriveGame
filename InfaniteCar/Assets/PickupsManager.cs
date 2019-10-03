@@ -54,16 +54,13 @@ public class PickupsManager : MonoBehaviour
     {
 
 
-        if(shieldSpawnTime != 0 && Time.time-shieldSpawnTime > shieldDuration)
-        	usingShield=true;
-        else
-        	usingShield=false;
+        if(usingShield && Time.time-shieldSpawnTime > shieldDuration)
+        	usingShield = false;
+
 		ShieldRenderer.enabled = usingShield;
 
 
-		if(speedSpawnTime != 0 && Time.time-speedSpawnTime > speedDuration)
-        	usingSpeed=true;
-        else
+		if(usingSpeed && Time.time-speedSpawnTime > speedDuration)
         	usingSpeed=false;
 		SpeedRenderer.enabled = usingSpeed;
 
@@ -73,13 +70,13 @@ public class PickupsManager : MonoBehaviour
 		}
     }
     void UseCurrentPickup(){
-    	//Debug.Log("Attempt use pickup");
+    	Debug.Log("Attempt use pickup");
     	if(hasRockets)
            SpawnRocketsButton();
         else if(hasOil)
           SpawnOilButton();
         else if(hasBomb)
-         	SpawnOilButton();
+         	SpawnBombButton();
         else if(hasSpeed)
         	SpawnSpeedButton();
         else if(hasShield)	
@@ -149,18 +146,20 @@ public class PickupsManager : MonoBehaviour
     	}
     }
     public void SpawnSpeedButton(){
-    //	Debug.Log("use speed");
 
     	if(hasSpeed){
+        Debug.Log("use speed");
+
     		hasSpeed = false;
     		usingSpeed = true;
 			speedSpawnTime = Time.time;
     	}
     }
     public void SpawnShieldButton(){
-    	//Debug.Log("use oil");
 
     	if(hasShield){
+        Debug.Log("use shield");
+
     		hasShield = false;
     		usingShield = true;
 			shieldSpawnTime = Time.time;

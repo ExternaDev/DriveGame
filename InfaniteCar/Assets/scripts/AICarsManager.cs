@@ -103,7 +103,7 @@ public class AICarsManager : MonoBehaviour
             //destroys all bullets that are in the bullets to remove list 
             foreach (AIDriver obj in EnemiesToRemove)
             {
-        Debug.Log("Remove and destroy Driver");
+        //Debug.Log("Remove and destroy Driver");
 
                 Enemies.Remove(obj);
                 Destroy(obj.gameObject);
@@ -114,8 +114,8 @@ public class AICarsManager : MonoBehaviour
     }
     public void RemoveDriver(AIDriver driver,string s = null)
     {
-        if(s != null)
-            Debug.Log(s);
+       // if(s != null)
+//            Debug.Log(s);
         if(Enemies.Contains(driver) && !EnemiesToRemove.Contains(driver))
         EnemiesToRemove.Add(driver);
 //        Debug.Log(driver);

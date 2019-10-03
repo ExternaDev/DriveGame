@@ -141,11 +141,9 @@ public class Tile : MonoBehaviour
 
         MoveAmount = transform.position - MoveAmount;//find offest amount
         if(sidings[0] != null)
-        SelectTileSideType(tile);
-       // AdjustCars(MoveAmount);
+            SelectTileSideType(tile);
 
-
-        //if not alst tile then RECURSION
+        //if not last tile then RECURSION
          if(TileMover.instance.LastTile() != this){
             
             //TileMover.instance.FindTileBefore(this).gameObject.name =" Align this one";
@@ -179,7 +177,7 @@ public class Tile : MonoBehaviour
         }
 
         TileSiding newSide  = (TileSiding)value;
-        Debug.Log("new siding value of " + value);
+//        Debug.Log("new siding value of " + value);
         if(newSide == currentSiding  || sidings[value] == null )
             return NewSideing(currentSiding); //try again
         else 

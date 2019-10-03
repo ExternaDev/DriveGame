@@ -25,11 +25,9 @@ public class TileMover : MonoBehaviour
     PlayerInput input;
 
 
-	//float Acceleration = .005f;
-	//float BrakePower = .03f;
-	//float turnAmount = .15f;
+
 	public float PlayerBrakeAmount = 1;
-	//float PlayerBrakeAmountDecay = .01f;
+
 
 
     float CarDataSpeed =0;
@@ -54,14 +52,17 @@ public class TileMover : MonoBehaviour
         PC = PlayerController.instance;
         input = PlayerInput.instance;
         playerData = PlayerData.instance;
-        CarDataSpeed = playerData.currentSelection.Speed; 
+        //CarDataSpeed = playerData.currentSelection.Speed; 
         CarDataAccel = playerData.currentSelection.Acceleration; 
     }
     void OnGameReset(){
         baseSpeed = InitialBaseSpeed;
+        RealignPlayer();
     }
     void OnResumeAftervideo(){
        // baseSpeed = InitialBaseSpeed;
+        RealignPlayer();
+
     }
 
 
@@ -150,7 +151,7 @@ public class TileMover : MonoBehaviour
     
 
     public float GetSpeed(){
-        return (baseSpeed * PlayerBrakeAmount) * HitBreak + CarDataSpeed;
+        return (baseSpeed * PlayerBrakeAmount) * HitBreak + PC.GetCurrentSpeed();
     }
     public Vector3 GetSideForce()
     {
@@ -161,7 +162,13 @@ public class TileMover : MonoBehaviour
         return (baseSpeed*2f);
     }
 
-
+    void RealignPlayer(){
+        Vector3 offset =PC.transform.position - PC.onComingWaypoint.position;
+        foreach(Tile obj in Tiles){
+            obj.transform.position += offset;
+           // transform.RotateAround (Vector3.zero, new Vector3 (0, 1, 0), 90);
+        }
+    }
     public void PlayerHitCar(){
         HitBreak=0;
     }

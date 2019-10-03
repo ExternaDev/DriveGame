@@ -63,6 +63,13 @@ public class PlayerController : MonoBehaviour
     public bool IsStarted(){
         return inited;
     }
+    public float GetCurrentSpeed(){
+        if(pickups.usingSpeed)
+          return  playerData.currentSelection.Speed*1.5f;
+        else
+          return  playerData.currentSelection.Speed;
+
+    }
     public void SetTurnAngle(float t,float total){
         turnAngle = Mathf.Clamp(t/total, -1,1);
     }

@@ -31,10 +31,10 @@ public class FrontBumper : MonoBehaviour
     {
         if (Front)
         {
-            Debug.Log("fuck i hit a building F");
+//            Debug.Log("fuck i hit a building F");
             if (col.gameObject.tag == "Building")
             {
-              Debug.Log("front");
+            //  Debug.Log("front");
 
                 
                     PC.TakeDamage(1000);
@@ -44,7 +44,7 @@ public class FrontBumper : MonoBehaviour
             {
                 // bump the car to the right
                 tilemover.BumpRight();
-                Debug.Log("left");
+              //  Debug.Log("left");
                
                     PC.TakeDamage(10);
             }  
@@ -55,13 +55,13 @@ public class FrontBumper : MonoBehaviour
                 tilemover.BumpLeft();
                 //bump the car to the left
 
-                Debug.Log("right");
+                //Debug.Log("right");
                
                     PC.TakeDamage(10);
             }
         }
         else{
-         Debug.Log("I dont know what i just hit");
+        // Debug.Log("I dont know what i just hit");
 
         }
         

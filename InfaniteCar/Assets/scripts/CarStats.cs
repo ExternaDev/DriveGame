@@ -127,7 +127,7 @@ public class CarStats : MonoBehaviour
         DamageAmount=0;
         PointsCollected=0;
 
-
+        this.transform.rotation = Quaternion.identity;
 
         CoinsText.text = PointsCollected.ToString("00");
 
@@ -135,6 +135,8 @@ public class CarStats : MonoBehaviour
     void OnResumeAftervideo(){
         GasAmount =100;
         DamageAmount=0;
+        this.transform.rotation = Quaternion.identity;
+        
     }
     
     void FindTotalDistance(){
