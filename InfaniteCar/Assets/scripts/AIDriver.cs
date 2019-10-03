@@ -23,8 +23,8 @@ public class AIDriver : MonoBehaviour
     bool police = false;
     bool inPursuit = false;
     public bool isdead = false;
-    public float x;
-    public float y;
+    private float x ;
+    private float y ;
     public float wayPointdis;
     public float percentOfdis;
 
@@ -167,13 +167,24 @@ public class AIDriver : MonoBehaviour
         dir2 = dir2.normalized;
 
         //(currentWaypoint.position * .5f) + (currentWaypoint.position * .5f); 
-        percentOfdis = wayPointdis * .2f; 
-       Vector3 somthing = ((dir * .1f) * x) + ((dir2 * .1f) * y);
-        Debug.DrawRay(this.transform.position, somthing, Color.black, .5f);
-        this.transform.position += somthing;
+        percentOfdis = wayPointdis * .2f;
+        if (percentOfdis <= .2f)
+        {
+            Vector3 somthing = ((dir * .1f) * x) + ((dir2 * .1f) * y);
+            Debug.DrawRay(this.transform.position, somthing, Color.black, .5f);
+            this.transform.position += somthing;
+        }
+        else
+
+        {
+            this.transform.position += dir * .5f;
+
+        }
+
+
         
        // GetNextWaypoint();
-        //this.transform.position += currentWaypoint.position * .5f;
+        
 
     }
 
