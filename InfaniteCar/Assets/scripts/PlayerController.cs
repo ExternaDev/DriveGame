@@ -5,9 +5,8 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     CarStats CS;
-    public BombSpawner bSpawner;
-    public OilSlick oil;
-    public RocketsManager sRockets;
+    //public BombSpawner bSpawner;
+    //public OilSlick oil;
 
     public static PlayerController instance;
     public Vector3 playerForward = new Vector3(0,0,1);
@@ -33,6 +32,9 @@ public class PlayerController : MonoBehaviour
     PlayerData playerData;
     GameObject CarMesh;
     public Transform CarMeshContainer;
+
+
+    public PickupsManager pickups;
     public void Init(){
         onComingWaypoint =TileMover.instance.Tiles[2].waypoints[0].transform;
         NextWaytotalDistance =  Mathf.Abs((onComingWaypoint.position - this.transform.position).magnitude);
@@ -44,7 +46,6 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         instance = this;
-        GetPowerUps();
     }
     private void Start()
     {
@@ -75,20 +76,20 @@ public class PlayerController : MonoBehaviour
        if(OnTileChange!=null)
             OnTileChange();
     }
-    public void GetPowerUps()
-    {
-        bSpawner = GetComponent<BombSpawner>();
-        oil = GetComponent<OilSlick>();
-        sRockets = GetComponent<RocketsManager>();
-        
-
-    }
+    
     public void HitOtherCar(){
       
         TakeDamage(50);
     }
     public void TakeDamage(int amount){
+        if (!pickups.usingShield)
         this.GetComponent<CarStats>().TakeDamage(amount);
+
+    }
+    
+    public void CollectedPickUp(PickupType type){
+        pickups.CollectedPickUp(type);
+
 
     }
     // void OnCollisionEnter(Collision col)

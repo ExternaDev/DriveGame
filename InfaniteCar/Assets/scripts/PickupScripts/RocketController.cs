@@ -10,21 +10,18 @@ public class RocketController : MonoBehaviour
 
     public bool markedForExplode = false;
     public bool boostTime = false;
-    //public bool rocketBounce = false;
-    //public bool noMoreSpeed = false;
+  
 
-    // Quaternion enemyPos;
-    //Quaternion prevPos;
-    //Transform enemyyyy;
     Quaternion lookOnLook = Quaternion.identity;
 
-    //public shootRockets rocketsShoot;
+ 
+
 
     public float thrust;
     public float boost = 100;
     public float forwardThrust = 10;
     public float upThrust;
-    //public float speed = 1f;
+    
     public float turnSpeed = .1f;
 
 
