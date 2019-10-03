@@ -49,8 +49,6 @@ public class AIDriver : MonoBehaviour
 
     	currentWaypoint = currentTile.FindFirstWay(onComing);
 
-        
-
 
         if (onComing)
 			wayIndex =currentTile.GetWaypointCount();
@@ -145,9 +143,12 @@ public class AIDriver : MonoBehaviour
     void StandardMovement(){
         Vector3 dir= Vector3.zero;
         Vector3 dir2 = Vector3.zero;
+
+
         if (!onComing)
         {
             dir = RightLane() - this.transform.position;
+            if(nextWaypoint != null)
             dir2 = RightLane2() - this.transform.position;
             //this.transform.LookAt(RightLane());
             //_direction = (RightLane()  - transform.position).normalized;
@@ -157,6 +158,7 @@ public class AIDriver : MonoBehaviour
         else
         {
             dir = LeftLane() - this.transform.position;
+            if(nextWaypoint != null)
             dir2 = LeftLane2() - this.transform.position;
             //this.transform.LookAt(LeftLane());
             //_direction = (LeftLane() - transform.position).normalized;
@@ -164,18 +166,18 @@ public class AIDriver : MonoBehaviour
             //transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotSpeed);
         }
         dir = dir.normalized;
-        dir2 = dir2.normalized;
+        if(nextWaypoint != null)
+            dir2 = NextWayDirection.normalized;
 
-        //(currentWaypoint.position * .5f) + (currentWaypoint.position * .5f); 
+
         percentOfdis = wayPointdis * .2f;
-        if (percentOfdis <= .2f)
+        if (percentOfdis <= .2f && nextWaypoint != null)
         {
             Vector3 somthing = ((dir * .1f) * x) + ((dir2 * .1f) * y);
-            Debug.DrawRay(this.transform.position, somthing, Color.black, .5f);
+            Debug.DrawRay(this.transform.position, somthing, Color.red, .5f);
             this.transform.position += somthing;
         }
         else
-
         {
             this.transform.position += dir * .5f;
 
@@ -207,7 +209,7 @@ public class AIDriver : MonoBehaviour
     	float dist = Vector3.Distance(this.transform.position, currentWaypoint.position);
         if (dist <= percentOfdis)
         {
-            if (NextWayDirection == Vector3.zero)
+            if (NextWayDirection == Vector3.zero || nextWaypoint == null)
             {
                 Debug.Log("no where to go");
                 y = 0;
@@ -215,9 +217,9 @@ public class AIDriver : MonoBehaviour
             }
             else
             { 
-            x = dist / (wayPointdis * .2f);
-            Debug.Log(x);
-            y = 1 - x;
+                x = dist / (wayPointdis * .2f);
+                Debug.Log(x);
+                y = 1 - x;
             }
 
         }
@@ -226,8 +228,8 @@ public class AIDriver : MonoBehaviour
             
             MoveToNextWay();
 
-            NextWayDirection = getNextWaypoint();
-            
+            NextWayDirection = getNextWaypointDirection();
+            nextWaypoint = getNextWaypoint();
 
             wayPointdis = Vector3.Distance(this.transform.position, currentWaypoint.position);
         }
@@ -235,7 +237,7 @@ public class AIDriver : MonoBehaviour
 	Vector3 WayDirection = new Vector3(0,0,1);
     Vector3 NextWayDirection = new Vector3(0, 0, 1);
 
-    Vector3 getNextWaypoint() {
+    Vector3 getNextWaypointDirection() {
         if (!onComing)
         {
             if (wayIndex + 1 < currentTile.waypoints.Count)
@@ -280,7 +282,51 @@ public class AIDriver : MonoBehaviour
 
         }
     }
+    Transform getNextWaypoint() {
+        if (!onComing)
+        {
+            if (wayIndex + 1 < currentTile.waypoints.Count)
+            {
+                Debug.Log("yep");
+                return currentTile.waypoints[wayIndex + 1];
+            }
+            else
+            {//Next tiles
+                Tile nextTile = TileMover.instance.FindTileAfter(currentTile);
+                if (nextTile == null)
+                {
+                    RemoveDriver("End of way");
+                    return null;
+                }
+                else
+                {
+                    return nextTile.waypoints[0];
+                }
+            }
+        }
+        else
+        {
+            if (wayIndex - 1 >= 0)
+            {
+                return currentTile.waypoints[wayIndex - 1];               
+            }
+            else
+            {//Next tiles
+                Tile nextTile = TileMover.instance.FindTileAfter(currentTile);
+                if (nextTile == null)
+                {
+                    RemoveDriver("End of way");
+                    return null;
+                }
+                else
+                {
+                    return nextTile.waypoints[nextTile.GetWaypointCount() - 1];
 
+                }
+            }
+
+        }
+    }
 
     void MoveToNextWay(){
     	Debug.Log("Find next waypoint");
@@ -305,7 +351,6 @@ public class AIDriver : MonoBehaviour
                 {
                     WayDirection = currentWaypoint.forward;
                     currentWaypoint = currentTile.waypoints[wayIndex];
-                    nextWaypoint = currentTile.waypoints[wayIndex + 1];
                     transform.SetParent(currentTile.transform);
                 }
             }
