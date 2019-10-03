@@ -979,7 +979,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1136172350}
+      - m_Target: {fileID: 0}
         m_MethodName: Shoot
         m_Mode: 1
         m_Arguments:
@@ -2778,6 +2778,7 @@ Transform:
   - {fileID: 1814872639}
   - {fileID: 1240219333}
   - {fileID: 1014229353}
+  - {fileID: 2007515671}
   m_Father: {fileID: 1136172345}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4078,7 +4079,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1136172347}
+      - m_Target: {fileID: 0}
         m_MethodName: Shoot
         m_Mode: 1
         m_Arguments:
@@ -4232,7 +4233,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84667913a1069b84e82092cfa858936e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSelection: {fileID: 11400000, guid: 50bd28c579443b248ab057810dfc11a1, type: 2}
+  currentSelection: {fileID: 11400000, guid: 53593cf93b8843247871c721e712d5a3, type: 2}
+  playerUnlocks:
+    Cars: 
+    Coins: 0
+    Distance: []
+  playerUpgrades:
+    CarUpgrades: []
+  OverriteSaveOnLoad: 0
 --- !u!4 &939355788
 Transform:
   m_ObjectHideFlags: 0
@@ -5674,12 +5682,11 @@ GameObject:
   - component: {fileID: 1136172346}
   - component: {fileID: 1136172343}
   - component: {fileID: 1136172342}
-  - component: {fileID: 1136172347}
   - component: {fileID: 1136172349}
-  - component: {fileID: 1136172350}
   - component: {fileID: 1136172344}
   - component: {fileID: 1136172348}
   - component: {fileID: 1136172351}
+  - component: {fileID: 1136172347}
   m_Layer: 13
   m_Name: CarObject
   m_TagString: Player
@@ -5715,9 +5722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9304572b9437fca49bc69573cae926f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bSpawner: {fileID: 0}
-  oil: {fileID: 0}
-  sRockets: {fileID: 0}
   playerForward: {x: 0, y: 0, z: 1}
   playerRight: {x: 0, y: 0, z: 1}
   onComingWaypoint: {fileID: 0}
@@ -5725,6 +5729,7 @@ MonoBehaviour:
   currTile: {fileID: 0}
   turnAngle: 0
   CarMeshContainer: {fileID: 2138831301}
+  pickups: {fileID: 1136172347}
 --- !u!114 &1136172344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5743,8 +5748,6 @@ MonoBehaviour:
   barrel: {fileID: 754111681}
   thrust: 50
   NumOfRockets: 20
-  canShootRocket: 0
-  enemyPos: {x: 0, y: 0, z: 0}
   InRange: []
   OutOfRange: []
 --- !u!4 &1136172345
@@ -5786,12 +5789,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1136172341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63afae1b0b5ce714a87b88ca757b8fcd, type: 3}
+  m_Script: {fileID: 11500000, guid: 74f37bad69703af46b198d5c60e6c11f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bomb: {fileID: 1922157251715978353, guid: a22641fef04b16c44baa069c6b157eac, type: 3}
-  ass: {fileID: 1827258883}
+  RearSpawnPoint: {fileID: 1827258883}
+  FrontSpawnPoint: {fileID: 754111681}
+  hasOil: 0
+  hasRockets: 0
   hasBomb: 0
+  hasSpeed: 0
+  hasShield: 0
+  usingSpeed: 0
+  usingShield: 0
+  oilPrefab: {fileID: 203808304566106179, guid: 67f85998aef5500488e19da079c788ca,
+    type: 3}
+  bombPrefab: {fileID: 1922157251715978353, guid: a22641fef04b16c44baa069c6b157eac,
+    type: 3}
+  ShieldRenderer: {fileID: 1814872642}
+  SpeedRenderer: {fileID: 2007515673}
+  rockets: {fileID: 1136172344}
 --- !u!114 &1136172348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5825,26 +5841,11 @@ MonoBehaviour:
   TotalDistance: 0
   DistanceText: {fileID: 1245918781}
   CoinsText: {fileID: 1003350981}
-  hasShield: 0
   FuelGauge: {fileID: 369015013}
   DamageGuage: {fileID: 1635240936}
+  DistanceGauge: {fileID: 444013354}
   PointsCollected: 0
-  DebugInvinsable: 1
---- !u!114 &1136172350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1136172341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee674ed7c6252547821b886c490336f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  oil: {fileID: 203808304566106179, guid: 67f85998aef5500488e19da079c788ca, type: 3}
-  ass: {fileID: 1827258883}
-  hasOil: 0
+  DebugInvinsable: 0
 --- !u!114 &1136172351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5852,7 +5853,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136172341}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6cc13358e5f6c448b2b2c1ab16d3fe4, type: 3}
   m_Name: 
@@ -7838,6 +7839,105 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760622, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 020965223ca3a8d46b7dfc68c568eee8, type: 3}
+--- !u!1001 &1781202112
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 637189810}
+    m_Modifications:
+    - target: {fileID: 7563820260259760623, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_Name
+      value: SpeedShield
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760623, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.012
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.548
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563820260259760622, guid: 020965223ca3a8d46b7dfc68c568eee8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 020965223ca3a8d46b7dfc68c568eee8, type: 3}
 --- !u!1 &1787452042
@@ -7917,33 +8017,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787452042}
   m_CullTransparentMesh: 0
---- !u!1 &1814872638 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7563820260259760623, guid: 020965223ca3a8d46b7dfc68c568eee8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1718902124}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1814872639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
     type: 3}
   m_PrefabInstance: {fileID: 1718902124}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1814872640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814872638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35e32c256d387c347be0178ab3f03da9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rend: {fileID: 1814872642}
-  timer: 10
-  hasShield: 1
 --- !u!23 &1814872642 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7563820260259760621, guid: 020965223ca3a8d46b7dfc68c568eee8,
@@ -8351,6 +8430,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1919711221
@@ -8662,6 +8752,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a470a6c3d7405f40bc743512e7b8368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2007515671 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7563820260259760531, guid: 020965223ca3a8d46b7dfc68c568eee8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1781202112}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2007515673 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7563820260259760621, guid: 020965223ca3a8d46b7dfc68c568eee8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1781202112}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2010966874
 GameObject:
   m_ObjectHideFlags: 0

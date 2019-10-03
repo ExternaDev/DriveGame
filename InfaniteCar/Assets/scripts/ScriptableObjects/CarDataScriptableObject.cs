@@ -16,4 +16,7 @@ public class CarDataScriptableObject : ScriptableObject
 
     public GameObject MeshObject;
 
+   // [Range(100f, 2000f)]
+    public int CarPrice;
+
 }

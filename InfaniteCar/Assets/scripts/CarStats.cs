@@ -24,16 +24,16 @@ public class CarStats : MonoBehaviour
     public TextMeshProUGUI DistanceText;
     public TextMeshProUGUI CoinsText;
 
-    public bool hasShield = false;
+   // public bool hasShield = false;
 
 
 
-    public Image FuelGauge, DamageGuage;
+    public Image FuelGauge, DamageGuage,DistanceGauge;
     GameManager GM;
    
     public int PointsCollected = 0;
     public bool DebugInvinsable =false;
-
+    PlayerData playerData;
    // public Event PlayerDied;
     void Awake(){
         instance = this;
@@ -46,6 +46,7 @@ public class CarStats : MonoBehaviour
         
     }
     void Start(){
+        playerData =PlayerData.instance;
     	  GM = GameManager.instance;
        
     }
@@ -56,11 +57,22 @@ public class CarStats : MonoBehaviour
         FuelGauge.fillAmount = GasAmount/100f;
         DamageGuage.fillAmount = DamageAmount/100f;
         FindTotalDistance();
-       // Debug.Log(DamageAmount);
+        UpdateDistanceGauge();
         ZeroGas();
 
     }
-    
+    void UpdateDistanceGauge(){
+        if(playerData.playerUnlocks.Distance[0] != 0 && TotalDistance < playerData.playerUnlocks.Distance[0]){
+            DistanceGauge.fillAmount = TotalDistance/playerData.playerUnlocks.Distance[0];
+        }else{
+
+
+            for(float i = playerData.playerUnlocks.Distance[0];i <=TotalDistance;i+=500){
+                DistanceGauge.fillAmount = TotalDistance/ (i+500);
+                //Debug.Log(i+"  " +playerData.playerUnlocks.Distance[0]+ "  "+  TotalDistance +"  " + TotalDistance/( i+500));
+            }
+        }
+    }
     public void FillGas(){
     	GasAmount=100;
     }
@@ -71,10 +83,10 @@ public class CarStats : MonoBehaviour
     {
         if(DebugInvinsable) return;
         Debug.Log("Player took " + amount  + " damage");
-        if (!hasShield ){ 
-            DamageAmount += amount;
+        
+        DamageAmount += amount;
             if (DamageAmount >= 100) PlayerDiedFromDamage();
-        }
+        
     }
     public void PlayerDiedFromDamage(){
     	Debug.Log("<color=red>Player died from damage </color>");
@@ -96,7 +108,17 @@ public class CarStats : MonoBehaviour
         CoinsText.text = PointsCollected.ToString("00");
         
     }
+    public void SaveGameData(){
+        PlayerData.instance.AddToCoins(PointsCollected);
+    }
     void OnGameReset(){
+       
+
+        bool save = PlayerData.instance.CheckDistance(TotalDistance,0);
+        if(PointsCollected >0 || save)
+            SaveGameData();
+
+
         TotalDistance=0;
         SmallTileCompleted=0;
         LargeTileCompleted=0;
@@ -104,6 +126,11 @@ public class CarStats : MonoBehaviour
         GasAmount =100;
         DamageAmount=0;
         PointsCollected=0;
+
+
+
+        CoinsText.text = PointsCollected.ToString("00");
+
     }
     void OnResumeAftervideo(){
         GasAmount =100;
