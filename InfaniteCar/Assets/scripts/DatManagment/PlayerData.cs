@@ -15,6 +15,7 @@ public class PlayerData : MonoBehaviour
 	string UpgradePath = "Assets/Resources/Data/Data2.txt";
 
 	public bool OverriteSaveOnLoad = false;
+	public bool inSceneTempData = false;
 	void Awake(){
 		if(instance == null){
 			instance = this;
