@@ -10,7 +10,7 @@ public class PlayerData : MonoBehaviour
 	public CarDataScriptableObject currentSelection;
 	public PlayerUnlocks playerUnlocks;
 	public PlayerUpgrades playerUpgrades;
-
+	public int SelectionIndex;
 	string UnlocksPath = "Assets/Resources/Data/Data1.txt";
 	string UpgradePath = "Assets/Resources/Data/Data2.txt";
 

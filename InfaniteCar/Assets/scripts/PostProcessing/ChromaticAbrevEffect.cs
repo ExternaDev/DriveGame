@@ -9,13 +9,15 @@ private float intensity = 1f;
 public bool test = false;
 
 Coroutine Routine;
+public bool isInitialized{ set{initialized = value;} get{return initialized;}}
+	bool initialized = false;
 	public void Init(float _intensity){
 		effect = ScriptableObject.CreateInstance<ChromaticAberration>();
 		effect.enabled.Override(true);
 		intensity=_intensity;
 		effect.intensity.Override(0);
 
-
+		initialized=true;
 		//StartFlash(length);
 	}
 	void Update(){
@@ -53,12 +55,32 @@ Coroutine Routine;
 			time += Time.fixedDeltaTime;
 			// Debug.Log("B" +time);
 			 scale = (time/length);
-			effect.intensity.value = .03f+((1f-scale) *intensity);
+			effect.intensity.value =Mathf.Clamp( .03f+((1f-scale) *intensity),0.01f,1000);
 			yield return new WaitForSeconds(.01f);
 		
 		}
 			End();
     }
+    public void StartFlashReturn(float length){
+		Routine =StartCoroutine(FlashReturn(length));
+		
+		
+    }
+	IEnumerator FlashReturn(float length){
+float time = 0;
+
+		volume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f,effect);
+			  effect.intensity.value =Mathf.Clamp((intensity),0,100);
+
+		while(time<length){
+			 time += Time.fixedDeltaTime;
+			 effect.intensity.value =Mathf.Clamp( (1f-(time/length)) * intensity ,0.01f,100);
+
+			 yield return new WaitForSeconds(.01f);
+
+		}
+		End();
+	}
 
 	public void StartFlash(float length){
 		//if(Routine!=null)
@@ -84,7 +106,7 @@ Coroutine Routine;
 			time += Time.fixedDeltaTime;
 			// Debug.Log("B" +time);
 			 scale = ((time-third)/two_Third);
-			effect.intensity.value = ((1f-((time-third)/two_Third)) *intensity);
+			effect.intensity.value =Mathf.Clamp( ((1f-((time-third)/two_Third)) *intensity),0.01f,1000);
 			 yield return new WaitForSeconds(.01f);
 		}	
 		End();
@@ -93,7 +115,7 @@ Coroutine Routine;
 		if(Routine!=null)
 			StopCoroutine(Routine);
 		 RuntimeUtilities.DestroyVolume(volume, true, true);
-		 Destroy(this.GetComponent<ChromaticAbrevEffect>());
+		 //Destroy(this.GetComponent<ChromaticAbrevEffect>());
 	}
     // void OnDestroy()
     // {

@@ -62,7 +62,7 @@ public class CarSelectionManager : MonoBehaviour
 
         CoinAmount.text = playerData.playerUnlocks.Coins.ToString("00");
         CarPrice.text = currentSelection.CarPrice.ToString("00");
-
+        playerData.SelectionIndex =SelectionIndex;
         if(!playerData.playerUnlocks.Cars[SelectionIndex]){ //if unlocked
             LockedImage.SetActive(true);
             PurchaseCarPanel.SetActive(true);

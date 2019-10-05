@@ -151,7 +151,9 @@ public class TileMover : MonoBehaviour
     
 
     public float GetSpeed(){
-        return (baseSpeed * PlayerBrakeAmount) * HitBreak + PC.GetCurrentSpeed();
+       float debugNoMovement =1;
+        if(PC.DebugNoMovement) debugNoMovement=0;
+        return (baseSpeed * PlayerBrakeAmount) * HitBreak*debugNoMovement + PC.GetCurrentSpeed();
     }
     public Vector3 GetSideForce()
     {

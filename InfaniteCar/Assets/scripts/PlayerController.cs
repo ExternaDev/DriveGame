@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
 
 
     public PickupsManager pickups;
+
+    public bool DebugNoMovement = false;
+    public CameraController camera;
     public void Init(){
         onComingWaypoint =TileMover.instance.Tiles[2].waypoints[0].transform;
         NextWaytotalDistance =  Mathf.Abs((onComingWaypoint.position - this.transform.position).magnitude);
@@ -64,8 +67,9 @@ public class PlayerController : MonoBehaviour
         return inited;
     }
     public float GetCurrentSpeed(){
+        if(DebugNoMovement) return 0;
         if(pickups.usingSpeed)
-          return  playerData.currentSelection.Speed*1.5f;
+          return  playerData.currentSelection.Speed+ playerData.playerUpgrades.CarUpgrades[playerData.SelectionIndex].Speed *1.5f;
         else
           return  playerData.currentSelection.Speed;
 
@@ -89,6 +93,7 @@ public class PlayerController : MonoBehaviour
         TakeDamage(50);
     }
     public void TakeDamage(int amount){
+        camera.CameraShake(.05f,50);
         if (!pickups.usingShield)
         this.GetComponent<CarStats>().TakeDamage(amount);
 
