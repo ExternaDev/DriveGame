@@ -27,7 +27,7 @@ public class TouchGlare : MonoBehaviour {
 			if( glare==null)
 	       		glare = this.gameObject.AddComponent<GlareEffect>();
 	       	if(!glare.isInitialized)
-	       		glare.Init(BloomIntensity);
+	       		glare.Init(BloomIntensity,Color.white);
 			glare.StartFlashReturn(flashLength);
 
 	      }
@@ -49,7 +49,7 @@ public class TouchGlare : MonoBehaviour {
 		
 		if(glare==null){
 	       	glare = this.gameObject.AddComponent<GlareEffect>();
-	       	glare.Init(BloomIntensity);
+	       	glare.Init(BloomIntensity,Color.white);
 	     }
 	    if(ChromaticAberr==null){
 	       	ChromaticAberr = this.gameObject.AddComponent<ChromaticAbrevEffect>();

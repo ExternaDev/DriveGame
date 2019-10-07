@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 
     public Tile currTile;
     public float turnAngle = 0;
+    float PlayerBrakeAmount = 0;
+
 
     PlayerData playerData;
     GameObject CarMesh;
@@ -38,6 +40,10 @@ public class PlayerController : MonoBehaviour
 
     public bool DebugNoMovement = false;
     public CameraController camera;
+
+
+    PlayerInput input;
+
     public void Init(){
         onComingWaypoint =TileMover.instance.Tiles[2].waypoints[0].transform;
         NextWaytotalDistance =  Mathf.Abs((onComingWaypoint.position - this.transform.position).magnitude);
@@ -54,6 +60,9 @@ public class PlayerController : MonoBehaviour
     {
         CS = CarStats.instance;
         playerData = PlayerData.instance;
+        input = PlayerInput.instance;
+
+
     }
 
     // Update is called once per frame
@@ -61,19 +70,41 @@ public class PlayerController : MonoBehaviour
     {
         playerForward = this.transform.forward;
         playerRight = this.transform.right;
-        
+
+        if(input.Down()){
+            if( PlayerBrakeAmount < .79f){
+                PlayerBrakeAmount +=playerData.currentSelection.Acceleration*5f ;
+            }else {
+                PlayerBrakeAmount =.8f;
+            }
+
+        }else{
+            if(PlayerBrakeAmount >0.01f ){
+                PlayerBrakeAmount -= playerData.currentSelection.Acceleration ;
+               
+
+            }else 
+                 PlayerBrakeAmount =0;
+
+        }
+       PlayerBrakeAmount = Mathf.Clamp01(PlayerBrakeAmount);
+
     }
     public bool IsStarted(){
         return inited;
     }
     public float GetCurrentSpeed(){
         if(DebugNoMovement) return 0;
+        //Debug.Log("Get player speed car: " + playerData.currentSelection.Speed  + "   upgrade "+ (playerData.playerUpgrades.CarUpgrades[playerData.SelectionIndex].Speed *.1f));
         if(pickups.usingSpeed)
-          return  playerData.currentSelection.Speed+ playerData.playerUpgrades.CarUpgrades[playerData.SelectionIndex].Speed *1.5f;
+          return ( playerData.currentSelection.Speed+ (playerData.playerUpgrades.CarUpgrades[playerData.SelectionIndex].Speed *.1f)) *1.5f ;
         else
-          return  playerData.currentSelection.Speed;
+          return  playerData.currentSelection.Speed+ (playerData.playerUpgrades.CarUpgrades[playerData.SelectionIndex].Speed *.1f) ;
 
     }
+
+    public float BrakeAmount{ set{PlayerBrakeAmount = value;}  get{ return(1-PlayerBrakeAmount);}}
+
     public void SetTurnAngle(float t,float total){
         turnAngle = Mathf.Clamp(t/total, -1,1);
     }
@@ -93,7 +124,8 @@ public class PlayerController : MonoBehaviour
         TakeDamage(50);
     }
     public void TakeDamage(int amount){
-        camera.CameraShake(.05f,50);
+        camera.CameraShake(.2f,50);
+        PostProcessingEffectsManager.instance.Flash();
         if (!pickups.usingShield)
         this.GetComponent<CarStats>().TakeDamage(amount);
 

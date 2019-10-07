@@ -13,9 +13,9 @@ public class CameraController : MonoBehaviour
     void Start(){
         CameraObj = this.transform.GetChild(0).gameObject;
     }
-    float hopDistance = .3f;
+    float hopDistance = 10f;
 
-    float shakeSpeed =1;
+    float shakeSpeed =3;
 
     Coroutine Routine;
 
@@ -32,14 +32,21 @@ public class CameraController : MonoBehaviour
         this.transform.position = Vector3.Slerp(transform.position, IdealPosition.position,Time.fixedDeltaTime*TurnSpeed);
     	
         transform.LookAt(LookTarget);
-        if(Input.GetKeyUp(KeyCode.S)) CameraShake(.25f,50f);
+
+
+
+        //if(Input.GetKeyUp(KeyCode.S)) CameraShake(.25f,50f);
 
         if(CameraIsShaking){
-            if(CameraObj.transform.localPosition.magnitude < .1f)
+            if(CameraObj.transform.localPosition.magnitude < .5f)
                 CameraObj.transform.localPosition = new Vector3(RandomHopValue(),RandomHopValue(),RandomHopValue());
         }
+
+
         if(shakeSpeed >1)
             shakeSpeed-=Time.fixedDeltaTime * ShakeSpeedReductionRate;
+
+
         CameraObj.transform.localPosition = Vector3.Lerp(CameraObj.transform.localPosition, Vector3.zero,Time.fixedDeltaTime*shakeSpeed);
 
     }
@@ -48,7 +55,7 @@ public class CameraController : MonoBehaviour
     }
     public void CameraShake(float time, float intensity){
       Routine =StartCoroutine(ShakeEvent(time,intensity));
-      CameraObj.GetComponent<TouchGlare>().Flash();
+      
     }
 
     IEnumerator ShakeEvent(float duration, float intensity){
@@ -63,11 +70,11 @@ public class CameraController : MonoBehaviour
         EndShake();
     }
     void StartShake(float intensity){
-         shakeSpeed =intensity;
-            CameraIsShaking=true;
+        shakeSpeed =intensity;
+        CameraIsShaking=true;
     }
     void EndShake(){
-            CameraIsShaking=false;
+        CameraIsShaking=false;
 
     }
 

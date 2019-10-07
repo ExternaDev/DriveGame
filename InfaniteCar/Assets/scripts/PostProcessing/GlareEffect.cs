@@ -14,16 +14,24 @@ private float intensity = 1f;
 float initIntensity = 0;
 public bool isInitialized{ set{initialized = value;} get{return initialized;}}
 	bool initialized = false;
-	public void Init(float _Intensity){
+	public void Init(float _Intensity,Color clr){
+
+
 		m_Bloom = ScriptableObject.CreateInstance<Bloom>();
 		m_Bloom.enabled.Override(true);
+		color =clr;
 		intensity = _Intensity;
-		Debug.Log("Set intensity " + intensity);
-		initialized = true;
+
 		initIntensity = m_Bloom.intensity;//.Override(0);
+		m_Bloom.intensity.Override(0);
+
 		m_Bloom.threshold.Override(.2f);
+
 		m_Bloom.diffusion.Override(5.3f);
-		m_Bloom.color.Override(color);
+		m_Bloom.color.Override(clr);
+		
+		initialized = true;
+
 		
 	}
 

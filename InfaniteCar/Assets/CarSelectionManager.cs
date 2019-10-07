@@ -112,6 +112,10 @@ public class CarSelectionManager : MonoBehaviour
         }
     }
     SingleCarUpgrade CurrentCarUpgrades(){
+        if(playerData == null){
+            Debug.Log("<color=red> No playerData on CarSelection </color>");
+            return null;
+        }
         return playerData.playerUpgrades.CarUpgrades[SelectionIndex];
     }
 

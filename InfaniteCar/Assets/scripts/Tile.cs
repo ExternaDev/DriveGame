@@ -31,9 +31,10 @@ public class Tile : MonoBehaviour
     List<AIDriver> Cars = new List<AIDriver>();
 
 
-    public List<Building> BuildLocations = new List<Building>();
-    public GameObject buildingprefab;
-    public List<GameObject> buildingprefabs = new List<GameObject>();
+
+
+   // public GameObject buildingprefab;
+   // public List<GameObject> buildingprefabs = new List<GameObject>();
 
     public GameObject PickupSpawnPoints;
 
@@ -43,19 +44,17 @@ public class Tile : MonoBehaviour
 
     public GameObject[] sidings = new GameObject[4]; 
 
+
+    public List<Building> BuildLocations = new List<Building>();
+
     public GameObject RightBuildings, LeftBuildings;
+    public GameObject Alt_RightBuildings, Alt_LeftBuildings;
+
     void Awake(){
         AICars = GameManager.instance.AICars;
         EventManager.OnGameReset += ClearOnReset;
         //EventManager.OnResumeAftervideo += ClearOnReset;
-        foreach(Building b in RightBuildings.GetComponentsInChildren<Building>()){
-            if(b.gameObject.activeInHierarchy)
-                    BuildLocations.Add(b);
-        }
-        foreach(Building b in LeftBuildings.GetComponentsInChildren<Building>()){
-            if(b.gameObject.activeInHierarchy)
-                    BuildLocations.Add(b);
-        }
+       
     }
     void Start(){
         
@@ -76,8 +75,30 @@ public class Tile : MonoBehaviour
         GameObject building = Instantiate(prefab, location.position + (location.right * 5 * offset), location.rotation);
         building.transform.SetParent(location);
     }
+    void GenerateBuildingList(){
+        if(RightBuildings != null) AddBuildingsToBuildList(RightBuildings);
+            
+        
+        if(LeftBuildings != null)  AddBuildingsToBuildList(LeftBuildings);
+            
+        if(Alt_RightBuildings != null)  AddBuildingsToBuildList(Alt_RightBuildings);
 
+        if(Alt_LeftBuildings != null)  AddBuildingsToBuildList(Alt_LeftBuildings);
+
+        
+        
+    }
+    void AddBuildingsToBuildList(GameObject buildingParent){
+        AddListOfBuildingsToBuildList(buildingParent.GetComponentsInChildren<Building>().ToList());
+    }
+    void AddListOfBuildingsToBuildList(List<Building> list){
+        foreach(Building b in list){
+            if(b.gameObject.activeInHierarchy)
+                    BuildLocations.Add(b);
+        }
+    }
     void SpawnBuildings(){
+        GenerateBuildingList();
         if(BuildLocations.Count>0){
             foreach(Building b in BuildLocations){
                 if(b.isOneBlock()){
@@ -145,24 +166,15 @@ public class Tile : MonoBehaviour
 
         //if not last tile then RECURSION
          if(TileMover.instance.LastTile() != this){
-            
-            //TileMover.instance.FindTileBefore(this).gameObject.name =" Align this one";
             TileMover.instance.FindTileAfter(this).RealignToTile(this,0);
          }
     }
 
     bool ChanceOfNewTile(){
-        return  Random.Range(0,100) > 10;
+        return  Random.Range(0,100) > 60;
     }
-    // TileSiding NewSideingExcluding(TileSiding sideingToExclude){
-    //     int randomSide = Random.Range(0,100);
-    //     int value = Random.Range(0, System.Enum.GetValues(typeof(TileSiding)).Length);
-    //     TileSiding newSide  = (TileSiding)value;
-    //     if(newSide == sideingToExclude || sidings[value] == null || value > sidings.Length)
-    //         return NewSideingExcluding(sideingToExclude); //try again
-    //     else 
-    //         return newSide;
-    // }
+    
+
     TileSiding NewSideing(TileSiding currentSiding){
         int rand = Random.Range(0,100);
         int value =(int)currentSiding;
@@ -177,7 +189,6 @@ public class Tile : MonoBehaviour
         }
 
         TileSiding newSide  = (TileSiding)value;
-//        Debug.Log("new siding value of " + value);
         if(newSide == currentSiding  || sidings[value] == null )
             return NewSideing(currentSiding); //try again
         else 
@@ -190,6 +201,24 @@ public class Tile : MonoBehaviour
             SetSiding(tile.siding);//stay on this tile type
         }
     }
+    void AddRemoveSidingViaIndex(int i){
+        sidings[i].SetActive(true);
+        foreach(GameObject obj in sidings)
+            if(obj != null && obj != sidings[i])
+                Destroy(obj);
+    }
+    void PlaceAlternativeBuildings(){
+        if(Alt_LeftBuildings != null)
+            Destroy(Alt_LeftBuildings);
+        if(Alt_RightBuildings != null)
+            Destroy(Alt_RightBuildings);
+    }
+    void KeepBuildings(bool left, bool right){
+        if(!left)
+        Destroy(LeftBuildings);
+        if(!right)
+        Destroy(RightBuildings);
+    }
     public void SetSiding(TileSiding sidingType){
         if(sidings.Length == 0)
             siding=TileSiding.Ground;
@@ -199,42 +228,40 @@ public class Tile : MonoBehaviour
                 SetSiding(NewSideing(sidingType));
             else{   
                 siding = sidingType;
+                AddRemoveSidingViaIndex((int)sidingType);
+
                 switch(sidingType){
                     case TileSiding.Ground:
-                        sidings[0].SetActive(true);
-                    
-                        foreach(GameObject obj in sidings)
-                            if(obj != null && obj != sidings[0])
-                                Destroy(obj);
+                      //  AddRemoveSidingViaIndex(0);
 
+                        //AllowDisallowBuildings(true,false);
+
+                        if(Alt_RightBuildings != null)
+                            Destroy(RightBuildings);
+                        if(Alt_LeftBuildings != null)
+                            Destroy(LeftBuildings);
                     break;
                     case TileSiding.LeftBeach:
-                         sidings[1].SetActive(true);
+                        //AddRemoveSidingViaIndex(1);
+                        
+                        //Destroy(LeftBuildings);
+                        KeepBuildings(false,true);
+                        PlaceAlternativeBuildings();
 
-                        foreach(GameObject obj in sidings)
-                            if(obj != null && obj != sidings[1])
-                                Destroy(obj);
-                        Destroy(LeftBuildings);
                     break;
                     case TileSiding.RightBeach:
-                        sidings[3].SetActive(true);
-                    
-                        foreach(GameObject obj in sidings)
-                            if(obj != null && obj != sidings[3])
-                                Destroy(obj);
+                       // AddRemoveSidingViaIndex(3);
+                        KeepBuildings(true,false);
+                        PlaceAlternativeBuildings();
 
-                        Destroy(RightBuildings);
-
+                       // Destroy(RightBuildings);   
                     break;
                     case TileSiding.Beach:
-                        sidings[2].SetActive(true);
-                    
-                        foreach(GameObject obj in sidings)
-                            if(obj != null && obj != sidings[2])
-                                Destroy(obj);
-                        Destroy(LeftBuildings);
-                        Destroy(RightBuildings);
-
+                       // AddRemoveSidingViaIndex(2);
+                        
+                        KeepBuildings(false,false);
+                       
+                        PlaceAlternativeBuildings();
                     break;
                 }
             }

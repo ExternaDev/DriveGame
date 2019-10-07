@@ -11,8 +11,8 @@ public class PlayerData : MonoBehaviour
 	public PlayerUnlocks playerUnlocks;
 	public PlayerUpgrades playerUpgrades;
 	public int SelectionIndex;
-	string UnlocksPath = "Assets/Resources/Data/Data1.txt";
-	string UpgradePath = "Assets/Resources/Data/Data2.txt";
+	string UnlocksPath = "/Data1.txt";
+	string UpgradePath = "/Data2.txt";
 
 	public bool OverriteSaveOnLoad = false;
 	public bool inSceneTempData = false;
@@ -31,7 +31,7 @@ public class PlayerData : MonoBehaviour
    	void FindUnlockedCars(){
    		string data = "";
    		
-		if (System.IO.File.Exists(UnlocksPath) && !OverriteSaveOnLoad)
+		if (System.IO.File.Exists(Application.persistentDataPath + UnlocksPath) && !OverriteSaveOnLoad)
 		{
 			//Debug.Log("File exists");
    			data = ReadData(UnlocksPath);
@@ -59,7 +59,7 @@ public class PlayerData : MonoBehaviour
    	void FindUpgrades(){
    		string data = "";
    		
-		if (System.IO.File.Exists(UpgradePath)  && !OverriteSaveOnLoad)
+		if (System.IO.File.Exists(Application.persistentDataPath +UpgradePath)  && !OverriteSaveOnLoad)
 		{
 			//Debug.Log("File exists");
    			data = ReadData(UpgradePath);
@@ -107,16 +107,19 @@ public class PlayerData : MonoBehaviour
    	}
    	void SaveData(string _path, string s){
    		//Write some text to the test.txt file
-        StreamWriter writer = new StreamWriter(_path, false);
+        StreamWriter writer = new StreamWriter(Application.persistentDataPath +_path, false);
         writer.WriteLine(s);
+         writer.Flush();
+        
         writer.Close();
-
         //Re-import the file to update the reference in the editor
+        #if UNITY_EDITOR
         AssetDatabase.ImportAsset(_path); 
+        #endif
    	}
 
    	string ReadData(string _path){
-   		StreamReader reader = new StreamReader(_path); 
+   		StreamReader reader = new StreamReader(Application.persistentDataPath +_path); 
        	string s= reader.ReadToEnd();
         reader.Close();
    		return s;

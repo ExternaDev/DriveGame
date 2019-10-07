@@ -775,7 +775,9 @@ MonoBehaviour:
     Distance: []
   playerUpgrades:
     CarUpgrades: []
+  SelectionIndex: 0
   OverriteSaveOnLoad: 0
+  inSceneTempData: 0
 --- !u!1 &261465484
 GameObject:
   m_ObjectHideFlags: 0

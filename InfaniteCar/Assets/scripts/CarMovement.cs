@@ -9,8 +9,8 @@ public class CarMovement : MonoBehaviour
 	float movement = .25f;
 	float width = 15;
 
-    float rotateSpeed = 2;
-
+    float rotateSpeed = 1.5f;
+    float baseRotationSpeed= 1.5f;
 
     float IncreaseScale = 2.5f;
     // //Tilting
@@ -50,16 +50,16 @@ public class CarMovement : MonoBehaviour
     void HandleRotation(){
 
         if(input.Left()){
-            rotateSpeed += Time.fixedDeltaTime*CarData.Grip /2f;
+            rotateSpeed += Time.fixedDeltaTime*CarData.Grip /4f;
             this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles - new Vector3(0,rotateSpeed,0) , 1);
             Skid();
         }else if (input.Right() ){
-            rotateSpeed += Time.fixedDeltaTime*CarData.Grip/2f;
+            rotateSpeed += Time.fixedDeltaTime*CarData.Grip/4f;
 
             this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles + new Vector3(0,rotateSpeed,0) , 1);
             Skid();
 
-        }else if(rotateSpeed>2f){
+        }else if(rotateSpeed> baseRotationSpeed){
             rotateSpeed-= Time.fixedDeltaTime*CarData.Grip*4f;
             //Skid();
         }else{

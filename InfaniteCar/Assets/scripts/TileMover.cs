@@ -19,10 +19,10 @@ public class TileMover : MonoBehaviour
 	float maxSpeed = .3f;
 	float width=15;
     float sideForce = 0;
-    public float bumpAmount = .25f;
+    float bumpAmount = .5f;
 
     //public float currentSpeed = 0;
-    PlayerInput input;
+   // PlayerInput input;
 
 
 
@@ -31,12 +31,12 @@ public class TileMover : MonoBehaviour
 
 
     float CarDataSpeed =0;
-    float CarDataAccel =0;
+   // float CarDataAccel =0;
 
 
     PlayerController PC;
     GameManager GM;
-    PlayerData playerData;
+    //PlayerData playerData;
     // Start is called before the first frame update
     void Awake()
     {
@@ -50,17 +50,14 @@ public class TileMover : MonoBehaviour
     void Start(){
         GM = GameManager.instance;
         PC = PlayerController.instance;
-        input = PlayerInput.instance;
-        playerData = PlayerData.instance;
-        //CarDataSpeed = playerData.currentSelection.Speed; 
-        CarDataAccel = playerData.currentSelection.Acceleration; 
+
     }
     void OnGameReset(){
         baseSpeed = InitialBaseSpeed;
         RealignPlayer();
     }
     void OnResumeAftervideo(){
-       // baseSpeed = InitialBaseSpeed;
+
         RealignPlayer();
 
     }
@@ -74,30 +71,20 @@ public class TileMover : MonoBehaviour
 
         MoveTiles(); 
         CheckTilestoRemove();
-        GatherInput();
+
+
+        baseSpeed += Time.fixedDeltaTime/ 1000f;
+        
+
+        if(HitBreak<1) HitBreak+=.1f;
 
         
-        if(HitBreak<1){
-            HitBreak+=Time.fixedDeltaTime;
+        if (Mathf.Abs(sideForce) > 0) sideForce *= .9f;
 
-        }
-        if (Mathf.Abs(sideForce) > 0) {
-            sideForce *= .9f;
-
-        }
+        
         
     }
 
-    void GatherInput(){
-    	baseSpeed += Time.fixedDeltaTime/ 1000f;
-        
-    	if(input.Down() && PlayerBrakeAmount >.1f){
-           // Debug.Log("down");
-    		PlayerBrakeAmount -=CarDataAccel*5f ;
-    	}else if(PlayerBrakeAmount <2 && !input.Down())
-            PlayerBrakeAmount += CarDataAccel;
-
-    }
     void CheckTilestoRemove(){
     	if(TilesToRemove.Count >0){
     		foreach(Tile obj in TilesToRemove){
@@ -153,7 +140,15 @@ public class TileMover : MonoBehaviour
     public float GetSpeed(){
        float debugNoMovement =1;
         if(PC.DebugNoMovement) debugNoMovement=0;
-        return (baseSpeed * PlayerBrakeAmount) * HitBreak*debugNoMovement + PC.GetCurrentSpeed();
+
+        //Debug.Log("Base: " + baseSpeed +  "  player speed: " + PC.GetCurrentSpeed());
+        float speedValue = baseSpeed + (baseSpeed *PC.GetCurrentSpeed());
+        speedValue *= HitBreak;//0-1
+        speedValue *= debugNoMovement;// 0 or 1
+        speedValue *= PC.BrakeAmount;
+        //Debug.Log(PC.BrakeAmount);
+        return speedValue;
+        //return (baseSpeed * PlayerBrakeAmount) * HitBreak*debugNoMovement + PC.GetCurrentSpeed();
     }
     public Vector3 GetSideForce()
     {

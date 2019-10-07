@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PickupUIController : MonoBehaviour
 {
-	public GameObject Rcokets, Bomb, oil, shield;
+	public GameObject Rcokets, Bomb, oil, shield,Speed;
 	PlayerController PC;
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,9 @@ public class PickupUIController : MonoBehaviour
         Bomb.SetActive(PC.pickups.hasBomb);
         Rcokets.SetActive(PC.pickups.hasRockets);
         oil.SetActive(PC.pickups.hasOil);
-       // shield.SetActive(PC.BombSpawner.hasBomb);
+        shield.SetActive(PC.pickups.hasShield);
+        Speed.SetActive(PC.pickups.hasSpeed);
+
 
     }
 }
