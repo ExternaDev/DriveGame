@@ -50,11 +50,11 @@ public class CarMovement : MonoBehaviour
     void HandleRotation(){
 
         if(input.Left()){
-            rotateSpeed += Time.fixedDeltaTime*CarData.Grip /4f;
+            rotateSpeed += Time.fixedDeltaTime*CarData.Grip /15f;
             this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles - new Vector3(0,rotateSpeed,0) , 1);
             Skid();
         }else if (input.Right() ){
-            rotateSpeed += Time.fixedDeltaTime*CarData.Grip/4f;
+            rotateSpeed += Time.fixedDeltaTime*CarData.Grip/15f;
 
             this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, this.transform.eulerAngles + new Vector3(0,rotateSpeed,0) , 1);
             Skid();

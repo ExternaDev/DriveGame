@@ -62,7 +62,7 @@ public class TileSpawner : MonoBehaviour
     	for(int i = 0; i <segments;i ++){
     		Tile obj = Instantiate(TileTypes[0].Tile, new Vector3(0,0,(i*50)-50),Quaternion.identity,this.transform).GetComponent<Tile>();
     		mover.Tiles.Add(obj);
-            obj.SetSiding(TileSiding.Ground);
+            obj.SetSiding(TileSiding.Beach);
 
     	}
         PlayerController.instance.Init();

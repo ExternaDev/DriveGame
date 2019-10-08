@@ -18,14 +18,16 @@ Shader "Aubergine/Objects/Surf/Toony/Diffuse-Edges" {
 			Cull Front
 			
 			CGPROGRAM
+			 #include "UnityCG.cginc"
 				#pragma vertex vert
 				#pragma fragment frag
 				#pragma fragmentoption ARB_precision_hint_fastest
-				
+				 #pragma multi_compile_fog
+			#pragma multi_compile LIGHTMAP_ON LIGHTMAP_OFF
 				fixed4 _EdgeColor;
 				fixed _EdgeWidth;
 				fixed _AdditionalColor;
-
+ 				sampler2D _MainTex;
 				struct a2v {
 					float4 vertex : POSITION;
 					float3 normal : NORMAL;
@@ -33,6 +35,8 @@ Shader "Aubergine/Objects/Surf/Toony/Diffuse-Edges" {
 
 				struct v2f {
 					float4 Pos : POSITION;
+					 float2 uv : TEXCOORD0;
+					//UNITY_FOG_COORDS(2)
 				};
 
 				v2f vert(a2v v) {
@@ -42,11 +46,15 @@ Shader "Aubergine/Objects/Surf/Toony/Diffuse-Edges" {
 					norm.x *= UNITY_MATRIX_P[0][0];
 					norm.y *= UNITY_MATRIX_P[1][1];
 					o.Pos.xy += norm.xy * _EdgeWidth;
+					//UNITY_TRANSFER_FOG(o,v.vertex);
 					return o;
 				}
 
 				half4 frag(v2f i) : COLOR {
+					 half4 col = tex2D(_MainTex, i.uv.xy);
 					//return _AdditionalColor;
+					//UNITY_APPLY_FOG(i.fogCoord, col);
+                 	//UNITY_OPAQUE_ALPHA(col.a);
 					return _EdgeColor;
 				}
 			ENDCG

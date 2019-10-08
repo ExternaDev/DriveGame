@@ -26,9 +26,9 @@ public class CarTilting : MonoBehaviour
 
 
         if(input.Right() && turnAngle < maxAngle){
-            turnAngle +=data.Grip * Time.fixedDeltaTime * 15f;
+            turnAngle +=data.Grip * Time.fixedDeltaTime * 10f;
         }else if(input.Left()&& turnAngle > -maxAngle){
-            turnAngle -= data.Grip * Time.fixedDeltaTime * 15f;
+            turnAngle -= data.Grip * Time.fixedDeltaTime * 10f;
         }else if(!input.Right() && !input.Left() ){
             //if not turning apply turn angle to car/camera
             turnAngle *= .9f;

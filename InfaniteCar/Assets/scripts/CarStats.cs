@@ -21,9 +21,8 @@ public class CarStats : MonoBehaviour
     int SmallTileCompleted=0;
     int LargeTileCompleted=0;
     int TinyTileCompleted=0;
-    public TextMeshProUGUI DistanceText;
-    public TextMeshProUGUI CoinsText;
 
+    public Text DistanceText,CoinsText; 
    // public bool hasShield = false;
 
 
@@ -54,12 +53,17 @@ public class CarStats : MonoBehaviour
         if(!GM.GameRunning()) return;
 
         GasAmount -= Time.fixedDeltaTime;
+        
+        ZeroGas();
+
+    }
+    void Update(){
+        if(!GM.GameRunning()) return;
+        
         FuelGauge.fillAmount = GasAmount/100f;
         DamageGuage.fillAmount = DamageAmount/100f;
         FindTotalDistance();
         UpdateDistanceGauge();
-        ZeroGas();
-
     }
     void UpdateDistanceGauge(){
         if(playerData.playerUnlocks.Distance[0] != 0 && TotalDistance < playerData.playerUnlocks.Distance[0]){
@@ -138,17 +142,27 @@ public class CarStats : MonoBehaviour
         this.transform.rotation = Quaternion.identity;
         
     }
-    
+    float lastUpdateDist = 0;
+
+    float LastChunkAmount = 0;
+    bool updateChunkDistance =false;
+    float PreviousChunksDstance(){
+        if(updateChunkDistance){
+            updateChunkDistance=false;
+            LastChunkAmount = (SmallTileCompleted * 50f) + (LargeTileCompleted * 80f) +(TinyTileCompleted * 25f);
+        }
+        return LastChunkAmount;
+    }
     void FindTotalDistance(){
        	distanceToNextWay = Mathf.Abs((PC.onComingWaypoint.position - this.transform.position).magnitude);
 
-        TotalDistance = (SmallTileCompleted * 50f);
-        TotalDistance += (LargeTileCompleted * 80f);
-        TotalDistance += TinyTileCompleted * 25f;
+        TotalDistance = PreviousChunksDstance();
         TotalDistance += (PC.NextWaytotalDistance - distanceToNextWay);
            
-
-        DistanceText.text = TotalDistance.ToString("00");
+        if(TotalDistance > lastUpdateDist + .1f){
+            lastUpdateDist = TotalDistance;
+            DistanceText.text = TotalDistance.ToString("00");
+        }
         
     }
     public void ZeroGas()
@@ -161,6 +175,7 @@ public class CarStats : MonoBehaviour
 
     }
     public void HitTile( Tile tile){
+        updateChunkDistance=true;
     	if(tile.tileSize == TileSize.Big){
                 LargeTileCompleted++;
             }else if(tile.tileSize == TileSize.Small){

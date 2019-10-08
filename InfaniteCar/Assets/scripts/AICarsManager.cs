@@ -64,7 +64,7 @@ public class AICarsManager : MonoBehaviour
 	        if(Input.GetKeyUp(KeyCode.Space) ){
 	        	SpawnPC();
 	        }
-	        if (Time.time - LastSpawnTime > 4)
+	        if (Time.time - LastSpawnTime > 1)
 	        {
 	            SpawnPC();
 	            LastSpawnTime = Time.time;
@@ -85,7 +85,7 @@ public class AICarsManager : MonoBehaviour
         othervehicle = CarPre[i];
 
     	AIDriver en = (AIDriver)Instantiate(othervehicle, Vector3.one*-50f, Quaternion.identity).GetComponent<AIDriver>();   	
-    	
+    	en.gameObject.transform.localScale = Vector3.one *.75f;
     	Enemies.Add(en);
         en.Init(OnComing);
         OnComing = !OnComing;

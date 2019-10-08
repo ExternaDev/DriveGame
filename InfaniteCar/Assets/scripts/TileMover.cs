@@ -107,11 +107,15 @@ public class TileMover : MonoBehaviour
         return Tiles.Last();
     }
     Vector3 offset = Vector3.zero;
+     Vector3 movement ;
+     Vector3 absMovement;
     void MoveTiles(){
+         movement = GetMovementUpdate();
+        absMovement = Absolute(movement);
     	foreach(Tile obj in Tiles){
-            obj.transform.position -= GetMovementUpdate();
+            obj.transform.position -= movement;
             ApplyDrift(obj.gameObject,PC.turnAngle);
-            offset += Absolute(GetMovementUpdate());
+            offset += absMovement;
 
     	}
     }
@@ -129,7 +133,7 @@ public class TileMover : MonoBehaviour
         return amount;
     }
     Vector3 DriftDirection(){
-        return (PC.transform.right+ PC.transform.forward + PC.transform.forward).normalized;
+        return (PC.transform.right+ (PC.transform.forward *2f)).normalized;
     }
     float HitBreak = 1; 
     public Vector3 GetMovementUpdate(){
@@ -182,7 +186,10 @@ public class TileMover : MonoBehaviour
     		return null;
     	return Tiles[index-1];
     }
+    public Tile FindTileAheadOfPlayer(){
+        return Tiles[4];
 
+    }
     public Tile FindLastTile(){
         return Tiles[Tiles.Count-1];
     }

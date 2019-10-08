@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     //public OilSlick oil;
 
     public static PlayerController instance;
-    public Vector3 playerForward = new Vector3(0,0,1);
+    //public Vector3 playerForward = new Vector3(0,0,1);
     public Vector3 playerRight = new Vector3(0, 0, 1);
     // Start is called before the first frame update
 
@@ -44,13 +44,15 @@ public class PlayerController : MonoBehaviour
 
     PlayerInput input;
 
+    public Vector3 playerForward{ get { return this.transform.forward;}
+    }
     public void Init(){
         onComingWaypoint =TileMover.instance.Tiles[2].waypoints[0].transform;
         NextWaytotalDistance =  Mathf.Abs((onComingWaypoint.position - this.transform.position).magnitude);
         currTile = TileMover.instance.Tiles[1];
         CarMesh = Instantiate(playerData.currentSelection.MeshObject, Vector3.zero, Quaternion.identity,CarMeshContainer);
         inited = true;
-
+        CarMesh.transform.localScale = Vector3.one*.75f;
     }
     void Awake()
     {
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        playerForward = this.transform.forward;
+       // playerForward = this.transform.forward;
         playerRight = this.transform.right;
 
         if(input.Down()){

@@ -65,11 +65,11 @@ public class PickupsManager : MonoBehaviour
 		SpeedRenderer.enabled = usingSpeed;
 
 
-		if(input.ActionAltPress()){
+		if(Input.GetKeyDown(KeyCode.Q)){
 			UseCurrentPickup();
 		}
     }
-    void UseCurrentPickup(){
+   public  void UseCurrentPickup(){
     	Debug.Log("Attempt use pickup");
     	if(hasRockets)
            SpawnRocketsButton();
