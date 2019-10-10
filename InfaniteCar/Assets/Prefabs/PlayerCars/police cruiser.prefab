@@ -55,6 +55,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cf7ef095dcbe94b948c15491593b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1804989277184094604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6308889711537596122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49be4f47acca66f4d8c1f769b1e30ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7376805934866365986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8404419956380201790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49be4f47acca66f4d8c1f769b1e30ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2017271655357901399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62,11 +86,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2017271653730460870}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 900dcca0d9bb3d94ca34e05673d6d6a4,
-        type: 3}
-      propertyPath: m_Name
-      value: police cruiser
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 900dcca0d9bb3d94ca34e05673d6d6a4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -122,6 +141,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 900dcca0d9bb3d94ca34e05673d6d6a4,
+        type: 3}
+      propertyPath: m_Name
+      value: police cruiser
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 900dcca0d9bb3d94ca34e05673d6d6a4, type: 3}
 --- !u!4 &6810706179196174669 stripped
@@ -133,6 +157,18 @@ Transform:
 --- !u!1 &5139366356492689995 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6677848245353662492, guid: 900dcca0d9bb3d94ca34e05673d6d6a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2017271655357901399}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8404419956380201790 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1198882696794957463, guid: 900dcca0d9bb3d94ca34e05673d6d6a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2017271655357901399}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6308889711537596122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3714515154516128627, guid: 900dcca0d9bb3d94ca34e05673d6d6a4,
     type: 3}
   m_PrefabInstance: {fileID: 2017271655357901399}
   m_PrefabAsset: {fileID: 0}
